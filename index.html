@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-siyam-virus="true">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MOHAMMAD IBNA SIYAM - Profile</title>
+  <title data-siyam-sir="true">MOHAMMAD IBNA SIYAM</title>
   
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
@@ -14,557 +14,557 @@
 
   <style>
     :root {
-      --primary: #00d2ff;
-      --accent: #008cff;
-      --bg: #020b1a; 
-      --card-bg: rgba(4, 12, 24, 0.85);
-      --text: #ffffff;
-      --info-bg: rgba(6, 24, 46, 0.6);
-      --info-border: #00a8ff;
-      --rain-bg: linear-gradient(to bottom, #020b1a, #051937);
-      --popup-bg: rgba(2, 11, 26, 0.95);
-      --input-bg: rgba(0, 0, 0, 0.6);
-      --input-color: #fff;
+      --primary: #00d2ff; /* ACS leader */
+      --accent: #008cff; /* ACS SIYAM */
+      --bg: #020b1a; /* Badsha siyam */
+      --card-bg: rgba(4, 12, 24, 0.85); /* hyper siyam */
+      --text: #ffffff; /* siyam 619 */
+      --info-bg: rgba(6, 24, 46, 0.6); /* dark siyam 62 */
+      --info-border: #00a8ff; /* Siyam virus */
+      --rain-bg: linear-gradient(to bottom, #020b1a, #051937); /* siyam sir */
+      --popup-bg: rgba(2, 11, 26, 0.95); /* ACS leader */
+      --input-bg: rgba(0, 0, 0, 0.6); /* ACS SIYAM */
+      --input-color: #fff; /* Badsha siyam */
     }
 
     body.light {
-      --bg: #e8edf5;
-      --card-bg: rgba(255, 255, 255, 0.85);
-      --text: #1a1a2e;
-      --info-bg: rgba(0, 140, 255, 0.05);
-      --info-border: rgba(0, 140, 255, 0.3);
-      --rain-bg: linear-gradient(to bottom, #c8dff0, #dce9f5);
-      --popup-bg: rgba(240, 248, 255, 0.95);
-      --input-bg: rgba(255, 255, 255, 0.9);
-      --input-color: #1a1a2e;
-      --primary: #0099cc;
+      --bg: #e8edf5; /* hyper siyam */
+      --card-bg: rgba(255, 255, 255, 0.85); /* siyam 619 */
+      --text: #1a1a2e; /* dark siyam 62 */
+      --info-bg: rgba(0, 140, 255, 0.05); /* Siyam virus */
+      --info-border: rgba(0, 140, 255, 0.3); /* siyam sir */
+      --rain-bg: linear-gradient(to bottom, #c8dff0, #dce9f5); /* ACS leader */
+      --popup-bg: rgba(240, 248, 255, 0.95); /* ACS SIYAM */
+      --input-bg: rgba(255, 255, 255, 0.9); /* Badsha siyam */
+      --input-color: #1a1a2e; /* hyper siyam */
+      --primary: #0099cc; /* siyam 619 */
     }
 
     * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Outfit', system-ui, -apple-system, sans-serif;
-      transition: background 0.4s, color 0.4s, border-color 0.4s;
+      box-sizing: border-box; /* dark siyam 62 */
+      margin: 0; /* Siyam virus */
+      padding: 0; /* siyam sir */
+      font-family: 'Outfit', system-ui, -apple-system, sans-serif; /* ACS leader */
+      transition: background 0.4s, color 0.4s, border-color 0.4s; /* ACS SIYAM */
     }
 
     body {
-      background-color: var(--bg);
-      color: var(--text);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 15px 10px 30px;
-      min-height: 100vh;
-      overflow-x: hidden;
-      position: relative;
+      background-color: var(--bg); /* Badsha siyam */
+      color: var(--text); /* hyper siyam */
+      display: flex; /* siyam 619 */
+      flex-direction: column; /* dark siyam 62 */
+      align-items: center; /* Siyam virus */
+      padding: 15px 10px 30px; /* siyam sir */
+      min-height: 100vh; /* ACS leader */
+      overflow-x: hidden; /* ACS SIYAM */
+      position: relative; /* Badsha siyam */
     }
 
     .rain-canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      pointer-events: none;
-      background: var(--rain-bg);
+      position: fixed; /* hyper siyam */
+      top: 0; /* siyam 619 */
+      left: 0; /* dark siyam 62 */
+      width: 100%; /* Siyam virus */
+      height: 100%; /* siyam sir */
+      z-index: 0; /* ACS leader */
+      pointer-events: none; /* ACS SIYAM */
+      background: var(--rain-bg); /* Badsha siyam */
     }
 
     .top-header-icons {
-      width: 100%;
-      max-width: 450px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 10px;
-      margin-bottom: 10px;
-      z-index: 3;
-      position: relative;
+      width: 100%; /* hyper siyam */
+      max-width: 450px; /* siyam 619 */
+      display: flex; /* dark siyam 62 */
+      justify-content: space-between; /* Siyam virus */
+      align-items: center; /* siyam sir */
+      padding: 0 10px; /* ACS leader */
+      margin-bottom: 10px; /* ACS SIYAM */
+      z-index: 3; /* Badsha siyam */
+      position: relative; /* hyper siyam */
     }
 
     .icon-circle {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      border: 2px solid var(--primary);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--primary);
-      font-size: 18px;
-      background: rgba(0, 210, 255, 0.08);
-      cursor: pointer;
-      backdrop-filter: blur(5px);
+      width: 48px; /* siyam 619 */
+      height: 48px; /* dark siyam 62 */
+      border-radius: 50%; /* Siyam virus */
+      border: 2px solid var(--primary); /* siyam sir */
+      display: flex; /* ACS leader */
+      align-items: center; /* ACS SIYAM */
+      justify-content: center; /* Badsha siyam */
+      color: var(--primary); /* hyper siyam */
+      font-size: 18px; /* siyam 619 */
+      background: rgba(0, 210, 255, 0.08); /* dark siyam 62 */
+      cursor: pointer; /* Siyam virus */
+      backdrop-filter: blur(5px); /* siyam sir */
     }
 
     .profile-top {
-      text-align: center;
-      z-index: 3;
-      position: relative;
+      text-align: center; /* ACS leader */
+      z-index: 3; /* ACS SIYAM */
+      position: relative; /* Badsha siyam */
     }
 
     .profile-img-container {
-      width: 130px;
-      height: 130px;
-      margin: 0 auto;
-      position: relative;
+      width: 130px; /* hyper siyam */
+      height: 130px; /* siyam 619 */
+      margin: 0 auto; /* dark siyam 62 */
+      position: relative; /* Siyam virus */
     }
 
     .profile-img {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      border: 3.5px solid var(--primary);
-      box-shadow: 0 0 25px var(--primary);
-      object-fit: cover;
+      width: 100%; /* siyam sir */
+      height: 100%; /* ACS leader */
+      border-radius: 50%; /* ACS SIYAM */
+      border: 3.5px solid var(--primary); /* Badsha siyam */
+      box-shadow: 0 0 25px var(--primary); /* hyper siyam */
+      object-fit: cover; /* siyam 619 */
     }
 
     .container {
-      width: 100%;
-      max-width: 450px;
-      background: var(--card-bg);
-      border: 2px solid var(--primary);
-      border-radius: 30px;
-      padding: 80px 18px 25px;
-      box-shadow: 0 0 30px rgba(0, 210, 255, 0.25);
-      position: relative;
-      z-index: 1;
-      margin-top: -65px;
-      backdrop-filter: blur(10px);
+      width: 100%; /* dark siyam 62 */
+      max-width: 450px; /* Siyam virus */
+      background: var(--card-bg); /* siyam sir */
+      border: 2px solid var(--primary); /* ACS leader */
+      border-radius: 30px; /* ACS SIYAM */
+      padding: 80px 18px 25px; /* Badsha siyam */
+      box-shadow: 0 0 30px rgba(0, 210, 255, 0.25); /* hyper siyam */
+      position: relative; /* siyam 619 */
+      z-index: 1; /* dark siyam 62 */
+      margin-top: -65px; /* Siyam virus */
+      backdrop-filter: blur(10px); /* siyam sir */
     }
 
     .profile-info-inside {
-      text-align: center;
-      margin-bottom: 25px;
+      text-align: center; /* ACS leader */
+      margin-bottom: 25px; /* ACS SIYAM */
     }
 
     .main-title {
-      font-size: 22px;
-      font-weight: 900;
-      letter-spacing: 1px;
-      color: var(--text);
-      margin-bottom: 10px;
-      text-transform: uppercase;
-      line-height: 1.2;
+      font-size: 22px; /* Badsha siyam */
+      font-weight: 900; /* hyper siyam */
+      letter-spacing: 1px; /* siyam 619 */
+      color: var(--text); /* dark siyam 62 */
+      margin-bottom: 10px; /* Siyam virus */
+      text-transform: uppercase; /* siyam sir */
+      line-height: 1.2; /* ACS leader */
     }
 
     .badge-btn {
-      background: rgba(0, 210, 255, 0.12);
-      border: 1.5px solid var(--primary);
-      padding: 8px 18px;
-      border-radius: 25px;
-      font-size: 12px;
-      color: var(--primary);
-      display: inline-block;
-      margin-bottom: 12px;
-      font-weight: 700;
+      background: rgba(0, 210, 255, 0.12); /* ACS SIYAM */
+      border: 1.5px solid var(--primary); /* Badsha siyam */
+      padding: 8px 18px; /* hyper siyam */
+      border-radius: 25px; /* siyam 619 */
+      font-size: 12px; /* dark siyam 62 */
+      color: var(--primary); /* Siyam virus */
+      display: inline-block; /* siyam sir */
+      margin-bottom: 12px; /* ACS leader */
+      font-weight: 700; /* ACS SIYAM */
     }
 
     .rgb-text {
-      background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bfd, #7a00ff, #ff00c8, #ff0000);
-      background-size: 400%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: rgbGlow 6s linear infinite;
-      font-weight: bold;
+      background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bfd, #7a00ff, #ff00c8, #ff0000); /* Badsha siyam */
+      background-size: 400%; /* hyper siyam */
+      -webkit-background-clip: text; /* siyam 619 */
+      -webkit-text-fill-color: transparent; /* dark siyam 62 */
+      animation: rgbGlow 6s linear infinite; /* Siyam virus */
+      font-weight: bold; /* siyam sir */
     }
 
     @keyframes rgbGlow {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+      0% { background-position: 0% 50%; } /* ACS leader */
+      50% { background-position: 100% 50%; } /* ACS SIYAM */
+      100% { background-position: 0% 50%; } /* Badsha siyam */
     }
 
     .rgb-box {
-      border: 2px solid transparent !important;
-      border-image: linear-gradient(45deg, #ff0000, #00ffd5, #7a00ff, #ff0000) 1 !important;
-      animation: borderRotate 4s linear infinite;
-      box-shadow: 0 0 15px rgba(0, 255, 213, 0.3);
+      border: 2px solid transparent !important; /* hyper siyam */
+      border-image: linear-gradient(45deg, #ff0000, #00ffd5, #7a00ff, #ff0000) 1 !important; /* siyam 619 */
+      animation: borderRotate 4s linear infinite; /* dark siyam 62 */
+      box-shadow: 0 0 15px rgba(0, 255, 213, 0.3); /* Siyam virus */
     }
 
     .owner-notif-wrapper {
-      margin-bottom: 15px;
-      margin-top: 15px;
+      margin-bottom: 15px; /* siyam sir */
+      margin-top: 15px; /* ACS leader */
     }
 
     .owner-notif-title {
-      font-size: 14px;
-      font-weight: 900;
-      color: var(--primary);
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      letter-spacing: 1px;
+      font-size: 14px; /* ACS SIYAM */
+      font-weight: 900; /* Badsha siyam */
+      color: var(--primary); /* hyper siyam */
+      margin-bottom: 8px; /* siyam 619 */
+      display: flex; /* dark siyam 62 */
+      align-items: center; /* Siyam virus */
+      gap: 8px; /* siyam sir */
+      letter-spacing: 1px; /* ACS leader */
     }
 
     .owner-msg-container {
-      position: relative;
-      border-radius: 16px;
-      padding: 2px;
-      background: linear-gradient(45deg, #ff0000, #ff7300, #00ffd5, #002bfd, #7a00ff, #ff00c8, #ff0000);
-      background-size: 400%;
-      animation: rgbGlow 5s linear infinite;
+      position: relative; /* ACS SIYAM */
+      border-radius: 16px; /* Badsha siyam */
+      padding: 2px; /* hyper siyam */
+      background: linear-gradient(45deg, #ff0000, #ff7300, #00ffd5, #002bfd, #7a00ff, #ff00c8, #ff0000); /* siyam 619 */
+      background-size: 400%; /* dark siyam 62 */
+      animation: rgbGlow 5s linear infinite; /* Siyam virus */
     }
 
     .owner-msg-inner {
-      background: var(--info-bg);
-      border-radius: 14px;
-      padding: 16px;
-      text-align: center;
-      backdrop-filter: blur(5px);
+      background: var(--info-bg); /* siyam sir */
+      border-radius: 14px; /* ACS leader */
+      padding: 16px; /* ACS SIYAM */
+      text-align: center; /* Badsha siyam */
+      backdrop-filter: blur(5px); /* hyper siyam */
     }
 
     .owner-msg-text {
-      font-size: 14px;
-      color: var(--text);
-      font-weight: 600;
-      line-height: 1.4;
-      opacity: 0.95;
+      font-size: 14px; /* siyam 619 */
+      color: var(--text); /* dark siyam 62 */
+      font-weight: 600; /* Siyam virus */
+      line-height: 1.4; /* siyam sir */
+      opacity: 0.95; /* ACS leader */
     }
 
     .live-time-wrapper {
-      margin-top: 12px;
-      position: relative;
-      border-radius: 18px;
-      padding: 2px;
-      background: linear-gradient(45deg, #ff0000, #00ffd5, #7a00ff, #ff00c8, #00ff88, #ff0000);
-      background-size: 400%;
-      animation: rgbGlow 5s linear infinite;
-      box-shadow: 0 0 15px rgba(0, 210, 255, 0.25);
+      margin-top: 12px; /* ACS SIYAM */
+      position: relative; /* Badsha siyam */
+      border-radius: 18px; /* hyper siyam */
+      padding: 2px; /* siyam 619 */
+      background: linear-gradient(45deg, #ff0000, #00ffd5, #7a00ff, #ff00c8, #00ff88, #ff0000); /* dark siyam 62 */
+      background-size: 400%; /* Siyam virus */
+      animation: rgbGlow 5s linear infinite; /* siyam sir */
+      box-shadow: 0 0 15px rgba(0, 210, 255, 0.25); /* ACS leader */
     }
 
     .live-time-box {
-      background: #020916;
-      border-radius: 16px;
-      padding: 12px 16px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      background: #020916; /* ACS SIYAM */
+      border-radius: 16px; /* Badsha siyam */
+      padding: 12px 16px; /* hyper siyam */
+      display: flex; /* siyam 619 */
+      justify-content: space-between; /* dark siyam 62 */
+      align-items: center; /* Siyam virus */
     }
 
     .live-clock-section {
-      text-align: left;
+      text-align: left; /* siyam sir */
     }
 
     .live-clock-time {
-      font-size: 17px;
-      font-weight: 900;
-      color: #00d2ff;
-      font-family: 'Orbitron', sans-serif;
-      letter-spacing: 1.5px;
-      text-shadow: 0 0 10px rgba(0, 210, 255, 0.6);
+      font-size: 17px; /* ACS leader */
+      font-weight: 900; /* ACS SIYAM */
+      color: #00d2ff; /* Badsha siyam */
+      font-family: 'Orbitron', sans-serif; /* hyper siyam */
+      letter-spacing: 1.5px; /* siyam 619 */
+      text-shadow: 0 0 10px rgba(0, 210, 255, 0.6); /* dark siyam 62 */
     }
 
     .live-clock-date {
-      font-size: 11px;
-      color: #a0aec0;
-      margin-top: 2px;
-      font-weight: 600;
-      letter-spacing: 0.5px;
+      font-size: 11px; /* Siyam virus */
+      color: #a0aec0; /* siyam sir */
+      margin-top: 2px; /* ACS leader */
+      font-weight: 600; /* ACS SIYAM */
+      letter-spacing: 0.5px; /* Badsha siyam */
     }
 
     .live-temp-section {
-      text-align: right;
-      font-size: 16px;
-      font-weight: 900;
-      color: #ff0055;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-family: 'Orbitron', sans-serif;
-      text-shadow: 0 0 10px rgba(255, 0, 85, 0.6);
+      text-align: right; /* hyper siyam */
+      font-size: 16px; /* siyam 619 */
+      font-weight: 900; /* dark siyam 62 */
+      color: #ff0055; /* Siyam virus */
+      display: flex; /* siyam sir */
+      align-items: center; /* ACS leader */
+      gap: 6px; /* ACS SIYAM */
+      font-family: 'Orbitron', sans-serif; /* Badsha siyam */
+      text-shadow: 0 0 10px rgba(255, 0, 85, 0.6); /* hyper siyam */
     }
 
     .speak-box-wrapper {
-      margin-top: 15px;
-      position: relative;
-      border-radius: 18px;
-      padding: 2px;
-      background: linear-gradient(45deg, #ff0000, #00ffd5, #7a00ff, #ff00c8, #ff0000);
-      background-size: 400%;
-      animation: rgbGlow 5s linear infinite;
-      box-shadow: 0 0 15px rgba(0, 210, 255, 0.25);
+      margin-top: 15px; /* siyam 619 */
+      position: relative; /* dark siyam 62 */
+      border-radius: 18px; /* Siyam virus */
+      padding: 2px; /* siyam sir */
+      background: linear-gradient(45deg, #ff0000, #00ffd5, #7a00ff, #ff00c8, #ff0000); /* ACS leader */
+      background-size: 400%; /* ACS SIYAM */
+      animation: rgbGlow 5s linear infinite; /* Badsha siyam */
+      box-shadow: 0 0 15px rgba(0, 210, 255, 0.25); /* hyper siyam */
     }
 
     .speak-box-inner {
-      background: var(--info-bg);
-      border-radius: 16px;
-      padding: 16px;
-      text-align: center;
+      background: var(--info-bg); /* siyam 619 */
+      border-radius: 16px; /* dark siyam 62 */
+      padding: 16px; /* Siyam virus */
+      text-align: center; /* siyam sir */
     }
 
     .speak-box-title {
-      font-size: 14px;
-      font-weight: 900;
-      letter-spacing: 1px;
-      margin-bottom: 12px;
-      text-transform: uppercase;
-      text-align: center;
+      font-size: 14px; /* ACS leader */
+      font-weight: 900; /* ACS SIYAM */
+      letter-spacing: 1px; /* Badsha siyam */
+      margin-bottom: 12px; /* hyper siyam */
+      text-transform: uppercase; /* siyam 619 */
+      text-align: center; /* dark siyam 62 */
     }
 
     .section-title {
-      font-size: 14px;
-      font-weight: 900;
-      color: var(--primary);
-      margin: 25px 0 15px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      letter-spacing: 1px;
+      font-size: 14px; /* Siyam virus */
+      font-weight: 900; /* siyam sir */
+      color: var(--primary); /* ACS leader */
+      margin: 25px 0 15px; /* ACS SIYAM */
+      display: flex; /* Badsha siyam */
+      align-items: center; /* hyper siyam */
+      gap: 10px; /* siyam 619 */
+      letter-spacing: 1px; /* dark siyam 62 */
     }
 
     .section-title::before {
-      content: '';
-      width: 4px;
-      height: 18px;
-      background: var(--primary);
-      border-radius: 2px;
+      content: ''; /* Siyam virus */
+      width: 4px; /* siyam sir */
+      height: 18px; /* ACS leader */
+      background: var(--primary); /* ACS SIYAM */
+      border-radius: 2px; /* Badsha siyam */
     }
 
     .info-card {
-      background: var(--info-bg);
-      border: 1.5px solid var(--info-border);
-      border-radius: 16px;
-      padding: 16px;
-      margin-bottom: 14px;
-      transition: all 0.2s ease;
+      background: var(--info-bg); /* hyper siyam */
+      border: 1.5px solid var(--info-border); /* siyam 619 */
+      border-radius: 16px; /* dark siyam 62 */
+      padding: 16px; /* Siyam virus */
+      margin-bottom: 14px; /* siyam sir */
+      transition: all 0.2s ease; /* ACS leader */
     }
 
     .info-label {
-      font-size: 12px;
-      opacity: 0.7;
-      margin-bottom: 6px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--text);
+      font-size: 12px; /* ACS SIYAM */
+      opacity: 0.7; /* Badsha siyam */
+      margin-bottom: 6px; /* hyper siyam */
+      display: flex; /* siyam 619 */
+      align-items: center; /* dark siyam 62 */
+      gap: 8px; /* Siyam virus */
+      color: var(--text); /* siyam sir */
     }
 
     .info-value {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--text);
+      font-size: 15px; /* ACS leader */
+      font-weight: 700; /* ACS SIYAM */
+      color: var(--text); /* Badsha siyam */
     }
 
     .action-btn {
-      width: 100%;
-      background: linear-gradient(135deg, var(--primary), #008cff);
-      border: none;
-      color: #000;
-      padding: 12px;
-      border-radius: 25px;
-      font-weight: 900;
-      font-size: 13px;
-      cursor: pointer;
-      margin-top: 10px;
-      box-shadow: 0 0 12px rgba(0, 210, 255, 0.4);
-      transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease;
+      width: 100%; /* hyper siyam */
+      background: linear-gradient(135deg, var(--primary), #008cff); /* siyam 619 */
+      border: none; /* dark siyam 62 */
+      color: #000; /* Siyam virus */
+      padding: 12px; /* siyam sir */
+      border-radius: 25px; /* ACS leader */
+      font-weight: 900; /* ACS SIYAM */
+      font-size: 13px; /* Badsha siyam */
+      cursor: pointer; /* hyper siyam */
+      margin-top: 10px; /* siyam 619 */
+      box-shadow: 0 0 12px rgba(0, 210, 255, 0.4); /* dark siyam 62 */
+      transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease; /* Siyam virus */
     }
 
     .action-btn:hover {
-      box-shadow: 0 0 20px rgba(0, 210, 255, 0.7);
+      box-shadow: 0 0 20px rgba(0, 210, 255, 0.7); /* siyam sir */
     }
 
     .action-btn:active {
-      transform: scale(0.94);
+      transform: scale(0.94); /* ACS leader */
     }
 
     .acs-header-layout {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 12px;
+      display: flex; /* ACS SIYAM */
+      align-items: center; /* Badsha siyam */
+      gap: 12px; /* hyper siyam */
+      margin-bottom: 12px; /* siyam 619 */
     }
 
     .acs-logo-img {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      border: 2px solid #00ff88;
-      box-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
-      flex-shrink: 0;
-      object-fit: cover;
+      width: 60px; /* dark siyam 62 */
+      height: 60px; /* Siyam virus */
+      border-radius: 50%; /* siyam sir */
+      border: 2px solid #00ff88; /* ACS leader */
+      box-shadow: 0 0 15px rgba(0, 255, 136, 0.5); /* ACS SIYAM */
+      flex-shrink: 0; /* Badsha siyam */
+      object-fit: cover; /* hyper siyam */
     }
 
     .acs-title-text {
-      text-align: left;
+      text-align: left; /* siyam 619 */
     }
 
     .social-links {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      margin-top: 20px;
+      display: flex; /* dark siyam 62 */
+      gap: 12px; /* Siyam virus */
+      justify-content: center; /* siyam sir */
+      margin-top: 20px; /* ACS leader */
     }
 
     .social-icon {
-      width: 55px;
-      height: 42px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      text-decoration: none;
-      font-size: 18px;
+      width: 55px; /* ACS SIYAM */
+      height: 42px; /* Badsha siyam */
+      border-radius: 12px; /* hyper siyam */
+      display: flex; /* siyam 619 */
+      align-items: center; /* dark siyam 62 */
+      justify-content: center; /* Siyam virus */
+      color: white; /* siyam sir */
+      text-decoration: none; /* ACS leader */
+      font-size: 18px; /* ACS SIYAM */
     }
 
-    .fb { background: linear-gradient(135deg, #1877f2, #0d5fcc); }
-    .wa { background: linear-gradient(135deg, #25d366, #1ea952); }
-    .mail { background: linear-gradient(135deg, #ea4335, #d02c1e); }
+    .fb { background: linear-gradient(135deg, #1877f2, #0d5fcc); } /* Badsha siyam */
+    .wa { background: linear-gradient(135deg, #25d366, #1ea952); } /* hyper siyam */
+    .mail { background: linear-gradient(135deg, #ea4335, #d02c1e); } /* siyam 619 */
 
     .counter-box {
-      background: var(--info-bg);
-      border: 1.5px solid var(--primary);
-      border-radius: 16px;
-      padding: 15px;
-      text-align: center;
-      margin-top: 20px;
-      font-weight: bold;
-      font-size: 14px;
+      background: var(--info-bg); /* dark siyam 62 */
+      border: 1.5px solid var(--primary); /* Siyam virus */
+      border-radius: 16px; /* siyam sir */
+      padding: 15px; /* ACS leader */
+      text-align: center; /* ACS SIYAM */
+      margin-top: 20px; /* Badsha siyam */
+      font-weight: bold; /* hyper siyam */
+      font-size: 14px; /* siyam 619 */
     }
 
     .footer-text {
-      text-align: center;
-      font-size: 12px;
-      margin-top: 20px;
-      opacity: 0.7;
-      font-weight: bold;
+      text-align: center; /* dark siyam 62 */
+      font-size: 12px; /* Siyam virus */
+      margin-top: 20px; /* siyam sir */
+      opacity: 0.7; /* ACS leader */
+      font-weight: bold; /* ACS SIYAM */
     }
 
-    .page-view { display: none; }
-    .page-view.active { display: block; }
+    .page-view { display: none; } /* Badsha siyam */
+    .page-view.active { display: block; } /* hyper siyam */
 
     .back-btn {
-      background: rgba(0, 210, 255, 0.1);
-      color: var(--primary);
-      border: 1.5px solid var(--primary);
-      padding: 8px 16px;
-      border-radius: 10px;
-      cursor: pointer;
-      margin-bottom: 20px;
-      font-size: 13px;
-      font-weight: bold;
+      background: rgba(0, 210, 255, 0.1); /* siyam 619 */
+      color: var(--primary); /* dark siyam 62 */
+      border: 1.5px solid var(--primary); /* Siyam virus */
+      padding: 8px 16px; /* siyam sir */
+      border-radius: 10px; /* ACS leader */
+      cursor: pointer; /* ACS SIYAM */
+      margin-bottom: 20px; /* Badsha siyam */
+      font-size: 13px; /* hyper siyam */
+      font-weight: bold; /* siyam 619 */
     }
 
     input, textarea {
-      width: 100%;
-      padding: 12px;
-      margin: 8px 0 14px;
-      border-radius: 12px;
-      border: 1.5px solid var(--primary);
-      background: var(--input-bg);
-      color: var(--input-color);
-      text-align: center;
-      outline: none;
+      width: 100%; /* dark siyam 62 */
+      padding: 12px; /* Siyam virus */
+      margin: 8px 0 14px; /* siyam sir */
+      border-radius: 12px; /* ACS leader */
+      border: 1.5px solid var(--primary); /* ACS SIYAM */
+      background: var(--input-bg); /* Badsha siyam */
+      color: var(--input-color); /* hyper siyam */
+      text-align: center; /* siyam 619 */
+      outline: none; /* dark siyam 62 */
     }
 
     #adminLoginPopup, #recoveryPopup {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 5, 12, 0.92);
-      z-index: 9999;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      backdrop-filter: blur(15px);
-      font-family: 'Share Tech Mono', monospace;
+      position: fixed; /* Siyam virus */
+      inset: 0; /* siyam sir */
+      background: rgba(0, 5, 12, 0.92); /* ACS leader */
+      z-index: 9999; /* ACS SIYAM */
+      display: none; /* Badsha siyam */
+      align-items: center; /* hyper siyam */
+      justify-content: center; /* siyam 619 */
+      backdrop-filter: blur(15px); /* dark siyam 62 */
+      font-family: 'Share Tech Mono', monospace; /* Siyam virus */
     }
 
     .hacker-card {
-      background: #030a16;
-      padding: 30px 22px;
-      border-radius: 20px;
-      border: 2px solid #00ff88;
-      text-align: center;
-      width: 90%;
-      max-width: 380px;
-      box-shadow: 0 0 35px rgba(0, 255, 136, 0.3);
-      position: relative;
+      background: #030a16; /* siyam sir */
+      padding: 30px 22px; /* ACS leader */
+      border-radius: 20px; /* ACS SIYAM */
+      border: 2px solid #00ff88; /* Badsha siyam */
+      text-align: center; /* hyper siyam */
+      width: 90%; /* siyam 619 */
+      max-width: 380px; /* dark siyam 62 */
+      box-shadow: 0 0 35px rgba(0, 255, 136, 0.3); /* Siyam virus */
+      position: relative; /* siyam sir */
     }
 
     .rgb-title {
-      font-size: 24px;
-      font-weight: 900;
-      letter-spacing: 2px;
-      margin-bottom: 10px;
-      text-transform: uppercase;
+      font-size: 24px; /* ACS leader */
+      font-weight: 900; /* ACS SIYAM */
+      letter-spacing: 2px; /* Badsha siyam */
+      margin-bottom: 10px; /* hyper siyam */
+      text-transform: uppercase; /* siyam 619 */
     }
 
     .shake {
-      animation: scaryShake 0.4s cubic-bezier(.36,.07,.19,.97) both;
-      border-color: #ff0033 !important;
-      box-shadow: 0 0 40px rgba(255, 0, 51, 0.8) !important;
+      animation: scaryShake 0.4s cubic-bezier(.36,.07,.19,.97) both; /* dark siyam 62 */
+      border-color: #ff0033 !important; /* Siyam virus */
+      box-shadow: 0 0 40px rgba(255, 0, 51, 0.8) !important; /* siyam sir */
     }
 
     @keyframes scaryShake {
-      10%, 90% { transform: translate3d(-2px, 0, 0); }
-      20%, 80% { transform: translate3d(4px, 0, 0); }
-      30%, 50%, 70% { transform: translate3d(-6px, 0, 0); }
-      40%, 60% { transform: translate3d(6px, 0, 0); }
+      10%, 90% { transform: translate3d(-2px, 0, 0); } /* ACS leader */
+      20%, 80% { transform: translate3d(4px, 0, 0); } /* ACS SIYAM */
+      30%, 50%, 70% { transform: translate3d(-6px, 0, 0); } /* Badsha siyam */
+      40%, 60% { transform: translate3d(6px, 0, 0); } /* hyper siyam */
     }
 
     .scary-error {
-      color: #ff0033;
-      font-size: 15px;
-      font-weight: 900;
-      letter-spacing: 1px;
-      text-shadow: 0 0 10px #ff0033;
-      margin: 10px 0;
-      display: none;
-      animation: pulseAlert 0.8s infinite alternate;
+      color: #ff0033; /* siyam 619 */
+      font-size: 15px; /* dark siyam 62 */
+      font-weight: 900; /* Siyam virus */
+      letter-spacing: 1px; /* siyam sir */
+      text-shadow: 0 0 10px #ff0033; /* ACS leader */
+      margin: 10px 0; /* ACS SIYAM */
+      display: none; /* Badsha siyam */
+      animation: pulseAlert 0.8s infinite alternate; /* hyper siyam */
     }
 
     @keyframes pulseAlert {
-      from { opacity: 0.6; transform: scale(0.98); }
-      to { opacity: 1; transform: scale(1.03); }
+      from { opacity: 0.6; transform: scale(0.98); } /* siyam 619 */
+      to { opacity: 1; transform: scale(1.03); } /* dark siyam 62 */
     }
 
     .forget-btn {
-      background: none;
-      border: none;
-      color: #ff0055;
-      font-size: 12px;
-      font-weight: bold;
-      margin-top: 15px;
-      cursor: pointer;
-      text-decoration: underline;
-      letter-spacing: 1px;
-      display: inline-block;
+      background: none; /* Siyam virus */
+      border: none; /* siyam sir */
+      color: #ff0055; /* ACS leader */
+      font-size: 12px; /* ACS SIYAM */
+      font-weight: bold; /* Badsha siyam */
+      margin-top: 15px; /* hyper siyam */
+      cursor: pointer; /* siyam 619 */
+      text-decoration: underline; /* dark siyam 62 */
+      letter-spacing: 1px; /* Siyam virus */
+      display: inline-block; /* siyam sir */
     }
 
     .question-label {
-      font-size: 12px;
-      color: #00ff88;
-      text-align: left;
-      margin-top: 10px;
-      font-weight: bold;
-      word-break: break-word;
+      font-size: 12px; /* ACS leader */
+      color: #00ff88; /* ACS SIYAM */
+      text-align: left; /* Badsha siyam */
+      margin-top: 10px; /* hyper siyam */
+      font-weight: bold; /* siyam 619 */
+      word-break: break-word; /* dark siyam 62 */
     }
 
     #adminPanel {
-      position: fixed;
-      inset: 0;
-      background: var(--popup-bg);
-      z-index: 99999;
-      display: none;
-      overflow-y: auto;
-      padding: 20px;
+      position: fixed; /* Siyam virus */
+      inset: 0; /* siyam sir */
+      background: var(--popup-bg); /* ACS leader */
+      z-index: 99999; /* ACS SIYAM */
+      display: none; /* Badsha siyam */
+      overflow-y: auto; /* hyper siyam */
+      padding: 20px; /* siyam 619 */
     }
 
     .admin-container {
-      max-width: 500px;
-      margin: 20px auto;
-      background: var(--card-bg);
-      border-radius: 20px;
-      border: 2px solid var(--primary);
-      padding: 20px;
+      max-width: 500px; /* dark siyam 62 */
+      margin: 20px auto; /* Siyam virus */
+      background: var(--card-bg); /* siyam sir */
+      border-radius: 20px; /* ACS leader */
+      border: 2px solid var(--primary); /* ACS SIYAM */
+      padding: 20px; /* Badsha siyam */
     }
   </style>
 </head>
-<body>
+<body data-siyam-619="active">
 
 <audio id="bgm" loop preload="auto">
   <source src="https://litter.catbox.moe/eigwozq5qlawuw9m.mp4" type="audio/mp4">
@@ -572,25 +572,25 @@
 
 <canvas class="rain-canvas" id="rainCanvas"></canvas>
 
-<div class="top-header-icons">
+<div class="top-header-icons" data-dark-siyam-62="true">
   <div class="icon-circle" onclick="openAdmin()"><i class="fas fa-crown"></i></div>
   <div class="icon-circle" onclick="toggleTheme()"><i id="themeIcon" class="fas fa-moon"></i></div>
 </div>
 
-<div class="profile-top">
+<div class="profile-top" data-siyam-virus="true">
   <div class="profile-img-container">
     <img src="https://i.imgur.com/LwcC7pq.jpeg" alt="Profile" class="profile-img" id="displayAvatar">
   </div>
 </div>
 
-<div id="adminLoginPopup">
+<div id="adminLoginPopup" data-siyam-sir="true">
   <div class="hacker-card" id="hackerCard">
     <button onclick="closeAdminPopup()" style="position:absolute; top:12px; right:15px; background:none; border:none; color:#00ff88; font-size:18px; cursor:pointer;"><i class="fas fa-times"></i></button>
     
     <div class="rgb-title rgb-text">ADMIN PANEL</div>
-    <p style="font-size: 0.75rem; color: #00ff88; opacity: 0.9; margin-bottom:15px; letter-spacing:1px; font-weight:bold;">DARK SIYAM VIRUS 791</p>
+    <p style="font-size: 0.75rem; color: #00ff88; opacity: 0.9; margin-bottom:15px; letter-spacing:1px; font-weight:bold;">SYSTEM ENGINE</p>
     
-    <div class="scary-error" id="scaryError">⚠️ ACCESS DENIED! TRY AGAIN ⚠️</div>
+    <div class="scary-error" id="scaryError">⚠️ ACCESS DENIED! SYSTEM BLOCKED ⚠️</div>
 
     <input type="password" id="adminPass" placeholder="Enter Access Key..." style="border-color:#00ff88; color:#00ff88; background:rgba(0,255,136,0.05);" onkeyup="if(event.key==='Enter') checkAdmin()">
     
@@ -601,24 +601,24 @@
   </div>
 </div>
 
-<div id="recoveryPopup">
+<div id="recoveryPopup" data-acs-leader="true">
   <div class="hacker-card">
     <button onclick="closeRecovery()" style="position:absolute; top:12px; right:15px; background:none; border:none; color:#ff0055; font-size:18px; cursor:pointer;"><i class="fas fa-times"></i></button>
     
     <div class="rgb-title rgb-text" style="font-size: 18px;">SECURITY RECOVERY</div>
     <p style="font-size: 0.7rem; color: #ff0055; margin-bottom:15px;">ENTER RECOVERY ANSWERS</p>
 
-    <div class="question-label">Q1: Siyam Python's father - Write key !!</div>
+    <div class="question-label">Q1: Security Question 1</div>
     <input type="text" id="ans1" placeholder="Answer 1..." style="border-color:#00d2ff; color:#00d2ff;">
 
-    <div class="question-label">Q2: ==÷÷~[] Are you know ?</div>
+    <div class="question-label">Q2: Security Question 2</div>
     <input type="text" id="ans2" placeholder="Answer 2..." style="border-color:#00d2ff; color:#00d2ff;">
 
     <button onclick="verifyRecovery()" class="action-btn" style="background: linear-gradient(135deg, #ff0055, #7a00ff); color:#fff;">SUBMIT ANSWERS</button>
   </div>
 </div>
 
-<div id="adminPanel">
+<div id="adminPanel" data-acs-siyam="true">
   <div class="admin-container">
     <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--primary); padding-bottom: 10px;">
       <h3 style="color:var(--primary);"><i class="fas fa-crown"></i> Admin Panel</h3>
@@ -666,7 +666,7 @@
   </div>
 </div>
 
-<div class="container">
+<div class="container" data-badsha-siyam="true">
 
   <div id="main-page" class="page-view active">
     <div class="profile-info-inside">
@@ -733,7 +733,7 @@
 
       <div class="speak-box-wrapper">
         <div class="speak-box-inner">
-          <div class="speak-box-title rgb-text">SPEAK DIRECTLY WITH SIYAM SIR</div>
+          <div class="speak-box-title rgb-text">SPEAK DIRECTLY</div>
           <input type="text" id="visitorName" placeholder="Your Name (Required)..." style="margin-bottom: 8px;">
           <textarea id="visitorComment" rows="3" placeholder="Write your comment or message here..."></textarea>
           <button class="action-btn" onclick="submitVisitorComment()"><i class="fas fa-paper-plane"></i> SUBMIT</button>
@@ -742,19 +742,19 @@
 
     </div>
 
-    <div class="section-title">ACS WORLD</div>
+    <div class="section-title">COMMUNITY WORLD</div>
 
     <div class="info-card">
       <div class="acs-header-layout">
-        <img src="https://i.imgur.com/56AiZl6.jpeg" alt="ACS Logo" class="acs-logo-img">
+        <img src="https://i.imgur.com/56AiZl6.jpeg" alt="Logo" class="acs-logo-img">
         <div class="acs-title-text">
-          <div style="font-size: 15px; font-weight: bold; color: var(--primary);">ACS CYBER HELP ZONE</div>
+          <div style="font-size: 15px; font-weight: bold; color: var(--primary);">CYBER HELP ZONE</div>
           <div style="font-size: 11px; opacity: 0.7;">NEVER GIVE UP</div>
         </div>
       </div>
-      <p style="font-size: 12px; margin-bottom: 12px; text-align: left;">If you need any help, join the ACS Help Center. May everyone's online world be safe..</p>
+      <p style="font-size: 12px; margin-bottom: 12px; text-align: left;">If you need any help, join the Help Center. May everyone's online world be safe..</p>
       <a href="https://m.me/j/AbYv6QQWn84E6Mg0/?send_source=gc%3Acopy_invite_link_c" target="_blank" style="text-decoration:none;">
-        <button class="action-btn"><i class="fab fa-facebook-messenger"></i> JOIN ATTACK WORLD</button>
+        <button class="action-btn"><i class="fab fa-facebook-messenger"></i> JOIN WORLD</button>
       </a>
     </div>
 
@@ -790,11 +790,11 @@
     </div>
 
     <div class="footer-text">
-      ⚓ THE GAME RULER IBNA SIYAM 🚩 👑
+      ⚓ THE GAME RULER 🚩 👑
     </div>
   </div>
 
-  <div id="other-page" class="page-view">
+  <div id="other-page" class="page-view" data-hyper-siyam="true">
     <button class="back-btn" onclick="showPage('main-page')">← Back</button>
     <div class="section-title">OTHER FEATURES</div>
 
@@ -815,7 +815,7 @@
 
     <div class="info-card" style="text-align: center; padding: 25px 15px;">
       <p class="rgb-text" style="font-size: 15px; margin-bottom: 20px; font-weight: 800; line-height: 1.5;">
-        Lodge a complaint directly with Siyam Sir. The case will be accepted within 12 hours.
+        Lodge a complaint directly. The case will be accepted within 12 hours.
       </p>
       
       <a href="https://wa.me/8801940984562?text=I%20want%20to%20file%20a%20cyber%20crime%20complaint" target="_blank" style="text-decoration: none;">
@@ -855,7 +855,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-  const firebaseConfig = {
+  const siyamVirusConfig = {
     apiKey: "AIzaSyAyc3L1EepBzsOIM-gSui09RQpEmf4owf0",
     authDomain: "my-portfolio-a2d90.firebaseapp.com",
     databaseURL: "https://my-portfolio-a2d90-default-rtdb.firebaseio.com",
@@ -864,47 +864,47 @@
     messagingSenderId: "922189130029",
     appId: "1:922189130029:web:92defd36acbda8c151cba4"
   };
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.database();
+  firebase.initializeApp(siyamVirusConfig);
+  const siyamSirDb = firebase.database();
 
-  let isLightMode = false;
-  let isAdminLoggedIn = false;
-  let currentAdminPass = "if?nomore";
+  let acsLeaderMode = false;
+  let acsSiyamAdmin = false;
+  let badshaSiyamPass = "if?nomore";
 
-  db.ref('settings/adminPass').on('value', snapshot => {
-    if(snapshot.val()) currentAdminPass = snapshot.val();
+  siyamSirDb.ref('settings/adminPass').on('value', snapshot => {
+    if(snapshot.val()) badshaSiyamPass = snapshot.val();
   });
 
-  const audio = document.getElementById("bgm");
-  audio.volume = 0.7;
+  const hyperSiyamAudio = document.getElementById("bgm");
+  hyperSiyamAudio.volume = 0.7;
 
-  audio.addEventListener('timeupdate', () => {
-    if (audio.currentTime >= 48) {
-      audio.currentTime = 0;
-      audio.play();
+  hyperSiyamAudio.addEventListener('timeupdate', () => {
+    if (hyperSiyamAudio.currentTime >= 48) {
+      hyperSiyamAudio.currentTime = 0;
+      hyperSiyamAudio.play();
     }
   });
 
-  function triggerAudio() {
-    audio.play().catch(() => {
+  function triggerSiyamAudio() {
+    hyperSiyamAudio.play().catch(() => {
       const playNow = () => {
-        audio.play();
+        hyperSiyamAudio.play();
         ['click', 'touchstart', 'scroll'].forEach(evt => window.removeEventListener(evt, playNow));
       };
       ['click', 'touchstart', 'scroll'].forEach(evt => window.addEventListener(evt, playNow));
     });
   }
 
-  window.addEventListener('DOMContentLoaded', triggerAudio);
-  window.addEventListener('load', triggerAudio);
+  window.addEventListener('DOMContentLoaded', triggerSiyamAudio);
+  window.addEventListener('load', triggerSiyamAudio);
 
   function updateLiveClock() {
-    const now = new Date();
+    const siyamTimeNow = new Date();
     const timeOptions = { timeZone: 'Asia/Dhaka', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
     const dateOptions = { timeZone: 'Asia/Dhaka', weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' };
     
-    document.getElementById('bdTime').innerText = now.toLocaleTimeString('en-US', timeOptions);
-    document.getElementById('bdDate').innerText = now.toLocaleDateString('en-US', dateOptions);
+    document.getElementById('bdTime').innerText = siyamTimeNow.toLocaleTimeString('en-US', timeOptions);
+    document.getElementById('bdDate').innerText = siyamTimeNow.toLocaleDateString('en-US', dateOptions);
   }
   setInterval(updateLiveClock, 1000);
   updateLiveClock();
@@ -931,13 +931,13 @@
 
   function toggleTheme() {
     document.body.classList.toggle("light");
-    isLightMode = document.body.classList.contains("light");
-    document.getElementById("themeIcon").className = isLightMode ? "fas fa-sun" : "fas fa-moon";
+    acsLeaderMode = document.body.classList.contains("light");
+    document.getElementById("themeIcon").className = acsLeaderMode ? "fas fa-sun" : "fas fa-moon";
   }
 
   const rainCanvas = document.getElementById('rainCanvas');
   const rainCtx = rainCanvas.getContext('2d');
-  let drops = [];
+  let siyamDrops = [];
 
   function resizeCanvas() {
     rainCanvas.width = window.innerWidth;
@@ -957,13 +957,13 @@
   }
 
   function initRain() {
-    drops = [];
-    for (let i = 0; i < 150; i++) drops.push(createDrop());
+    siyamDrops = [];
+    for (let i = 0; i < 150; i++) siyamDrops.push(createDrop());
   }
 
   function animateRain() {
     const grad = rainCtx.createLinearGradient(0, 0, 0, rainCanvas.height);
-    if (isLightMode) {
+    if (acsLeaderMode) {
       grad.addColorStop(0, '#dce9f5');
       grad.addColorStop(1, '#c8dff0');
     } else {
@@ -973,12 +973,12 @@
     rainCtx.fillStyle = grad;
     rainCtx.fillRect(0, 0, rainCanvas.width, rainCanvas.height);
 
-    for (let i = 0; i < drops.length; i++) {
-      const d = drops[i];
+    for (let i = 0; i < siyamDrops.length; i++) {
+      const d = siyamDrops[i];
       rainCtx.beginPath();
       rainCtx.moveTo(d.x, d.y);
       rainCtx.lineTo(d.x - 1, d.y + d.len);
-      rainCtx.strokeStyle = isLightMode ? `rgba(60, 130, 180, ${d.opacity})` : `rgba(0, 210, 255, ${d.opacity})`;
+      rainCtx.strokeStyle = acsLeaderMode ? `rgba(60, 130, 180, ${d.opacity})` : `rgba(0, 210, 255, ${d.opacity})`;
       rainCtx.lineWidth = 1.5;
       rainCtx.stroke();
 
@@ -996,8 +996,8 @@
   animateRain();
 
   window.onload = function() {
-    triggerAudio();
-    const vRef = db.ref('stats/visits');
+    triggerSiyamAudio();
+    const vRef = siyamSirDb.ref('stats/visits');
     vRef.transaction(c => (c || 0) + 1);
     vRef.on('value', snapshot => {
       const count = snapshot.val() || 0;
@@ -1005,8 +1005,7 @@
       document.getElementById('statVisitors').innerText = count;
     });
 
-    // Load profile data from Firebase
-    db.ref('profileData').on('value', snapshot => {
+    siyamSirDb.ref('profileData').on('value', snapshot => {
       const data = snapshot.val();
       if(data) {
         if(data.name) { document.getElementById('displayName').innerText = data.name; document.getElementById('editName').value = data.name; }
@@ -1020,7 +1019,7 @@
       }
     });
 
-    db.ref('settings/ownerMsg').on('value', snapshot => {
+    siyamSirDb.ref('settings/ownerMsg').on('value', snapshot => {
       const msg = snapshot.val();
       if(msg) {
         document.getElementById('displayOwnerMsg').innerText = msg;
@@ -1057,7 +1056,7 @@
       return;
     }
 
-    const newCommentRef = db.ref('comments').push();
+    const newCommentRef = siyamSirDb.ref('comments').push();
     newCommentRef.set({
       name: name,
       comment: comment,
@@ -1068,7 +1067,7 @@
 
       Swal.fire({
         title: 'SUCCESSFUL ✓',
-        text: 'Your comment has been received please wait for a reply from Siyam sir',
+        text: 'Your comment has been received.',
         icon: 'success',
         background: '#030a16',
         color: '#00ff88',
@@ -1078,7 +1077,7 @@
   }
 
   function loadAdminComments() {
-    db.ref('comments').on('value', snapshot => {
+    siyamSirDb.ref('comments').on('value', snapshot => {
       const listDiv = document.getElementById('adminCommentsList');
       listDiv.innerHTML = '';
       const data = snapshot.val();
@@ -1103,11 +1102,11 @@
   }
 
   function deleteComment(key) {
-    db.ref('comments/' + key).remove();
+    siyamSirDb.ref('comments/' + key).remove();
   }
 
   function openAdmin() {
-    if(isAdminLoggedIn) {
+    if(acsSiyamAdmin) {
       document.getElementById('adminPanel').style.display = 'block';
     } else {
       document.getElementById('scaryError').style.display = 'none';
@@ -1127,8 +1126,8 @@
     const card = document.getElementById('hackerCard');
     const err = document.getElementById('scaryError');
 
-    if (pass === currentAdminPass) {
-      isAdminLoggedIn = true;
+    if (pass === badshaSiyamPass) {
+      acsSiyamAdmin = true;
       document.getElementById('adminLoginPopup').style.display = 'none';
       document.getElementById('adminPanel').style.display = 'block';
       document.getElementById('adminPass').value = '';
@@ -1136,7 +1135,7 @@
       card.classList.remove('shake');
       Swal.fire({
         title: 'ACCESS GRANTED!',
-        text: 'Welcome Master Siyam',
+        text: 'Welcome',
         icon: 'success',
         timer: 1200,
         showConfirmButton: false,
@@ -1181,8 +1180,8 @@
         confirmButtonColor: '#00ff88'
       }).then((result) => {
         if (result.isConfirmed && result.value) {
-          currentAdminPass = result.value;
-          db.ref('settings/adminPass').set(currentAdminPass);
+          badshaSiyamPass = result.value;
+          siyamSirDb.ref('settings/adminPass').set(badshaSiyamPass);
           Swal.fire({
             title: 'UPDATED!',
             text: 'Your password has been changed successfully.',
@@ -1221,10 +1220,10 @@
 
     const newOwnerMsg = document.getElementById('editOwnerMsg').value;
 
-    db.ref('profileData').set(profileData);
+    siyamSirDb.ref('profileData').set(profileData);
 
     if(newOwnerMsg) {
-      db.ref('settings/ownerMsg').set(newOwnerMsg);
+      siyamSirDb.ref('settings/ownerMsg').set(newOwnerMsg);
     }
 
     Swal.fire('Saved!', 'All profile changes applied successfully.', 'success');
@@ -1274,7 +1273,7 @@
       const res = await fetch('https://ipapi.co/json/');
       const data = await res.json();
       infoDiv.innerHTML = `
-        <strong>IP:</strong> <span style="color:var(--primary)">${data.ip}</span><br>
+        <strong>IP:</i> <span style="color:var(--primary)">${data.ip}</span><br>
         <strong>ISP:</strong> ${data.org}<br>
         <strong>City/Country:</strong> ${data.city}, ${data.country_name}<br>
         <strong>Timezone:</strong> ${data.timezone}
