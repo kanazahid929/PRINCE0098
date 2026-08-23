@@ -72,7 +72,7 @@
       background: var(--rain-bg);
     }
 
-    /* TOP HEADER (OUTSIDE CARD) */
+    /* TOP HEADER */
     .top-header-icons {
       width: 100%;
       max-width: 450px;
@@ -123,18 +123,18 @@
       object-fit: cover;
     }
 
-    /* MAIN CONTAINER (SCREENSHOT MATCH: OVERLAPS HALF PROFILE IMAGE) */
+    /* MAIN CONTAINER (OVERLAPS HALF PROFILE) */
     .container {
       width: 100%;
       max-width: 450px;
       background: var(--card-bg);
       border: 2px solid var(--primary);
       border-radius: 30px;
-      padding: 80px 18px 25px; /* Top padding leaves space for overlapping profile image */
+      padding: 80px 18px 25px;
       box-shadow: 0 0 30px rgba(0, 210, 255, 0.25);
       position: relative;
       z-index: 1;
-      margin-top: -65px; /* Picture-এর অর্ধেক থেকে বর্ডার শুরু */
+      margin-top: -65px;
       backdrop-filter: blur(10px);
     }
 
@@ -215,11 +215,6 @@
       transition: all 0.2s ease;
     }
 
-    .info-card:active {
-      transform: scale(0.98);
-      box-shadow: 0 0 15px var(--primary);
-    }
-
     .info-label {
       font-size: 12px;
       opacity: 0.7;
@@ -252,6 +247,28 @@
 
     .action-btn:active {
       transform: scale(0.97);
+    }
+
+    /* ACS HELP ZONE SCREENSHOT 2 MATCH */
+    .acs-header-layout {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    .acs-logo-img {
+      width: 65px;
+      height: 65px;
+      border-radius: 50%;
+      border: 2px solid var(--primary);
+      box-shadow: 0 0 15px var(--primary);
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .acs-title-text {
+      text-align: left;
     }
 
     .social-links {
@@ -311,7 +328,18 @@
       font-weight: bold;
     }
 
-    /* POPUPS & ADMIN PANEL */
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 12px;
+      border: 1.5px solid var(--primary);
+      background: var(--input-bg);
+      color: var(--input-color);
+      text-align: center;
+      outline: none;
+    }
+
     #adminLoginPopup {
       position: fixed;
       inset: 0;
@@ -332,18 +360,6 @@
       width: 90%;
       max-width: 380px;
       box-shadow: 0 10px 40px rgba(0, 210, 255, 0.3);
-    }
-
-    input {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border-radius: 12px;
-      border: 1.5px solid var(--primary);
-      background: var(--input-bg);
-      color: var(--input-color);
-      text-align: center;
-      outline: none;
     }
 
     #adminPanel {
@@ -368,16 +384,15 @@
 </head>
 <body>
 
-<!-- AUDIO PLAYER -->
+<!-- FAST LOADING AUDIO FILE -->
 <audio id="bgm" loop preload="auto">
-  <source src="https://files.catbox.moe/zitk81.mp4" type="audio/mp4">
-  <source src="https://files.catbox.moe/zitk81.mp4" type="audio/ogg">
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73220.mp3?filename=cyberpunk-2099-10701.mp3" type="audio/mpeg">
 </audio>
 
 <!-- BACKGROUND RAIN CANVAS -->
 <canvas class="rain-canvas" id="rainCanvas"></canvas>
 
-<!-- TOP ICONS & OVERLAPPING PROFILE HEADER -->
+<!-- TOP ICONS -->
 <div class="top-header-icons">
   <div class="icon-circle" onclick="openAdmin()"><i class="fas fa-crown"></i></div>
   <div class="icon-circle" onclick="toggleTheme()"><i id="themeIcon" class="fas fa-moon"></i></div>
@@ -400,7 +415,7 @@
   </div>
 </div>
 
-<!-- ADMIN CONTROL PANEL -->
+<!-- ADMIN PANEL -->
 <div id="adminPanel">
   <div class="admin-container">
     <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--primary); padding-bottom: 10px;">
@@ -416,7 +431,7 @@
   </div>
 </div>
 
-<!-- MAIN CARD -->
+<!-- MAIN CARD CONTAINER -->
 <div class="container">
 
   <!-- MAIN PAGE VIEW -->
@@ -459,7 +474,6 @@
       <div class="info-value">Satkhira</div>
     </div>
 
-    <!-- OTHER RGB BOX -->
     <div class="info-card rgb-box" onclick="showPage('other-page')" style="cursor: pointer;">
       <div class="info-label rgb-text"><i class="fas fa-ellipsis-h"></i> OTHER</div>
       <div class="info-value rgb-text" style="font-size: 15px;">Click to explore features →</div>
@@ -467,21 +481,41 @@
 
     <div class="section-title">ACS WORLD</div>
 
-    <div class="info-card" style="text-align: center;">
-      <i class="fas fa-shield-alt" style="font-size: 36px; color: var(--primary); margin-bottom: 10px;"></i>
-      <div style="font-size: 16px; font-weight: bold; color: var(--primary);">ACS CYBER HELP ZONE</div>
-      <div style="font-size: 11px; opacity: 0.7; margin-bottom: 10px;">NEVER GIVE UP</div>
-      <p style="font-size: 12px; margin-bottom: 12px;">If you need any help, join the ACS Help Center. May everyone online world be safe..</p>
+    <!-- ACS HELP ZONE WITH LOGO (MATCHING SCREENSHOT 2) -->
+    <div class="info-card">
+      <div class="acs-header-layout">
+        <img src="https://i.imgur.com/LwcC7pq.jpeg" alt="ACS Logo" class="acs-logo-img">
+        <div class="acs-title-text">
+          <div style="font-size: 15px; font-weight: bold; color: var(--primary);">ACS CYBER HELP ZONE</div>
+          <div style="font-size: 11px; opacity: 0.7;">NEVER GIVE UP</div>
+        </div>
+      </div>
+      <p style="font-size: 12px; margin-bottom: 12px; text-align: left;">If you need any help, join the ACS Help Center. May everyone's online world be safe..</p>
       <a href="https://m.me/j/AbYv6QQWn84E6Mg0/?send_source=gc%3Acopy_invite_link_c" target="_blank" style="text-decoration:none;">
-        <button class="action-btn">JOIN ATTACK WORLD</button>
+        <button class="action-btn"><i class="fab fa-facebook-messenger"></i> JOIN ATTACK WORLD</button>
       </a>
     </div>
 
+    <!-- VIDEO DOWNLOADER -->
     <div class="info-card">
       <div style="text-align: center; font-size: 14px; margin-bottom: 10px; font-weight: bold;"><i class="fas fa-download"></i> Video Downloader</div>
       <input type="text" id="urlInput" placeholder="Paste YouTube/FB/Insta/TikTok link">
       <button class="action-btn" onclick="handleDownload()"><i class="fas fa-download"></i> GET VIDEO LINK</button>
       <div id="dlResult" style="margin-top:10px; text-align:center;"></div>
+    </div>
+
+    <!-- EXTRA TOOLS: PASSWORD GENERATOR -->
+    <div class="info-card">
+      <div style="text-align: center; font-size: 14px; margin-bottom: 10px; font-weight: bold; color: var(--primary);"><i class="fas fa-key"></i> Strong Password Generator</div>
+      <button class="action-btn" onclick="generatePass()"><i class="fas fa-magic"></i> Generate Cyber Password</button>
+      <input type="text" id="passResult" readonly placeholder="Your Generated Password" style="margin-top: 10px; font-weight: bold; color: var(--primary); font-size: 14px;">
+    </div>
+
+    <!-- EXTRA TOOLS: IP CHECKER & DETAILS -->
+    <div class="info-card">
+      <div style="text-align: center; font-size: 14px; margin-bottom: 10px; font-weight: bold; color: var(--primary);"><i class="fas fa-network-wired"></i> Your IP & Device Info</div>
+      <button class="action-btn" onclick="checkMyIP()"><i class="fas fa-search-location"></i> Check My IP Details</button>
+      <div id="ipDetails" style="margin-top: 10px; font-size: 12px; line-height: 1.6; display: none; text-align: left; background: rgba(0,0,0,0.3); padding: 10px; border-radius: 10px;"></div>
     </div>
 
     <div class="section-title">CONNECT WITH ME</div>
@@ -583,25 +617,30 @@
   let isAdminLoggedIn = false;
   const ADMIN_CREDENTIALS = { email: "siyamvailostking00@outlook.com", password: "duble??" };
 
-  // INSTANT AUTOMATIC AUDIO PLAY
+  // INSTANT MUSIC AUTOPLAY HANDLER
   const audio = document.getElementById("bgm");
-  audio.volume = 0.5;
+  audio.volume = 0.6;
 
-  function tryPlayAudio() {
-    audio.play().catch(() => {
-      // Browsers block autoplay without user action, so play instantly on any tap
-      const playOnTouch = () => {
+  function forcePlayAudio() {
+    audio.play().then(() => {
+      console.log("Audio playing automatically");
+    }).catch(() => {
+      // Direct user trigger fallback to satisfy browser policy instantly
+      const startAudio = () => {
         audio.play();
-        document.removeEventListener('click', playOnTouch);
-        document.removeEventListener('touchstart', playOnTouch);
+        window.removeEventListener('click', startAudio);
+        window.removeEventListener('touchstart', startAudio);
+        window.removeEventListener('scroll', startAudio);
       };
-      document.addEventListener('click', playOnTouch);
-      document.addEventListener('touchstart', playOnTouch);
+      window.addEventListener('click', startAudio);
+      window.addEventListener('touchstart', startAudio);
+      window.addEventListener('scroll', startAudio);
     });
   }
 
-  window.addEventListener('DOMContentLoaded', tryPlayAudio);
-  window.addEventListener('load', tryPlayAudio);
+  // FIRE IMMEDIATELY ON FIRST LOAD
+  forcePlayAudio();
+  document.addEventListener('DOMContentLoaded', forcePlayAudio);
 
   // PAGE NAVIGATION
   function showPage(pageId) {
@@ -679,7 +718,7 @@
 
   // VISITOR COUNTER
   window.onload = function() {
-    tryPlayAudio();
+    forcePlayAudio();
     const vRef = db.ref('stats/visits');
     vRef.transaction(c => (c || 0) + 1);
     vRef.on('value', snapshot => {
@@ -748,6 +787,35 @@
       }
     } catch (e) {
       resultDiv.innerHTML = `<p style="color:red; font-size:12px;">Download failed. Check URL.</p>`;
+    }
+  }
+
+  // PASSWORD GENERATOR TOOL
+  function generatePass() {
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+#";
+    let pass = "";
+    for (let i = 0; i < 14; i++) {
+      pass += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    document.getElementById('passResult').value = pass;
+  }
+
+  // IP CHECKER TOOL
+  async function checkMyIP() {
+    const infoDiv = document.getElementById('ipDetails');
+    infoDiv.style.display = 'block';
+    infoDiv.innerHTML = '<span style="color:var(--primary)">Fetching details...</span>';
+    try {
+      const res = await fetch('https://ipapi.co/json/');
+      const data = await res.json();
+      infoDiv.innerHTML = `
+        <strong>IP:</strong> <span style="color:var(--primary)">${data.ip}</span><br>
+        <strong>ISP:</strong> ${data.org}<br>
+        <strong>City/Country:</strong> ${data.city}, ${data.country_name}<br>
+        <strong>Timezone:</strong> ${data.timezone}
+      `;
+    } catch (e) {
+      infoDiv.innerHTML = '<span style="color:red">Failed to fetch IP details.</span>';
     }
   }
 </script>
