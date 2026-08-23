@@ -5,1284 +5,446 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MOHAMMAD IBNA SIYAM - Profile</title>
   
-  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script> <!-- siyam_core_791 -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script> <!-- acs_db_init -->
   
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Orbitron:wght@600;800;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"> <!-- css_fa_siyam -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Orbitron:wght@600;800;900&family=Share+Tech+Mono&display=swap" rel="stylesheet"> <!-- font_load_siyam -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"> <!-- alert_css_siyam -->
 
   <style>
-    :root {
-      --primary: #00d2ff;
-      --accent: #008cff;
-      --bg: #020b1a; 
-      --card-bg: rgba(4, 12, 24, 0.85);
-      --text: #ffffff;
-      --info-bg: rgba(6, 24, 46, 0.6);
-      --info-border: #00a8ff;
-      --rain-bg: linear-gradient(to bottom, #020b1a, #051937);
-      --popup-bg: rgba(2, 11, 26, 0.95);
-      --input-bg: rgba(0, 0, 0, 0.6);
-      --input-color: #fff;
-    }
-
-    body.light {
-      --bg: #e8edf5;
-      --card-bg: rgba(255, 255, 255, 0.85);
-      --text: #1a1a2e;
-      --info-bg: rgba(0, 140, 255, 0.05);
-      --info-border: rgba(0, 140, 255, 0.3);
-      --rain-bg: linear-gradient(to bottom, #c8dff0, #dce9f5);
-      --popup-bg: rgba(240, 248, 255, 0.95);
-      --input-bg: rgba(255, 255, 255, 0.9);
-      --input-color: #1a1a2e;
-      --primary: #0099cc;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Outfit', system-ui, -apple-system, sans-serif;
-      transition: background 0.4s, color 0.4s, border-color 0.4s;
-    }
-
-    body {
-      background-color: var(--bg);
-      color: var(--text);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 15px 10px 30px;
-      min-height: 100vh;
-      overflow-x: hidden;
-      position: relative;
-    }
-
-    .rain-canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      pointer-events: none;
-      background: var(--rain-bg);
-    }
-
-    .top-header-icons {
-      width: 100%;
-      max-width: 450px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 10px;
-      margin-bottom: 10px;
-      z-index: 3;
-      position: relative;
-    }
-
-    .icon-circle {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      border: 2px solid var(--primary);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--primary);
-      font-size: 18px;
-      background: rgba(0, 210, 255, 0.08);
-      cursor: pointer;
-      backdrop-filter: blur(5px);
-    }
-
-    .profile-top {
-      text-align: center;
-      z-index: 3;
-      position: relative;
-    }
-
-    .profile-img-container {
-      width: 130px;
-      height: 130px;
-      margin: 0 auto;
-      position: relative;
-    }
-
-    .profile-img {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      border: 3.5px solid var(--primary);
-      box-shadow: 0 0 25px var(--primary);
-      object-fit: cover;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 450px;
-      background: var(--card-bg);
-      border: 2px solid var(--primary);
-      border-radius: 30px;
-      padding: 80px 18px 25px;
-      box-shadow: 0 0 30px rgba(0, 210, 255, 0.25);
-      position: relative;
-      z-index: 1;
-      margin-top: -65px;
-      backdrop-filter: blur(10px);
-    }
-
-    .profile-info-inside {
-      text-align: center;
-      margin-bottom: 25px;
-    }
-
-    .main-title {
-      font-size: 22px;
-      font-weight: 900;
-      letter-spacing: 1px;
-      color: var(--text);
-      margin-bottom: 10px;
-      text-transform: uppercase;
-      line-height: 1.2;
-    }
-
-    .badge-btn {
-      background: rgba(0, 210, 255, 0.12);
-      border: 1.5px solid var(--primary);
-      padding: 8px 18px;
-      border-radius: 25px;
-      font-size: 12px;
-      color: var(--primary);
-      display: inline-block;
-      margin-bottom: 12px;
-      font-weight: 700;
-    }
-
-    .rgb-text {
-      background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bfd, #7a00ff, #ff00c8, #ff0000);
-      background-size: 400%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: rgbGlow 6s linear infinite;
-      font-weight: bold;
-    }
-
-    @keyframes rgbGlow {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    .rgb-box {
-      border: 2px solid transparent !important;
-      border-image: linear-gradient(45deg, #ff0000, #00ffd5, #7a00ff, #ff0000) 1 !important;
-      animation: borderRotate 4s linear infinite;
-      box-shadow: 0 0 15px rgba(0, 255, 213, 0.3);
-    }
-
-    .owner-notif-wrapper {
-      margin-bottom: 15px;
-      margin-top: 15px;
-    }
-
-    .owner-notif-title {
-      font-size: 14px;
-      font-weight: 900;
-      color: var(--primary);
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      letter-spacing: 1px;
-    }
-
-    .owner-msg-container {
-      position: relative;
-      border-radius: 16px;
-      padding: 2px;
-      background: linear-gradient(45deg, #ff0000, #ff7300, #00ffd5, #002bfd, #7a00ff, #ff00c8, #ff0000);
-      background-size: 400%;
-      animation: rgbGlow 5s linear infinite;
-    }
-
-    .owner-msg-inner {
-      background: var(--info-bg);
-      border-radius: 14px;
-      padding: 16px;
-      text-align: center;
-      backdrop-filter: blur(5px);
-    }
-
-    .owner-msg-text {
-      font-size: 14px;
-      color: var(--text);
-      font-weight: 600;
-      line-height: 1.4;
-      opacity: 0.95;
-    }
-
-    .live-time-wrapper {
-      margin-top: 12px;
-      position: relative;
-      border-radius: 18px;
-      padding: 2px;
-      background: linear-gradient(45deg, #ff0000, #00ffd5, #7a00ff, #ff00c8, #00ff88, #ff0000);
-      background-size: 400%;
-      animation: rgbGlow 5s linear infinite;
-      box-shadow: 0 0 15px rgba(0, 210, 255, 0.25);
-    }
-
-    .live-time-box {
-      background: #020916;
-      border-radius: 16px;
-      padding: 12px 16px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .live-clock-section {
-      text-align: left;
-    }
-
-    .live-clock-time {
-      font-size: 17px;
-      font-weight: 900;
-      color: #00d2ff;
-      font-family: 'Orbitron', sans-serif;
-      letter-spacing: 1.5px;
-      text-shadow: 0 0 10px rgba(0, 210, 255, 0.6);
-    }
-
-    .live-clock-date {
-      font-size: 11px;
-      color: #a0aec0;
-      margin-top: 2px;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-    }
-
-    .live-temp-section {
-      text-align: right;
-      font-size: 16px;
-      font-weight: 900;
-      color: #ff0055;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-family: 'Orbitron', sans-serif;
-      text-shadow: 0 0 10px rgba(255, 0, 85, 0.6);
-    }
-
-    .speak-box-wrapper {
-      margin-top: 15px;
-      position: relative;
-      border-radius: 18px;
-      padding: 2px;
-      background: linear-gradient(45deg, #ff0000, #00ffd5, #7a00ff, #ff00c8, #ff0000);
-      background-size: 400%;
-      animation: rgbGlow 5s linear infinite;
-      box-shadow: 0 0 15px rgba(0, 210, 255, 0.25);
-    }
-
-    .speak-box-inner {
-      background: var(--info-bg);
-      border-radius: 16px;
-      padding: 16px;
-      text-align: center;
-    }
-
-    .speak-box-title {
-      font-size: 14px;
-      font-weight: 900;
-      letter-spacing: 1px;
-      margin-bottom: 12px;
-      text-transform: uppercase;
-      text-align: center;
-    }
-
-    .section-title {
-      font-size: 14px;
-      font-weight: 900;
-      color: var(--primary);
-      margin: 25px 0 15px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      letter-spacing: 1px;
-    }
-
-    .section-title::before {
-      content: '';
-      width: 4px;
-      height: 18px;
-      background: var(--primary);
-      border-radius: 2px;
-    }
-
-    .info-card {
-      background: var(--info-bg);
-      border: 1.5px solid var(--info-border);
-      border-radius: 16px;
-      padding: 16px;
-      margin-bottom: 14px;
-      transition: all 0.2s ease;
-    }
-
-    .info-label {
-      font-size: 12px;
-      opacity: 0.7;
-      margin-bottom: 6px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--text);
-    }
-
-    .info-value {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--text);
-    }
-
-    .action-btn {
-      width: 100%;
-      background: linear-gradient(135deg, var(--primary), #008cff);
-      border: none;
-      color: #000;
-      padding: 12px;
-      border-radius: 25px;
-      font-weight: 900;
-      font-size: 13px;
-      cursor: pointer;
-      margin-top: 10px;
-      box-shadow: 0 0 12px rgba(0, 210, 255, 0.4);
-      transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease;
-    }
-
-    .action-btn:hover {
-      box-shadow: 0 0 20px rgba(0, 210, 255, 0.7);
-    }
-
-    .action-btn:active {
-      transform: scale(0.94);
-    }
-
-    .acs-header-layout {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
-
-    .acs-logo-img {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      border: 2px solid #00ff88;
-      box-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
-      flex-shrink: 0;
-      object-fit: cover;
-    }
-
-    .acs-title-text {
-      text-align: left;
-    }
-
-    .social-links {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      margin-top: 20px;
-    }
-
-    .social-icon {
-      width: 55px;
-      height: 42px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      text-decoration: none;
-      font-size: 18px;
-    }
-
-    .fb { background: linear-gradient(135deg, #1877f2, #0d5fcc); }
-    .wa { background: linear-gradient(135deg, #25d366, #1ea952); }
-    .mail { background: linear-gradient(135deg, #ea4335, #d02c1e); }
-
-    .counter-box {
-      background: var(--info-bg);
-      border: 1.5px solid var(--primary);
-      border-radius: 16px;
-      padding: 15px;
-      text-align: center;
-      margin-top: 20px;
-      font-weight: bold;
-      font-size: 14px;
-    }
-
-    .footer-text {
-      text-align: center;
-      font-size: 12px;
-      margin-top: 20px;
-      opacity: 0.7;
-      font-weight: bold;
-    }
-
-    .page-view { display: none; }
-    .page-view.active { display: block; }
-
-    .back-btn {
-      background: rgba(0, 210, 255, 0.1);
-      color: var(--primary);
-      border: 1.5px solid var(--primary);
-      padding: 8px 16px;
-      border-radius: 10px;
-      cursor: pointer;
-      margin-bottom: 20px;
-      font-size: 13px;
-      font-weight: bold;
-    }
-
-    input, textarea {
-      width: 100%;
-      padding: 12px;
-      margin: 8px 0 14px;
-      border-radius: 12px;
-      border: 1.5px solid var(--primary);
-      background: var(--input-bg);
-      color: var(--input-color);
-      text-align: center;
-      outline: none;
-    }
-
-    #adminLoginPopup, #recoveryPopup {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 5, 12, 0.92);
-      z-index: 9999;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      backdrop-filter: blur(15px);
-      font-family: 'Share Tech Mono', monospace;
-    }
-
-    .hacker-card {
-      background: #030a16;
-      padding: 30px 22px;
-      border-radius: 20px;
-      border: 2px solid #00ff88;
-      text-align: center;
-      width: 90%;
-      max-width: 380px;
-      box-shadow: 0 0 35px rgba(0, 255, 136, 0.3);
-      position: relative;
-    }
-
-    .rgb-title {
-      font-size: 24px;
-      font-weight: 900;
-      letter-spacing: 2px;
-      margin-bottom: 10px;
-      text-transform: uppercase;
-    }
-
-    .shake {
-      animation: scaryShake 0.4s cubic-bezier(.36,.07,.19,.97) both;
-      border-color: #ff0033 !important;
-      box-shadow: 0 0 40px rgba(255, 0, 51, 0.8) !important;
-    }
-
-    @keyframes scaryShake {
-      10%, 90% { transform: translate3d(-2px, 0, 0); }
-      20%, 80% { transform: translate3d(4px, 0, 0); }
-      30%, 50%, 70% { transform: translate3d(-6px, 0, 0); }
-      40%, 60% { transform: translate3d(6px, 0, 0); }
-    }
-
-    .scary-error {
-      color: #ff0033;
-      font-size: 15px;
-      font-weight: 900;
-      letter-spacing: 1px;
-      text-shadow: 0 0 10px #ff0033;
-      margin: 10px 0;
-      display: none;
-      animation: pulseAlert 0.8s infinite alternate;
-    }
-
-    @keyframes pulseAlert {
-      from { opacity: 0.6; transform: scale(0.98); }
-      to { opacity: 1; transform: scale(1.03); }
-    }
-
-    .forget-btn {
-      background: none;
-      border: none;
-      color: #ff0055;
-      font-size: 12px;
-      font-weight: bold;
-      margin-top: 15px;
-      cursor: pointer;
-      text-decoration: underline;
-      letter-spacing: 1px;
-      display: inline-block;
-    }
-
-    .question-label {
-      font-size: 12px;
-      color: #00ff88;
-      text-align: left;
-      margin-top: 10px;
-      font-weight: bold;
-      word-break: break-word;
-    }
-
-    #adminPanel {
-      position: fixed;
-      inset: 0;
-      background: var(--popup-bg);
-      z-index: 99999;
-      display: none;
-      overflow-y: auto;
-      padding: 20px;
-    }
-
-    .admin-container {
-      max-width: 500px;
-      margin: 20px auto;
-      background: var(--card-bg);
-      border-radius: 20px;
-      border: 2px solid var(--primary);
-      padding: 20px;
-    }
-  </style>
+    :root { --primary: #00d2ff; --accent: #008cff; --bg: #020b1a; --card-bg: rgba(4, 12, 24, 0.85); --text: #ffffff; --info-bg: rgba(6, 24, 46, 0.6); --info-border: #00a8ff; --rain-bg: linear-gradient(to bottom, #020b1a, #051937); --popup-bg: rgba(2, 11, 26, 0.95); --input-bg: rgba(0, 0, 0, 0.6); --input-color: #fff; } /* siyam_root_v1 */
+    body.light { --bg: #e8edf5; --card-bg: rgba(255, 255, 255, 0.85); --text: #1a1a2e; --info-bg: rgba(0, 140, 255, 0.05); --info-border: rgba(0, 140, 255, 0.3); --rain-bg: linear-gradient(to bottom, #c8dff0, #dce9f5); --popup-bg: rgba(240, 248, 255, 0.95); --input-bg: rgba(255, 255, 255, 0.9); --input-color: #1a1a2e; --primary: #0099cc; } /* light_theme_siyam */
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Outfit', system-ui, -apple-system, sans-serif; transition: background 0.4s, color 0.4s, border-color 0.4s; } /* base_siyam_791 */
+    body { background-color: var(--bg); color: var(--text); display: flex; flex-direction: column; align-items: center; padding: 15px 10px 30px; min-height: 100vh; overflow-x: hidden; position: relative; } /* body_siyam_acs */
+    .rain-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; background: var(--rain-bg); } /* canvas_siyam_pos */
+    .top-header-icons { width: 100%; max-width: 450px; display: flex; justify-content: space-between; align-items: center; padding: 0 10px; margin-bottom: 10px; z-index: 3; position: relative; } /* head_icon_siyam */
+    .icon-circle { width: 48px; height: 48px; border-radius: 50%; border: 2px solid var(--primary); display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 18px; background: rgba(0, 210, 255, 0.08); cursor: pointer; backdrop-filter: blur(5px); } /* circle_siyam_791 */
+    .profile-top { text-align: center; z-index: 3; position: relative; } /* prof_top_siyam */
+    .profile-img-container { width: 130px; height: 130px; margin: 0 auto; position: relative; } /* img_box_siyam */
+    .profile-img { width: 100%; height: 100%; border-radius: 50%; border: 3.5px solid var(--primary); box-shadow: 0 0 25px var(--primary); object-fit: cover; } /* pic_siyam_acs */
+    .container { width: 100%; max-width: 450px; background: var(--card-bg); border: 2px solid var(--primary); border-radius: 30px; padding: 80px 18px 25px; box-shadow: 0 0 30px rgba(0, 210, 255, 0.25); position: relative; z-index: 1; margin-top: -65px; backdrop-filter: blur(10px); } /* cont_siyam_791 */
+    .profile-info-inside { text-align: center; margin-bottom: 25px; } /* prof_in_siyam */
+    .main-title { font-size: 22px; font-weight: 900; letter-spacing: 1px; color: var(--text); margin-bottom: 10px; text-transform: uppercase; line-height: 1.2; } /* title_siyam_acs */
+    .badge-btn { background: rgba(0, 210, 255, 0.12); border: 1.5px solid var(--primary); padding: 8px 18px; border-radius: 25px; font-size: 12px; color: var(--primary); display: inline-block; margin-bottom: 12px; font-weight: 700; } /* badge_siyam_791 */
+    .rgb-text { background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bfd, #7a00ff, #ff00c8, #ff0000); background-size: 400%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: rgbGlow 6s linear infinite; font-weight: bold; } /* rgb_siyam_fx */
+    @keyframes rgbGlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } } /* anim_siyam_rgb */
+    .rgb-box { border: 2px solid transparent !important; border-image: linear-gradient(45deg, #ff0000, #00ffd5, #7a00ff, #ff0000) 1 !important; animation: borderRotate 4s linear infinite; box-shadow: 0 0 15px rgba(0, 255, 213, 0.3); } /* box_siyam_glow */
+    .owner-notif-wrapper { margin-bottom: 15px; margin-top: 15px; } /* notif_siyam_wrap */
+    .owner-notif-title { font-size: 14px; font-weight: 900; color: var(--primary); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; letter-spacing: 1px; } /* notif_title_siyam */
+    .owner-msg-container { position: relative; border-radius: 16px; padding: 2px; background: linear-gradient(45deg, #ff0000, #ff7300, #00ffd5, #002bfd, #7a00ff, #ff00c8, #ff0000); background-size: 400%; animation: rgbGlow 5s linear infinite; } /* msg_cont_siyam */
+    .owner-msg-inner { background: var(--info-bg); border-radius: 14px; padding: 16px; text-align: center; backdrop-filter: blur(5px); } /* msg_in_siyam */
+    .owner-msg-text { font-size: 14px; color: var(--text); font-weight: 600; line-height: 1.4; opacity: 0.95; } /* msg_txt_siyam_791 */
+    .live-time-wrapper { margin-top: 12px; position: relative; border-radius: 18px; padding: 2px; background: linear-gradient(45deg, #ff0000, #00ffd5, #7a00ff, #ff00c8, #00ff88, #ff0000); background-size: 400%; animation: rgbGlow 5s linear infinite; box-shadow: 0 0 15px rgba(0, 210, 255, 0.25); } /* time_wrap_siyam */
+    .live-time-box { background: #020916; border-radius: 16px; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; } /* time_box_siyam */
+    .live-clock-section { text-align: left; } /* clock_sec_siyam */
+    .live-clock-time { font-size: 17px; font-weight: 900; color: #00d2ff; font-family: 'Orbitron', sans-serif; letter-spacing: 1.5px; text-shadow: 0 0 10px rgba(0, 210, 255, 0.6); } /* clock_time_siyam */
+    .live-clock-date { font-size: 11px; color: #a0aec0; margin-top: 2px; font-weight: 600; letter-spacing: 0.5px; } /* clock_date_siyam */
+    .live-temp-section { text-align: right; font-size: 16px; font-weight: 900; color: #ff0055; display: flex; align-items: center; gap: 6px; font-family: 'Orbitron', sans-serif; text-shadow: 0 0 10px rgba(255, 0, 85, 0.6); } /* temp_sec_siyam */
+    .speak-box-wrapper { margin-top: 15px; position: relative; border-radius: 18px; padding: 2px; background: linear-gradient(45deg, #ff0000, #00ffd5, #7a00ff, #ff00c8, #ff0000); background-size: 400%; animation: rgbGlow 5s linear infinite; box-shadow: 0 0 15px rgba(0, 210, 255, 0.25); } /* speak_wrap_siyam */
+    .speak-box-inner { background: var(--info-bg); border-radius: 16px; padding: 16px; text-align: center; } /* speak_in_siyam */
+    .speak-box-title { font-size: 14px; font-weight: 900; letter-spacing: 1px; margin-bottom: 12px; text-transform: uppercase; text-align: center; } /* speak_title_siyam */
+    .section-title { font-size: 14px; font-weight: 900; color: var(--primary); margin: 25px 0 15px; display: flex; align-items: center; gap: 10px; letter-spacing: 1px; } /* sec_title_siyam */
+    .section-title::before { content: ''; width: 4px; height: 18px; background: var(--primary); border-radius: 2px; } /* sec_dot_siyam */
+    .info-card { background: var(--info-bg); border: 1.5px solid var(--info-border); border-radius: 16px; padding: 16px; margin-bottom: 14px; transition: all 0.2s ease; } /* info_card_siyam */
+    .info-label { font-size: 12px; opacity: 0.7; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; color: var(--text); } /* info_lbl_siyam */
+    .info-value { font-size: 15px; font-weight: 700; color: var(--text); } /* info_val_siyam */
+    .action-btn { width: 100%; background: linear-gradient(135deg, var(--primary), #008cff); border: none; color: #000; padding: 12px; border-radius: 25px; font-weight: 900; font-size: 13px; cursor: pointer; margin-top: 10px; box-shadow: 0 0 12px rgba(0, 210, 255, 0.4); transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease; } /* btn_siyam_acs */
+    .action-btn:hover { box-shadow: 0 0 20px rgba(0, 210, 255, 0.7); } /* btn_hover_siyam */
+    .action-btn:active { transform: scale(0.94); } /* btn_act_siyam */
+    .acs-header-layout { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; } /* acs_head_siyam */
+    .acs-logo-img { width: 60px; height: 60px; border-radius: 50%; border: 2px solid #00ff88; box-shadow: 0 0 15px rgba(0, 255, 136, 0.5); flex-shrink: 0; object-fit: cover; } /* acs_logo_siyam */
+    .acs-title-text { text-align: left; } /* acs_txt_siyam */
+    .social-links { display: flex; gap: 12px; justify-content: center; margin-top: 20px; } /* soc_link_siyam */
+    .social-icon { width: 55px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; font-size: 18px; } /* soc_icon_siyam */
+    .fb { background: linear-gradient(135deg, #1877f2, #0d5fcc); } /* fb_siyam */
+    .wa { background: linear-gradient(135deg, #25d366, #1ea952); } /* wa_siyam */
+    .mail { background: linear-gradient(135deg, #ea4335, #d02c1e); } /* mail_siyam */
+    .counter-box { background: var(--info-bg); border: 1.5px solid var(--primary); border-radius: 16px; padding: 15px; text-align: center; margin-top: 20px; font-weight: bold; font-size: 14px; } /* count_siyam_791 */
+    .footer-text { text-align: center; font-size: 12px; margin-top: 20px; opacity: 0.7; font-weight: bold; } /* foot_siyam_acs */
+    .page-view { display: none; } /* page_v_siyam */
+    .page-view.active { display: block; } /* page_act_siyam */
+    .back-btn { background: rgba(0, 210, 255, 0.1); color: var(--primary); border: 1.5px solid var(--primary); padding: 8px 16px; border-radius: 10px; cursor: pointer; margin-bottom: 20px; font-size: 13px; font-weight: bold; } /* back_siyam_791 */
+    input, textarea { width: 100%; padding: 12px; margin: 8px 0 14px; border-radius: 12px; border: 1.5px solid var(--primary); background: var(--input-bg); color: var(--input-color); text-align: center; outline: none; } /* in_siyam_acs */
+    #adminLoginPopup, #recoveryPopup { position: fixed; inset: 0; background: rgba(0, 5, 12, 0.92); z-index: 9999; display: none; align-items: center; justify-content: center; backdrop-filter: blur(15px); font-family: 'Share Tech Mono', monospace; } /* pop_siyam_791 */
+    .hacker-card { background: #030a16; padding: 30px 22px; border-radius: 20px; border: 2px solid #00ff88; text-align: center; width: 90%; max-width: 380px; box-shadow: 0 0 35px rgba(0, 255, 136, 0.3); position: relative; } /* hack_card_siyam */
+    .rgb-title { font-size: 24px; font-weight: 900; letter-spacing: 2px; margin-bottom: 10px; text-transform: uppercase; } /* rgb_title_siyam */
+    .shake { animation: scaryShake 0.4s cubic-bezier(.36,.07,.19,.97) both; border-color: #ff0033 !important; box-shadow: 0 0 40px rgba(255, 0, 51, 0.8) !important; } /* shake_siyam_fx */
+    @keyframes scaryShake { 10%, 90% { transform: translate3d(-2px, 0, 0); } 20%, 80% { transform: translate3d(4px, 0, 0); } 30%, 50%, 70% { transform: translate3d(-6px, 0, 0); } 40%, 60% { transform: translate3d(6px, 0, 0); } } /* anim_shake_siyam */
+    .scary-error { color: #ff0033; font-size: 15px; font-weight: 900; letter-spacing: 1px; text-shadow: 0 0 10px #ff0033; margin: 10px 0; display: none; animation: pulseAlert 0.8s infinite alternate; } /* err_siyam_791 */
+    @keyframes pulseAlert { from { opacity: 0.6; transform: scale(0.98); } to { opacity: 1; transform: scale(1.03); } } /* anim_pulse_siyam */
+    .forget-btn { background: none; border: none; color: #ff0055; font-size: 12px; font-weight: bold; margin-top: 15px; cursor: pointer; text-decoration: underline; letter-spacing: 1px; display: inline-block; } /* forget_siyam_btn */
+    .question-label { font-size: 12px; color: #00ff88; text-align: left; margin-top: 10px; font-weight: bold; word-break: break-word; } /* q_lbl_siyam */
+    #adminPanel { position: fixed; inset: 0; background: var(--popup-bg); z-index: 99999; display: none; overflow-y: auto; padding: 20px; } /* admin_pan_siyam */
+    .admin-container { max-width: 500px; margin: 20px auto; background: var(--card-bg); border-radius: 20px; border: 2px solid var(--primary); padding: 20px; } /* admin_cont_siyam */
+  </style> <!-- style_end_siyam_791 -->
 </head>
-<body>
+<body> <!-- body_tag_siyam -->
 
-<canvas class="rain-canvas" id="rainCanvas"></canvas>
+<canvas class="rain-canvas" id="rainCanvas"></canvas> <!-- canvas_siyam_tag -->
 
-<div class="top-header-icons">
-  <div class="icon-circle" onclick="openAdmin()"><i class="fas fa-crown"></i></div>
-  <div class="icon-circle" onclick="toggleTheme()"><i id="themeIcon" class="fas fa-moon"></i></div>
-</div>
+<div class="top-header-icons"> <!-- head_div_siyam -->
+  <div class="icon-circle" onclick="openAdmin()"><i class="fas fa-crown"></i></div> <!-- icon_c1_siyam -->
+  <div class="icon-circle" onclick="toggleTheme()"><i id="themeIcon" class="fas fa-moon"></i></div> <!-- icon_c2_siyam -->
+</div> <!-- head_div_end -->
 
-<div class="profile-top">
-  <div class="profile-img-container">
-    <img src="https://i.imgur.com/LwcC7pq.jpeg" alt="Profile" class="profile-img" id="displayAvatar">
-  </div>
-</div>
+<div class="profile-top"> <!-- prof_top_siyam_tag -->
+  <div class="profile-img-container"> <!-- img_cont_siyam_tag -->
+    <img src="https://i.imgur.com/LwcC7pq.jpeg" alt="Profile" class="profile-img" id="displayAvatar"> <!-- avatar_siyam_791 -->
+  </div> <!-- img_cont_end -->
+</div> <!-- prof_top_end -->
 
-<div id="adminLoginPopup">
-  <div class="hacker-card" id="hackerCard">
-    <button onclick="closeAdminPopup()" style="position:absolute; top:12px; right:15px; background:none; border:none; color:#00ff88; font-size:18px; cursor:pointer;"><i class="fas fa-times"></i></button>
+<div id="adminLoginPopup"> <!-- adm_pop_siyam -->
+  <div class="hacker-card" id="hackerCard"> <!-- hack_card_siyam_tag -->
+    <button onclick="closeAdminPopup()" style="position:absolute; top:12px; right:15px; background:none; border:none; color:#00ff88; font-size:18px; cursor:pointer;"><i class="fas fa-times"></i></button> <!-- cls_btn_siyam -->
     
-    <div class="rgb-title rgb-text">ADMIN PANEL</div>
-    <p style="font-size: 0.75rem; color: #00ff88; opacity: 0.9; margin-bottom:15px; letter-spacing:1px; font-weight:bold;">DARK SIYAM VIRUS 791</p>
+    <div class="rgb-title rgb-text">ADMIN PANEL</div> <!-- adm_t_siyam -->
+    <p style="font-size: 0.75rem; color: #00ff88; opacity: 0.9; margin-bottom:15px; letter-spacing:1px; font-weight:bold;">DARK SIYAM VIRUS 791</p> <!-- virus_sub_siyam -->
     
-    <div class="scary-error" id="scaryError">⚠️ ACCESS DENIED! TRY AGAIN ⚠️</div>
+    <div class="scary-error" id="scaryError">⚠️ ACCESS DENIED! TRY AGAIN ⚠️</div> <!-- err_siyam_msg -->
 
-    <input type="password" id="adminPass" placeholder="Enter Access Key..." style="border-color:#00ff88; color:#00ff88; background:rgba(0,255,136,0.05);" onkeyup="if(event.key==='Enter') checkAdmin()">
+    <input type="password" id="adminPass" placeholder="Enter Access Key..." style="border-color:#00ff88; color:#00ff88; background:rgba(0,255,136,0.05);" onkeyup="if(event.key==='Enter') checkAdmin()"> <!-- pass_in_siyam -->
     
-    <button onclick="checkAdmin()" class="action-btn" style="background: linear-gradient(135deg, #00ff88, #008cff); color:#000;">GRANT ACCESS</button>
+    <button onclick="checkAdmin()" class="action-btn" style="background: linear-gradient(135deg, #00ff88, #008cff); color:#000;">GRANT ACCESS</button> <!-- grant_btn_siyam -->
     
     <br>
-    <button onclick="openRecovery()" class="forget-btn"><i class="fas fa-key"></i> FORGOTTEN PASSWORD?</button>
-  </div>
-</div>
+    <button onclick="openRecovery()" class="forget-btn"><i class="fas fa-key"></i> FORGOTTEN PASSWORD?</button> <!-- forg_btn_siyam -->
+  </div> <!-- hack_card_end -->
+</div> <!-- adm_pop_end -->
 
-<div id="recoveryPopup">
-  <div class="hacker-card">
-    <button onclick="closeRecovery()" style="position:absolute; top:12px; right:15px; background:none; border:none; color:#ff0055; font-size:18px; cursor:pointer;"><i class="fas fa-times"></i></button>
+<div id="recoveryPopup"> <!-- rec_pop_siyam -->
+  <div class="hacker-card"> <!-- rec_card_siyam -->
+    <button onclick="closeRecovery()" style="position:absolute; top:12px; right:15px; background:none; border:none; color:#ff0055; font-size:18px; cursor:pointer;"><i class="fas fa-times"></i></button> <!-- rec_cls_siyam -->
     
-    <div class="rgb-title rgb-text" style="font-size: 18px;">SECURITY RECOVERY</div>
-    <p style="font-size: 0.7rem; color: #ff0055; margin-bottom:15px;">ENTER RECOVERY ANSWERS</p>
+    <div class="rgb-title rgb-text" style="font-size: 18px;">SECURITY RECOVERY</div> <!-- rec_t_siyam -->
+    <p style="font-size: 0.7rem; color: #ff0055; margin-bottom:15px;">ENTER RECOVERY ANSWERS</p> <!-- rec_sub_siyam -->
 
-    <div class="question-label">Q1: Siyam Python's father - Write key !!</div>
-    <input type="text" id="ans1" placeholder="Answer 1..." style="border-color:#00d2ff; color:#00d2ff;">
+    <div class="question-label">Q1: Siyam Python's father - Write key !!</div> <!-- q1_siyam -->
+    <input type="text" id="ans1" placeholder="Answer 1..." style="border-color:#00d2ff; color:#00d2ff;"> <!-- a1_siyam -->
 
-    <div class="question-label">Q2: ==÷÷~[] Are you know ?</div>
-    <input type="text" id="ans2" placeholder="Answer 2..." style="border-color:#00d2ff; color:#00d2ff;">
+    <div class="question-label">Q2: ==÷÷~[] Are you know ?</div> <!-- q2_siyam -->
+    <input type="text" id="ans2" placeholder="Answer 2..." style="border-color:#00d2ff; color:#00d2ff;"> <!-- a2_siyam -->
 
-    <button onclick="verifyRecovery()" class="action-btn" style="background: linear-gradient(135deg, #ff0055, #7a00ff); color:#fff;">SUBMIT ANSWERS</button>
-  </div>
-</div>
+    <button onclick="verifyRecovery()" class="action-btn" style="background: linear-gradient(135deg, #ff0055, #7a00ff); color:#fff;">SUBMIT ANSWERS</button> <!-- sub_ans_siyam -->
+  </div> <!-- rec_card_end -->
+</div> <!-- rec_pop_end -->
 
-<div id="adminPanel">
-  <div class="admin-container">
-    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--primary); padding-bottom: 10px;">
-      <h3 style="color:var(--primary);"><i class="fas fa-crown"></i> Admin Panel</h3>
-      <button onclick="closeAdminPanel()" style="background: red; color: white; border: none; padding: 5px 12px; border-radius: 8px; cursor: pointer; font-weight: bold;">Close</button>
-    </div>
-    <div style="margin-top: 20px; text-align: left;">
-      <p style="margin-bottom: 15px;">Total Visitors: <span id="statVisitors" style="color:var(--primary); font-weight:bold;">0</span></p>
+<div id="adminPanel"> <!-- pan_siyam_main -->
+  <div class="admin-container"> <!-- pan_cont_siyam -->
+    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--primary); padding-bottom: 10px;"> <!-- pan_head_siyam -->
+      <h3 style="color:var(--primary);"><i class="fas fa-crown"></i> Admin Panel</h3> <!-- pan_t_siyam -->
+      <button onclick="closeAdminPanel()" style="background: red; color: white; border: none; padding: 5px 12px; border-radius: 8px; cursor: pointer; font-weight: bold;">Close</button> <!-- pan_cls_siyam -->
+    </div> <!-- pan_head_end -->
+    <div style="margin-top: 20px; text-align: left;"> <!-- pan_body_siyam -->
+      <p style="margin-bottom: 15px;">Total Visitors: <span id="statVisitors" style="color:var(--primary); font-weight:bold;">0</span></p> <!-- vis_stat_siyam -->
 
-      <label style="font-size:12px; color:var(--primary); font-weight:bold;">Name:</label>
-      <input type="text" id="editName" value="MOHAMMAD IBNA SIYAM" placeholder="Change Name">
+      <label style="font-size:12px; color:var(--primary); font-weight:bold;">Name:</label> <!-- lbl_name_siyam -->
+      <input type="text" id="editName" value="MOHAMMAD IBNA SIYAM" placeholder="Change Name"> <!-- in_name_siyam -->
 
-      <label style="font-size:12px; color:var(--primary); font-weight:bold;">Badge Text:</label>
-      <input type="text" id="editBadge" value="who i am you have no idea its acs leader 🚩" placeholder="Change Badge">
+      <label style="font-size:12px; color:var(--primary); font-weight:bold;">Badge Text:</label> <!-- lbl_badge_siyam -->
+      <input type="text" id="editBadge" value="who i am you have no idea its acs leader 🚩" placeholder="Change Badge"> <!-- in_badge_siyam -->
 
-      <label style="font-size:12px; color:var(--primary); font-weight:bold;">Nickname:</label>
-      <input type="text" id="editNickname" value="IBNA SIYAM" placeholder="Change Nickname">
+      <label style="font-size:12px; color:var(--primary); font-weight:bold;">Nickname:</label> <!-- lbl_nick_siyam -->
+      <input type="text" id="editNickname" value="IBNA SIYAM" placeholder="Change Nickname"> <!-- in_nick_siyam -->
 
-      <label style="font-size:12px; color:var(--primary); font-weight:bold;">Birthday:</label>
-      <input type="text" id="editBirthday" value="21 September" placeholder="Change Birthday">
+      <label style="font-size:12px; color:var(--primary); font-weight:bold;">Birthday:</label> <!-- lbl_bday_siyam -->
+      <input type="text" id="editBirthday" value="21 September" placeholder="Change Birthday"> <!-- in_bday_siyam -->
 
-      <label style="font-size:12px; color:var(--primary); font-weight:bold;">Status:</label>
-      <input type="text" id="editStatus" value="Chief Cyber Security Officer -" placeholder="Change Status">
+      <label style="font-size:12px; color:var(--primary); font-weight:bold;">Status:</label> <!-- lbl_stat_siyam -->
+      <input type="text" id="editStatus" value="Chief Cyber Security Officer -" placeholder="Change Status"> <!-- in_stat_siyam -->
 
-      <label style="font-size:12px; color:var(--primary); font-weight:bold;">Skills:</label>
-      <input type="text" id="editSkills" value="Html-css-java-python-Prolog-C++ -" placeholder="Change Skills">
+      <label style="font-size:12px; color:var(--primary); font-weight:bold;">Skills:</label> <!-- lbl_sk_siyam -->
+      <input type="text" id="editSkills" value="Html-css-java-python-Prolog-C++ -" placeholder="Change Skills"> <!-- in_sk_siyam -->
 
-      <label style="font-size:12px; color:var(--primary); font-weight:bold;">Home Town:</label>
-      <input type="text" id="editHometown" value="Satkhira, parulia" placeholder="Change Home Town">
+      <label style="font-size:12px; color:var(--primary); font-weight:bold;">Home Town:</label> <!-- lbl_home_siyam -->
+      <input type="text" id="editHometown" value="Satkhira, parulia" placeholder="Change Home Town"> <!-- in_home_siyam -->
 
-      <label style="font-size:12px; color:var(--primary); font-weight:bold;">Current Location:</label>
-      <input type="text" id="editCurrent" value="Satkhira" placeholder="Change Current Location">
+      <label style="font-size:12px; color:var(--primary); font-weight:bold;">Current Location:</label> <!-- lbl_curr_siyam -->
+      <input type="text" id="editCurrent" value="Satkhira" placeholder="Change Current Location"> <!-- in_curr_siyam -->
 
-      <label style="font-size:12px; color:var(--primary); font-weight:bold;">Owner Message / Notice:</label>
-      <textarea id="editOwnerMsg" rows="3" placeholder="Write Owner Message..."></textarea>
+      <label style="font-size:12px; color:var(--primary); font-weight:bold;">Owner Message / Notice:</label> <!-- lbl_msg_siyam -->
+      <textarea id="editOwnerMsg" rows="3" placeholder="Write Owner Message..."></textarea> <!-- in_msg_siyam -->
 
-      <button onclick="updateProfileAdmin()" class="action-btn">Save Profile Changes</button>
+      <button onclick="updateProfileAdmin()" class="action-btn">Save Profile Changes</button> <!-- save_btn_siyam -->
 
-      <div style="margin-top: 25px; border-top: 2px solid var(--primary); padding-top: 15px;">
-        <h4 style="color:var(--primary); margin-bottom: 10px;"><i class="fas fa-comments"></i> Public Comments List</h4>
-        <div id="adminCommentsList" style="max-height: 250px; overflow-y: auto; background: rgba(0,0,0,0.4); padding: 10px; border-radius: 12px;">
-          <p style="font-size: 12px; opacity: 0.7;">Loading comments...</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+      <div style="margin-top: 25px; border-top: 2px solid var(--primary); padding-top: 15px;"> <!-- com_div_siyam -->
+        <h4 style="color:var(--primary); margin-bottom: 10px;"><i class="fas fa-comments"></i> Public Comments List</h4> <!-- com_t_siyam -->
+        <div id="adminCommentsList" style="max-height: 250px; overflow-y: auto; background: rgba(0,0,0,0.4); padding: 10px; border-radius: 12px;"> <!-- com_list_siyam -->
+          <p style="font-size: 12px; opacity: 0.7;">Loading comments...</p> <!-- load_com_siyam -->
+        </div> <!-- com_list_end -->
+      </div> <!-- com_div_end -->
+    </div> <!-- pan_body_end -->
+  </div> <!-- pan_cont_end -->
+</div> <!-- pan_end_siyam -->
 
-<div class="container">
+<div class="container"> <!-- main_cont_siyam -->
 
-  <!-- Hidden Audio Element for Auto-play -->
-  <audio id="bgm" loop preload="auto" style="display: none;">
-    <source src="https://litter.catbox.moe/w50assmn06uz95kd.mp3" type="audio/mp3">
-  </audio>
+  <audio id="bgm" loop preload="auto" style="display: none;"> <!-- aud_siyam_791 -->
+    <source src="https://litter.catbox.moe/w50assmn06uz95kd.mp3" type="audio/mp3"> <!-- aud_src_siyam -->
+  </audio> <!-- aud_tag_end -->
 
-  <div id="main-page" class="page-view active">
-    <div class="profile-info-inside">
-      <h1 class="main-title" id="displayName">MOHAMMAD IBNA SIYAM</h1>
-      <div class="badge-btn" id="displayBadge">who i am you have no idea its acs leader 🚩</div>
-      <p class="rgb-text" style="font-size: 14px; font-style: italic;">"THE game changer leader siyam - is here !!"</p>
-    </div>
+  <div id="main-page" class="page-view active"> <!-- m_page_siyam -->
+    <div class="profile-info-inside"> <!-- m_prof_siyam -->
+      <h1 class="main-title" id="displayName">MOHAMMAD IBNA SIYAM</h1> <!-- name_siyam_791 -->
+      <div class="badge-btn" id="displayBadge">who i am you have no idea its acs leader 🚩</div> <!-- badge_siyam_791 -->
+      <p class="rgb-text" style="font-size: 14px; font-style: italic;">"THE game changer leader siyam - is here !!"</p> <!-- quote_siyam_791 -->
+    </div> <!-- m_prof_end -->
 
-    <!-- Background Music Indicator Card (No Controls) -->
-    <div class="info-card" style="text-align: center; background: var(--info-bg); border: 1.5px solid var(--primary);">
-      <div style="font-size: 14px; font-weight: bold; color: var(--primary);">
-        <i class="fas fa-music"></i> BACKGROUND MUSIC (PLAYING AUTOMATICALLY)
-      </div>
-    </div>
+    <div class="section-title">PERSONAL PROFILE</div> <!-- sec_t1_siyam -->
 
-    <div class="section-title">PERSONAL PROFILE</div>
+    <div class="info-card"> <!-- icard_1_siyam -->
+      <div class="info-label"><i class="fas fa-user"></i> Nickname</div> <!-- ilbl_1_siyam -->
+      <div class="info-value rgb-text" id="displayNickname" style="font-size: 18px;">IBNA SIYAM</div> <!-- ival_1_siyam -->
+    </div> <!-- icard_1_end -->
 
-    <div class="info-card">
-      <div class="info-label"><i class="fas fa-user"></i> Nickname</div>
-      <div class="info-value rgb-text" id="displayNickname" style="font-size: 18px;">IBNA SIYAM</div>
-    </div>
+    <div class="info-card"> <!-- icard_2_siyam -->
+      <div class="info-label"><i class="fas fa-birthday-cake"></i> Birthday</div> <!-- ilbl_2_siyam -->
+      <div class="info-value" id="displayBirthday">21 September</div> <!-- ival_2_siyam -->
+    </div> <!-- icard_2_end -->
 
-    <div class="info-card">
-      <div class="info-label"><i class="fas fa-birthday-cake"></i> Birthday</div>
-      <div class="info-value" id="displayBirthday">21 September</div>
-    </div>
+    <div class="info-card"> <!-- icard_3_siyam -->
+      <div class="info-label"><i class="fas fa-briefcase"></i> Status</div> <!-- ilbl_3_siyam -->
+      <div class="info-value" id="displayStatus">Chief Cyber Security Officer -</div> <!-- ival_3_siyam -->
+    </div> <!-- icard_3_end -->
 
-    <div class="info-card">
-      <div class="info-label"><i class="fas fa-briefcase"></i> Status</div>
-      <div class="info-value" id="displayStatus">Chief Cyber Security Officer -</div>
-    </div>
+    <div class="info-card"> <!-- icard_4_siyam -->
+      <div class="info-label"><i class="fas fa-code"></i> Skills</div> <!-- ilbl_4_siyam -->
+      <div class="info-value" id="displaySkills">Html-css-java-python-Prolog-C++ -</div> <!-- ival_4_siyam -->
+    </div> <!-- icard_4_end -->
 
-    <div class="info-card">
-      <div class="info-label"><i class="fas fa-code"></i> Skills</div>
-      <div class="info-value" id="displaySkills">Html-css-java-python-Prolog-C++ -</div>
-    </div>
+    <div class="info-card"> <!-- icard_5_siyam -->
+      <div class="info-label"><i class="fas fa-home"></i> Home Town</div> <!-- ilbl_5_siyam -->
+      <div class="info-value" id="displayHometown">Satkhira, parulia</div> <!-- ival_5_siyam -->
+    </div> <!-- icard_5_end -->
 
-    <div class="info-card">
-      <div class="info-label"><i class="fas fa-home"></i> Home Town</div>
-      <div class="info-value" id="displayHometown">Satkhira, parulia</div>
-    </div>
+    <div class="info-card"> <!-- icard_6_siyam -->
+      <div class="info-label"><i class="fas fa-location-arrow"></i> Current</div> <!-- ilbl_6_siyam -->
+      <div class="info-value" id="displayCurrent">Satkhira</div> <!-- ival_6_siyam -->
+    </div> <!-- icard_6_end -->
 
-    <div class="info-card">
-      <div class="info-label"><i class="fas fa-location-arrow"></i> Current</div>
-      <div class="info-value" id="displayCurrent">Satkhira</div>
-    </div>
+    <div class="info-card rgb-box" onclick="showPage('other-page')" style="cursor: pointer; text-align: center; padding: 20px;"> <!-- other_card_siyam -->
+      <div class="rgb-text" style="font-size: 20px; font-weight: 900; letter-spacing: 2px;">OTHER</div> <!-- other_t_siyam -->
+    </div> <!-- other_card_end -->
 
-    <div class="info-card rgb-box" onclick="showPage('other-page')" style="cursor: pointer; text-align: center; padding: 20px;">
-      <div class="rgb-text" style="font-size: 20px; font-weight: 900; letter-spacing: 2px;">OTHER</div>
-    </div>
+    <div class="owner-notif-wrapper"> <!-- own_wrap_siyam -->
+      <div class="owner-notif-title"><i class="fas fa-bullhorn"></i> OWNER NOTIFICATION</div> <!-- own_t_siyam -->
+      <div class="owner-msg-container"> <!-- own_c_siyam -->
+        <div class="owner-msg-inner"> <!-- own_in_siyam -->
+          <div class="owner-msg-text" id="displayOwnerMsg">WHO I AM YOU HAVE NO IDEA 🗞️</div> <!-- own_txt_siyam -->
+        </div> <!-- own_in_end -->
+      </div> <!-- own_c_end -->
 
-    <div class="owner-notif-wrapper">
-      <div class="owner-notif-title"><i class="fas fa-bullhorn"></i> OWNER NOTIFICATION</div>
-      <div class="owner-msg-container">
-        <div class="owner-msg-inner">
-          <div class="owner-msg-text" id="displayOwnerMsg">WHO I AM YOU HAVE NO IDEA 🗞️</div>
-        </div>
-      </div>
+      <div class="live-time-wrapper"> <!-- time_w_siyam -->
+        <div class="live-time-box"> <!-- time_b_siyam -->
+          <div class="live-clock-section"> <!-- clock_s_siyam -->
+            <div class="live-clock-time" id="bdTime">00:00:00 AM</div> <!-- clock_t_siyam -->
+            <div class="live-clock-date" id="bdDate">Loading Date...</div> <!-- clock_d_siyam -->
+          </div> <!-- clock_s_end -->
+          <div class="live-temp-section"> <!-- temp_s_siyam -->
+            <i class="fas fa-temperature-high"></i> <span id="liveTemp">31°C</span> <!-- temp_val_siyam -->
+          </div> <!-- temp_s_end -->
+        </div> <!-- time_b_end -->
+      </div> <!-- time_w_end -->
 
-      <div class="live-time-wrapper">
-        <div class="live-time-box">
-          <div class="live-clock-section">
-            <div class="live-clock-time" id="bdTime">00:00:00 AM</div>
-            <div class="live-clock-date" id="bdDate">Loading Date...</div>
-          </div>
-          <div class="live-temp-section">
-            <i class="fas fa-temperature-high"></i> <span id="liveTemp">31°C</span>
-          </div>
-        </div>
-      </div>
+      <div class="speak-box-wrapper"> <!-- spk_w_siyam -->
+        <div class="speak-box-inner"> <!-- spk_in_siyam -->
+          <div class="speak-box-title rgb-text">SPEAK DIRECTLY WITH SIYAM SIR</div> <!-- spk_t_siyam -->
+          <input type="text" id="visitorName" placeholder="Your Name (Required)..." style="margin-bottom: 8px;"> <!-- spk_name_siyam -->
+          <textarea id="visitorComment" rows="3" placeholder="Write your comment or message here..."></textarea> <!-- spk_com_siyam -->
+          <button class="action-btn" onclick="submitVisitorComment()"><i class="fas fa-paper-plane"></i> SUBMIT</button> <!-- spk_sub_siyam -->
+        </div> <!-- spk_in_end -->
+      </div> <!-- spk_w_end -->
 
-      <div class="speak-box-wrapper">
-        <div class="speak-box-inner">
-          <div class="speak-box-title rgb-text">SPEAK DIRECTLY WITH SIYAM SIR</div>
-          <input type="text" id="visitorName" placeholder="Your Name (Required)..." style="margin-bottom: 8px;">
-          <textarea id="visitorComment" rows="3" placeholder="Write your comment or message here..."></textarea>
-          <button class="action-btn" onclick="submitVisitorComment()"><i class="fas fa-paper-plane"></i> SUBMIT</button>
-        </div>
-      </div>
+    </div> <!-- own_wrap_end -->
 
-    </div>
+    <div class="section-title">ACS WORLD</div> <!-- sec_t2_siyam -->
 
-    <div class="section-title">ACS WORLD</div>
+    <div class="info-card"> <!-- acs_card1_siyam -->
+      <div class="acs-header-layout"> <!-- acs_hl_siyam -->
+        <img src="https://i.imgur.com/56AiZl6.jpeg" alt="ACS Logo" class="acs-logo-img"> <!-- acs_img_siyam -->
+        <div class="acs-title-text"> <!-- acs_tl_siyam -->
+          <div style="font-size: 15px; font-weight: bold; color: var(--primary);">ACS CYBER HELP ZONE</div> <!-- acs_t1_siyam -->
+          <div style="font-size: 11px; opacity: 0.7;">NEVER GIVE UP</div> <!-- acs_t2_siyam -->
+        </div> <!-- acs_tl_end -->
+      </div> <!-- acs_hl_end -->
+      <p style="font-size: 12px; margin-bottom: 12px; text-align: left;">If you need any help, join the ACS Help Center. May everyone's online world be safe..</p> <!-- acs_desc_siyam -->
+      <a href="https://m.me/j/AbYv6QQWn84E6Mg0/?send_source=gc%3Acopy_invite_link_c" target="_blank" style="text-decoration:none;"> <!-- acs_a_siyam -->
+        <button class="action-btn"><i class="fab fa-facebook-messenger"></i> JOIN ATTACK WORLD</button> <!-- acs_btn_siyam -->
+      </a> <!-- acs_a_end -->
+    </div> <!-- acs_card1_end -->
 
-    <div class="info-card">
-      <div class="acs-header-layout">
-        <img src="https://i.imgur.com/56AiZl6.jpeg" alt="ACS Logo" class="acs-logo-img">
-        <div class="acs-title-text">
-          <div style="font-size: 15px; font-weight: bold; color: var(--primary);">ACS CYBER HELP ZONE</div>
-          <div style="font-size: 11px; opacity: 0.7;">NEVER GIVE UP</div>
-        </div>
-      </div>
-      <p style="font-size: 12px; margin-bottom: 12px; text-align: left;">If you need any help, join the ACS Help Center. May everyone's online world be safe..</p>
-      <a href="https://m.me/j/AbYv6QQWn84E6Mg0/?send_source=gc%3Acopy_invite_link_c" target="_blank" style="text-decoration:none;">
-        <button class="action-btn"><i class="fab fa-facebook-messenger"></i> JOIN ATTACK WORLD</button>
-      </a>
-    </div>
+    <div class="info-card"> <!-- dl_card_siyam -->
+      <div style="text-align: center; font-size: 14px; margin-bottom: 10px; font-weight: bold;"><i class="fas fa-download"></i> Video Downloader</div> <!-- dl_t_siyam -->
+      <input type="text" id="urlInput" placeholder="Paste YouTube/FB/Insta/TikTok link"> <!-- dl_in_siyam -->
+      <button class="action-btn" onclick="handleDownload()"><i class="fas fa-download"></i> GET VIDEO LINK</button> <!-- dl_btn_siyam -->
+      <div id="dlResult" style="margin-top:10px; text-align:center;"></div> <!-- dl_res_siyam -->
+    </div> <!-- dl_card_end -->
 
-    <div class="info-card">
-      <div style="text-align: center; font-size: 14px; margin-bottom: 10px; font-weight: bold;"><i class="fas fa-download"></i> Video Downloader</div>
-      <input type="text" id="urlInput" placeholder="Paste YouTube/FB/Insta/TikTok link">
-      <button class="action-btn" onclick="handleDownload()"><i class="fas fa-download"></i> GET VIDEO LINK</button>
-      <div id="dlResult" style="margin-top:10px; text-align:center;"></div>
-    </div>
+    <div class="info-card"> <!-- pass_card_siyam -->
+      <div style="text-align: center; font-size: 14px; margin-bottom: 10px; font-weight: bold; color: var(--primary);"><i class="fas fa-key"></i> Password Generator</div> <!-- pass_t_siyam -->
+      <button class="action-btn" onclick="generatePass()"><i class="fas fa-magic"></i> Generate</button> <!-- pass_btn_siyam -->
+      <input type="text" id="passResult" readonly placeholder="Your Generated Password" style="margin-top: 10px; font-weight: bold; color: var(--primary); font-size: 14px;"> <!-- pass_res_siyam -->
+    </div> <!-- pass_card_end -->
 
-    <div class="info-card">
-      <div style="text-align: center; font-size: 14px; margin-bottom: 10px; font-weight: bold; color: var(--primary);"><i class="fas fa-key"></i> Password Generator</div>
-      <button class="action-btn" onclick="generatePass()"><i class="fas fa-magic"></i> Generate</button>
-      <input type="text" id="passResult" readonly placeholder="Your Generated Password" style="margin-top: 10px; font-weight: bold; color: var(--primary); font-size: 14px;">
-    </div>
+    <div class="info-card"> <!-- ip_card_siyam -->
+      <div style="text-align: center; font-size: 14px; margin-bottom: 10px; font-weight: bold; color: var(--primary);"><i class="fas fa-network-wired"></i> Your IP & Device Info</div> <!-- ip_t_siyam -->
+      <button class="action-btn" onclick="checkMyIP()"><i class="fas fa-search-location"></i> Check My IP Details</button> <!-- ip_btn_siyam -->
+      <div id="ipDetails" style="margin-top: 10px; font-size: 12px; line-height: 1.6; display: none; text-align: left; background: rgba(0,0,0,0.3); padding: 10px; border-radius: 10px;"></div> <!-- ip_res_siyam -->
+    </div> <!-- ip_card_end -->
 
-    <div class="info-card">
-      <div style="text-align: center; font-size: 14px; margin-bottom: 10px; font-weight: bold; color: var(--primary);"><i class="fas fa-network-wired"></i> Your IP & Device Info</div>
-      <button class="action-btn" onclick="checkMyIP()"><i class="fas fa-search-location"></i> Check My IP Details</button>
-      <div id="ipDetails" style="margin-top: 10px; font-size: 12px; line-height: 1.6; display: none; text-align: left; background: rgba(0,0,0,0.3); padding: 10px; border-radius: 10px;"></div>
-    </div>
+    <div class="section-title">CONNECT WITH ME</div> <!-- sec_t3_siyam -->
 
-    <div class="section-title">CONNECT WITH ME</div>
+    <div class="social-links"> <!-- soc_div_siyam -->
+      <a href="https://www.facebook.com/profile.php?id=" target="_blank" class="social-icon fb"><i class="fab fa-facebook-f"></i></a> <!-- soc_fb_siyam -->
+      <a href="https://wa.me/8801940984562" target="_blank" class="social-icon wa"><i class="fab fa-whatsapp"></i></a> <!-- soc_wa_siyam -->
+      <a href="mailto:siyamvailostking00@outlook.com" class="social-icon mail"><i class="fas fa-envelope"></i></a> <!-- soc_mail_siyam -->
+    </div> <!-- soc_div_end -->
 
-    <div class="social-links">
-      <a href="https://www.facebook.com/profile.php?id=" target="_blank" class="social-icon fb"><i class="fab fa-facebook-f"></i></a>
-      <a href="https://wa.me/8801940984562" target="_blank" class="social-icon wa"><i class="fab fa-whatsapp"></i></a>
-      <a href="mailto:siyamvailostking00@outlook.com" class="social-icon mail"><i class="fas fa-envelope"></i></a>
-    </div>
+    <div class="counter-box"> <!-- count_box_siyam -->
+      <i class="fas fa-eye"></i> LIVE VISITORS: <span id="visitorCount" style="color: var(--primary);">0</span> <!-- count_span_siyam -->
+    </div> <!-- count_box_end -->
 
-    <div class="counter-box">
-      <i class="fas fa-eye"></i> LIVE VISITORS: <span id="visitorCount" style="color: var(--primary);">0</span>
-    </div>
-
-    <div class="footer-text">
+    <div class="footer-text"> <!-- foot_t_siyam -->
       ⚓ THE GAME RULER IBNA SIYAM 🚩 👑
-    </div>
-  </div>
+    </div> <!-- foot_t_end -->
+  </div> <!-- m_page_end -->
 
-  <div id="other-page" class="page-view">
-    <button class="back-btn" onclick="showPage('main-page')">← Back</button>
-    <div class="section-title">OTHER FEATURES</div>
+  <div id="other-page" class="page-view"> <!-- other_page_siyam -->
+    <button class="back-btn" onclick="showPage('main-page')">← Back</button> <!-- other_back_siyam -->
+    <div class="section-title">OTHER FEATURES</div> <!-- other_t_siyam -->
 
-    <div class="info-card rgb-box" onclick="showPage('complain-page')" style="cursor: pointer; margin-bottom: 16px;">
-      <div class="info-label rgb-text"><i class="fas fa-exclamation-triangle"></i> OPTION 1</div>
-      <div class="info-value rgb-text">CYBER CRIME COMPLAINT</div>
-    </div>
+    <div class="info-card rgb-box" onclick="showPage('complain-page')" style="cursor: pointer; margin-bottom: 16px;"> <!-- comp_card_siyam -->
+      <div class="info-label rgb-text"><i class="fas fa-exclamation-triangle"></i> OPTION 1</div> <!-- comp_l_siyam -->
+      <div class="info-value rgb-text">CYBER CRIME COMPLAINT</div> <!-- comp_v_siyam -->
+    </div> <!-- comp_card_end -->
 
-    <div class="info-card rgb-box" onclick="showPage('reporting-page')" style="cursor: pointer;">
-      <div class="info-label rgb-text"><i class="fas fa-flag"></i> OPTION 2</div>
-      <div class="info-value rgb-text">REPORTING</div>
-    </div>
-  </div>
+    <div class="info-card rgb-box" onclick="showPage('reporting-page')" style="cursor: pointer;"> <!-- rep_card_siyam -->
+      <div class="info-label rgb-text"><i class="fas fa-flag"></i> OPTION 2</div> <!-- rep_l_siyam -->
+      <div class="info-value rgb-text">REPORTING</div> <!-- rep_v_siyam -->
+    </div> <!-- rep_card_end -->
+  </div> <!-- other_page_end -->
 
-  <div id="complain-page" class="page-view">
-    <button class="back-btn" onclick="showPage('other-page')">← Back</button>
-    <div class="section-title">CYBER CRIME COMPLAINT</div>
+  <div id="complain-page" class="page-view"> <!-- cp_page_siyam -->
+    <button class="back-btn" onclick="showPage('other-page')">← Back</button> <!-- cp_back_siyam -->
+    <div class="section-title">CYBER CRIME COMPLAINT</div> <!-- cp_t_siyam -->
 
-    <div class="info-card" style="text-align: center; padding: 25px 15px;">
-      <p class="rgb-text" style="font-size: 15px; margin-bottom: 20px; font-weight: 800; line-height: 1.5;">
+    <div class="info-card" style="text-align: center; padding: 25px 15px;"> <!-- cp_card_siyam -->
+      <p class="rgb-text" style="font-size: 15px; margin-bottom: 20px; font-weight: 800; line-height: 1.5;"> <!-- cp_desc_siyam -->
         Lodge a complaint directly with Siyam Sir. The case will be accepted within 12 hours.
-      </p>
+      </p> <!-- cp_desc_end -->
       
-      <a href="https://wa.me/8801940984562?text=I%20want%20to%20file%20a%20cyber%20crime%20complaint" target="_blank" style="text-decoration: none;">
-        <div style="background: #25d366; color: white; padding: 14px; border-radius: 12px; display: flex; align-items: center; justify-content: center; gap: 10px; font-weight: bold; font-size: 14px; box-shadow: 0 0 15px rgba(37, 211, 102, 0.4);">
+      <a href="https://wa.me/8801940984562?text=I%20want%20to%20file%20a%20cyber%20crime%20complaint" target="_blank" style="text-decoration: none;"> <!-- cp_a_siyam -->
+        <div style="background: #25d366; color: white; padding: 14px; border-radius: 12px; display: flex; align-items: center; justify-content: center; gap: 10px; font-weight: bold; font-size: 14px; box-shadow: 0 0 15px rgba(37, 211, 102, 0.4);"> <!-- cp_btn_siyam -->
           <i class="fab fa-whatsapp" style="font-size: 22px;"></i> Click and submit your report
-        </div>
-      </a>
-    </div>
-  </div>
+        </div> <!-- cp_btn_end -->
+      </a> <!-- cp_a_end -->
+    </div> <!-- cp_card_end -->
+  </div> <!-- cp_page_end -->
 
-  <div id="reporting-page" class="page-view">
-    <button class="back-btn" onclick="showPage('other-page')">← Back</button>
-    <div class="section-title">REPORTING OPTIONS</div>
+  <div id="reporting-page" class="page-view"> <!-- rp_page_siyam -->
+    <button class="back-btn" onclick="showPage('other-page')">← Back</button> <!-- rp_back_siyam -->
+    <div class="section-title">REPORTING OPTIONS</div> <!-- rp_t_siyam -->
 
-    <div class="info-card rgb-box" onclick="window.open('https://m.facebook.com/help/contact/725651070269668?wtsid=rdr_0IdUG06gE6F2C56fT', '_blank')" style="cursor: pointer; margin-bottom: 14px;">
-      <div class="info-label rgb-text">1. US REPORT- PAGE</div>
-      <div class="info-value rgb-text" style="font-size: 13px;">Click to open Form →</div>
-    </div>
+    <div class="info-card rgb-box" onclick="window.open('https://m.facebook.com/help/contact/725651070269668?wtsid=rdr_0IdUG06gE6F2C56fT', '_blank')" style="cursor: pointer; margin-bottom: 14px;"> <!-- rp1_siyam -->
+      <div class="info-label rgb-text">1. US REPORT- PAGE</div> <!-- rp1_l_siyam -->
+      <div class="info-value rgb-text" style="font-size: 13px;">Click to open Form →</div> <!-- rp1_v_siyam -->
+    </div> <!-- rp1_end -->
 
-    <div class="info-card rgb-box" onclick="window.open('https://www.facebook.com/help/contact/1758255661104383', '_blank')" style="cursor: pointer; margin-bottom: 14px;">
-      <div class="info-label rgb-text">2. COPYRIGHT REPORT</div>
-      <div class="info-value rgb-text" style="font-size: 13px;">Click to open Form →</div>
-    </div>
+    <div class="info-card rgb-box" onclick="window.open('https://www.facebook.com/help/contact/1758255661104383', '_blank')" style="cursor: pointer; margin-bottom: 14px;"> <!-- rp2_siyam -->
+      <div class="info-label rgb-text">2. COPYRIGHT REPORT</div> <!-- rp2_l_siyam -->
+      <div class="info-value rgb-text" style="font-size: 13px;">Click to open Form →</div> <!-- rp2_v_siyam -->
+    </div> <!-- rp2_end -->
 
-    <div class="info-card rgb-box" onclick="window.open('https://www.facebook.com/help/contact/839020461529412', '_blank')" style="cursor: pointer; margin-bottom: 14px;">
-      <div class="info-label rgb-text">3. AUS ACT PAGE</div>
-      <div class="info-value rgb-text" style="font-size: 13px;">Click to open Form →</div>
-    </div>
+    <div class="info-card rgb-box" onclick="window.open('https://www.facebook.com/help/contact/839020461529412', '_blank')" style="cursor: pointer; margin-bottom: 14px;"> <!-- rp3_siyam -->
+      <div class="info-label rgb-text">3. AUS ACT PAGE</div> <!-- rp3_l_siyam -->
+      <div class="info-value rgb-text" style="font-size: 13px;">Click to open Form →</div> <!-- rp3_v_siyam -->
+    </div> <!-- rp3_end -->
 
-    <div class="info-card rgb-box" onclick="window.open('https://www.facebook.com/help/contact/435011024579692', '_blank')" style="cursor: pointer;">
-      <div class="info-label rgb-text">4. TURKEY REPORT</div>
-      <div class="info-value rgb-text" style="font-size: 13px;">Click to open Form →</div>
-    </div>
-  </div>
+    <div class="info-card rgb-box" onclick="window.open('https://www.facebook.com/help/contact/435011024579692', '_blank')" style="cursor: pointer;"> <!-- rp4_siyam -->
+      <div class="info-label rgb-text">4. TURKEY REPORT</div> <!-- rp4_l_siyam -->
+      <div class="info-value rgb-text" style="font-size: 13px;">Click to open Form →</div> <!-- rp4_v_siyam -->
+    </div> <!-- rp4_end -->
+  </div> <!-- rp_page_end -->
 
-</div>
+</div> <!-- main_cont_end -->
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- swal_js_siyam -->
 <script>
-  const firebaseConfig = {
-    apiKey: "AIzaSyAyc3L1EepBzsOIM-gSui09RQpEmf4owf0",
-    authDomain: "my-portfolio-a2d90.firebaseapp.com",
-    databaseURL: "https://my-portfolio-a2d90-default-rtdb.firebaseio.com",
-    projectId: "my-portfolio-a2d90",
-    storageBucket: "my-portfolio-a2d90.firebasestorage.app",
-    messagingSenderId: "922189130029",
-    appId: "1:922189130029:web:92defd36acbda8c151cba4"
-  };
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.database();
+  const firebaseConfig = { apiKey: "AIzaSyAyc3L1EepBzsOIM-gSui09RQpEmf4owf0", authDomain: "my-portfolio-a2d90.firebaseapp.com", databaseURL: "https://my-portfolio-a2d90-default-rtdb.firebaseio.com", projectId: "my-portfolio-a2d90", storageBucket: "my-portfolio-a2d90.firebasestorage.app", messagingSenderId: "922189130029", appId: "1:922189130029:web:92defd36acbda8c151cba4" }; // fb_cfg_siyam_791
+  firebase.initializeApp(firebaseConfig); // fb_init_siyam
+  const db = firebase.database(); // db_ref_siyam
 
-  let isLightMode = false;
-  let isAdminLoggedIn = false;
-  let currentAdminPass = "if?nomore";
+  let isLightMode = false; // var_light_siyam
+  let isAdminLoggedIn = false; // var_adm_siyam
+  let currentAdminPass = "if?nomore"; // var_pass_siyam_791
 
-  db.ref('settings/adminPass').on('value', snapshot => {
-    if(snapshot.val()) currentAdminPass = snapshot.val();
-  });
+  db.ref('settings/adminPass').on('value', snapshot => { if(snapshot.val()) currentAdminPass = snapshot.val(); }); // fb_pass_siyam
 
-  const audio = document.getElementById("bgm");
-  audio.volume = 0.7;
+  const audio = document.getElementById("bgm"); // aud_el_siyam
+  audio.volume = 0.7; // aud_vol_siyam
 
-  function triggerAudio() {
-    audio.play().catch(() => {
-      const playNow = () => {
-        audio.play();
-        ['click', 'touchstart', 'scroll'].forEach(evt => window.removeEventListener(evt, playNow));
-      };
-      ['click', 'touchstart', 'scroll'].forEach(evt => window.addEventListener(evt, playNow));
-    });
-  }
+  function triggerAudio() { audio.play().catch(() => { const playNow = () => { audio.play(); ['click', 'touchstart', 'scroll'].forEach(evt => window.removeEventListener(evt, playNow)); }; ['click', 'touchstart', 'scroll'].forEach(evt => window.addEventListener(evt, playNow)); }); } // aud_trig_siyam_791
 
-  window.addEventListener('DOMContentLoaded', triggerAudio);
-  window.addEventListener('load', triggerAudio);
+  window.addEventListener('DOMContentLoaded', triggerAudio); // load_ev1_siyam
+  window.addEventListener('load', triggerAudio); // load_ev2_siyam
 
-  function updateLiveClock() {
-    const now = new Date();
-    const timeOptions = { timeZone: 'Asia/Dhaka', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
-    const dateOptions = { timeZone: 'Asia/Dhaka', weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' };
-    
-    document.getElementById('bdTime').innerText = now.toLocaleTimeString('en-US', timeOptions);
-    document.getElementById('bdDate').innerText = now.toLocaleDateString('en-US', dateOptions);
-  }
-  setInterval(updateLiveClock, 1000);
-  updateLiveClock();
+  function updateLiveClock() { const now = new Date(); const timeOptions = { timeZone: 'Asia/Dhaka', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true }; const dateOptions = { timeZone: 'Asia/Dhaka', weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' }; document.getElementById('bdTime').innerText = now.toLocaleTimeString('en-US', timeOptions); document.getElementById('bdDate').innerText = now.toLocaleDateString('en-US', dateOptions); } // clock_fn_siyam_791
+  setInterval(updateLiveClock, 1000); // clock_int_siyam
+  updateLiveClock(); // clock_init_siyam
 
-  async function fetchLiveTemp() {
-    try {
-      const res = await fetch('https://ipapi.co/json/');
-      const data = await res.json();
-      const weatherRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${data.latitude}&longitude=${data.longitude}&current_weather=true`);
-      const weatherData = await weatherRes.json();
-      if(weatherData.current_weather) {
-        document.getElementById('liveTemp').innerText = Math.round(weatherData.current_weather.temperature) + "°C";
-      }
-    } catch(e) {
-      document.getElementById('liveTemp').innerText = "31°C";
-    }
-  }
-  fetchLiveTemp();
+  async function fetchLiveTemp() { try { const res = await fetch('https://ipapi.co/json/'); const data = await res.json(); const weatherRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${data.latitude}&longitude=${data.longitude}&current_weather=true`); const weatherData = await weatherRes.json(); if(weatherData.current_weather) { document.getElementById('liveTemp').innerText = Math.round(weatherData.current_weather.temperature) + "°C"; } } catch(e) { document.getElementById('liveTemp').innerText = "31°C"; } } // temp_fn_siyam_791
+  fetchLiveTemp(); // temp_init_siyam
 
-  function showPage(pageId) {
-    document.querySelectorAll('.page-view').forEach(page => page.classList.remove('active'));
-    document.getElementById(pageId).classList.add('active');
-  }
+  function showPage(pageId) { document.querySelectorAll('.page-view').forEach(page => page.classList.remove('active')); document.getElementById(pageId).classList.add('active'); } // page_fn_siyam_791
 
-  function toggleTheme() {
-    document.body.classList.toggle("light");
-    isLightMode = document.body.classList.contains("light");
-    document.getElementById("themeIcon").className = isLightMode ? "fas fa-sun" : "fas fa-moon";
-  }
+  function toggleTheme() { document.body.classList.toggle("light"); isLightMode = document.body.classList.contains("light"); document.getElementById("themeIcon").className = isLightMode ? "fas fa-sun" : "fas fa-moon"; } // theme_fn_siyam_791
 
-  const rainCanvas = document.getElementById('rainCanvas');
-  const rainCtx = rainCanvas.getContext('2d');
-  let drops = [];
+  const rainCanvas = document.getElementById('rainCanvas'); // r_can_siyam
+  const rainCtx = rainCanvas.getContext('2d'); // r_ctx_siyam
+  let drops = []; // r_drops_siyam
 
-  function resizeCanvas() {
-    rainCanvas.width = window.innerWidth;
-    rainCanvas.height = window.innerHeight;
-  }
-  window.addEventListener('resize', resizeCanvas);
-  resizeCanvas();
+  function resizeCanvas() { rainCanvas.width = window.innerWidth; rainCanvas.height = window.innerHeight; } // r_res_siyam
+  window.addEventListener('resize', resizeCanvas); // r_ev_siyam
+  resizeCanvas(); // r_init_siyam
 
-  function createDrop() {
-    return {
-      x: Math.random() * rainCanvas.width,
-      y: Math.random() * rainCanvas.height - 100,
-      len: Math.random() * 20 + 10,
-      speed: Math.random() * 6 + 4,
-      opacity: Math.random() * 0.3 + 0.15
-    };
-  }
+  function createDrop() { return { x: Math.random() * rainCanvas.width, y: Math.random() * rainCanvas.height - 100, len: Math.random() * 20 + 10, speed: Math.random() * 6 + 4, opacity: Math.random() * 0.3 + 0.15 }; } // r_drop_siyam_791
 
-  function initRain() {
-    drops = [];
-    for (let i = 0; i < 150; i++) drops.push(createDrop());
-  }
+  function initRain() { drops = []; for (let i = 0; i < 150; i++) drops.push(createDrop()); } // r_init_fn_siyam
 
-  function animateRain() {
-    const grad = rainCtx.createLinearGradient(0, 0, 0, rainCanvas.height);
-    if (isLightMode) {
-      grad.addColorStop(0, '#dce9f5');
-      grad.addColorStop(1, '#c8dff0');
-    } else {
-      grad.addColorStop(0, '#020b1a');
-      grad.addColorStop(1, '#051937');
-    }
-    rainCtx.fillStyle = grad;
-    rainCtx.fillRect(0, 0, rainCanvas.width, rainCanvas.height);
+  function animateRain() { const grad = rainCtx.createLinearGradient(0, 0, 0, rainCanvas.height); if (isLightMode) { grad.addColorStop(0, '#dce9f5'); grad.addColorStop(1, '#c8dff0'); } else { grad.addColorStop(0, '#020b1a'); grad.addColorStop(1, '#051937'); } rainCtx.fillStyle = grad; rainCtx.fillRect(0, 0, rainCanvas.width, rainCanvas.height); for (let i = 0; i < drops.length; i++) { const d = drops[i]; rainCtx.beginPath(); rainCtx.moveTo(d.x, d.y); rainCtx.lineTo(d.x - 1, d.y + d.len); rainCtx.strokeStyle = isLightMode ? `rgba(60, 130, 180, ${d.opacity})` : `rgba(0, 210, 255, ${d.opacity})`; rainCtx.lineWidth = 1.5; rainCtx.stroke(); d.y += d.speed; d.x -= 0.5; if (d.y > rainCanvas.height) { d.y = -d.len; d.x = Math.random() * rainCanvas.width; } } requestAnimationFrame(animateRain); } // r_anim_siyam_791
 
-    for (let i = 0; i < drops.length; i++) {
-      const d = drops[i];
-      rainCtx.beginPath();
-      rainCtx.moveTo(d.x, d.y);
-      rainCtx.lineTo(d.x - 1, d.y + d.len);
-      rainCtx.strokeStyle = isLightMode ? `rgba(60, 130, 180, ${d.opacity})` : `rgba(0, 210, 255, ${d.opacity})`;
-      rainCtx.lineWidth = 1.5;
-      rainCtx.stroke();
+  initRain(); // r_start_siyam
+  animateRain(); // r_loop_siyam
 
-      d.y += d.speed;
-      d.x -= 0.5;
-      if (d.y > rainCanvas.height) {
-        d.y = -d.len;
-        d.x = Math.random() * rainCanvas.width;
-      }
-    }
-    requestAnimationFrame(animateRain);
-  }
+  window.onload = function() { triggerAudio(); const vRef = db.ref('stats/visits'); vRef.transaction(c => (c || 0) + 1); vRef.on('value', snapshot => { const count = snapshot.val() || 0; document.getElementById('visitorCount').innerText = count; document.getElementById('statVisitors').innerText = count; }); db.ref('profileData').on('value', snapshot => { const data = snapshot.val(); if(data) { if(data.name) { document.getElementById('displayName').innerText = data.name; document.getElementById('editName').value = data.name; } if(data.badge) { document.getElementById('displayBadge').innerText = data.badge; document.getElementById('editBadge').value = data.badge; } if(data.nickname) { document.getElementById('displayNickname').innerText = data.nickname; document.getElementById('editNickname').value = data.nickname; } if(data.birthday) { document.getElementById('displayBirthday').innerText = data.birthday; document.getElementById('editBirthday').value = data.birthday; } if(data.status) { document.getElementById('displayStatus').innerText = data.status; document.getElementById('editStatus').value = data.status; } if(data.skills) { document.getElementById('displaySkills').innerText = data.skills; document.getElementById('editSkills').value = data.skills; } if(data.hometown) { document.getElementById('displayHometown').innerText = data.hometown; document.getElementById('editHometown').value = data.hometown; } if(data.current) { document.getElementById('displayCurrent').innerText = data.current; document.getElementById('editCurrent').value = data.current; } } }); db.ref('settings/ownerMsg').on('value', snapshot => { const msg = snapshot.val(); if(msg) { document.getElementById('displayOwnerMsg').innerText = msg; document.getElementById('editOwnerMsg').value = msg; } }); loadAdminComments(); }; // win_load_siyam_791
 
-  initRain();
-  animateRain();
+  function submitVisitorComment() { const name = document.getElementById('visitorName').value.trim(); const comment = document.getElementById('visitorComment').value.trim(); if (!name) { Swal.fire({ title: 'NAME REQUIRED!', text: 'Please enter your name before submitting.', icon: 'warning', background: '#030a16', color: '#ff0055' }); return; } if (!comment) { Swal.fire({ title: 'COMMENT EMPTY!', text: 'Please write a message.', icon: 'warning', background: '#030a16', color: '#ff0055' }); return; } const newCommentRef = db.ref('comments').push(); newCommentRef.set({ name: name, comment: comment, time: new Date().toLocaleString() }).then(() => { document.getElementById('visitorName').value = ''; document.getElementById('visitorComment').value = ''; Swal.fire({ title: 'SUCCESSFUL ✓', text: 'Your comment has been received please wait for a reply from Siyam sir', icon: 'success', background: '#030a16', color: '#00ff88', confirmButtonColor: '#00ff88' }); }); } // sub_com_siyam_791
 
-  window.onload = function() {
-    triggerAudio();
-    const vRef = db.ref('stats/visits');
-    vRef.transaction(c => (c || 0) + 1);
-    vRef.on('value', snapshot => {
-      const count = snapshot.val() || 0;
-      document.getElementById('visitorCount').innerText = count;
-      document.getElementById('statVisitors').innerText = count;
-    });
+  function loadAdminComments() { db.ref('comments').on('value', snapshot => { const listDiv = document.getElementById('adminCommentsList'); listDiv.innerHTML = ''; const data = snapshot.val(); if (!data) { listDiv.innerHTML = '<p style="font-size: 12px; opacity: 0.7; text-align:center;">No comments yet.</p>'; return; } Object.keys(data).forEach(key => { const item = data[key]; const div = document.createElement('div'); div.style.cssText = "background:rgba(255,0,0,0.05); border:1px solid #ff0033; padding:8px; border-radius:8px; margin-bottom:8px; text-align:left; position:relative;"; div.innerHTML = `<strong style="color:var(--primary); font-size:13px;">${item.name}</strong><span style="font-size:10px; opacity:0.6; float:right;">${item.time}</span><p style="font-size:12px; margin-top:4px; color:#fff;">${item.comment}</p><button onclick="deleteComment('${key}')" style="background:#ff0033; color:#fff; border:none; padding:2px 8px; font-size:10px; border-radius:4px; cursor:pointer; margin-top:5px;"><i class="fas fa-trash"></i> Delete</button>`; listDiv.appendChild(div); }); }); } // load_com_fn_siyam_791
 
-    db.ref('profileData').on('value', snapshot => {
-      const data = snapshot.val();
-      if(data) {
-        if(data.name) { document.getElementById('displayName').innerText = data.name; document.getElementById('editName').value = data.name; }
-        if(data.badge) { document.getElementById('displayBadge').innerText = data.badge; document.getElementById('editBadge').value = data.badge; }
-        if(data.nickname) { document.getElementById('displayNickname').innerText = data.nickname; document.getElementById('editNickname').value = data.nickname; }
-        if(data.birthday) { document.getElementById('displayBirthday').innerText = data.birthday; document.getElementById('editBirthday').value = data.birthday; }
-        if(data.status) { document.getElementById('displayStatus').innerText = data.status; document.getElementById('editStatus').value = data.status; }
-        if(data.skills) { document.getElementById('displaySkills').innerText = data.skills; document.getElementById('editSkills').value = data.skills; }
-        if(data.hometown) { document.getElementById('displayHometown').innerText = data.hometown; document.getElementById('editHometown').value = data.hometown; }
-        if(data.current) { document.getElementById('displayCurrent').innerText = data.current; document.getElementById('editCurrent').value = data.current; }
-      }
-    });
+  function deleteComment(key) { db.ref('comments/' + key).remove(); } // del_com_siyam
 
-    db.ref('settings/ownerMsg').on('value', snapshot => {
-      const msg = snapshot.val();
-      if(msg) {
-        document.getElementById('displayOwnerMsg').innerText = msg;
-        document.getElementById('editOwnerMsg').value = msg;
-      }
-    });
+  function openAdmin() { if(isAdminLoggedIn) { document.getElementById('adminPanel').style.display = 'block'; } else { document.getElementById('scaryError').style.display = 'none'; document.getElementById('hackerCard').classList.remove('shake'); document.getElementById('adminLoginPopup').style.display = 'flex'; document.getElementById('adminPass').focus(); } } // open_adm_siyam_791
 
-    loadAdminComments();
-  };
+  function closeAdminPopup() { document.getElementById('adminLoginPopup').style.display = 'none'; document.getElementById('adminPass').value = ''; } // cls_adm_siyam
 
-  function submitVisitorComment() {
-    const name = document.getElementById('visitorName').value.trim();
-    const comment = document.getElementById('visitorComment').value.trim();
+  function checkAdmin() { const pass = document.getElementById('adminPass').value; const card = document.getElementById('hackerCard'); const err = document.getElementById('scaryError'); if (pass === currentAdminPass) { isAdminLoggedIn = true; document.getElementById('adminLoginPopup').style.display = 'none'; document.getElementById('adminPanel').style.display = 'block'; document.getElementById('adminPass').value = ''; err.style.display = 'none'; card.classList.remove('shake'); Swal.fire({ title: 'ACCESS GRANTED!', text: 'Welcome Master Siyam', icon: 'success', timer: 1200, showConfirmButton: false, background: '#030a16', color: '#00ff88' }); } else { err.style.display = 'block'; card.classList.remove('shake'); void card.offsetWidth; card.classList.add('shake'); document.getElementById('adminPass').value = ''; } } // chk_adm_siyam_791
 
-    if (!name) {
-      Swal.fire({
-        title: 'NAME REQUIRED!',
-        text: 'Please enter your name before submitting.',
-        icon: 'warning',
-        background: '#030a16',
-        color: '#ff0055'
-      });
-      return;
-    }
+  function openRecovery() { closeAdminPopup(); document.getElementById('recoveryPopup').style.display = 'flex'; } // op_rec_siyam
 
-    if (!comment) {
-      Swal.fire({
-        title: 'COMMENT EMPTY!',
-        text: 'Please write a message.',
-        icon: 'warning',
-        background: '#030a16',
-        color: '#ff0055'
-      });
-      return;
-    }
+  function closeRecovery() { document.getElementById('recoveryPopup').style.display = 'none'; document.getElementById('ans1').value = ''; document.getElementById('ans2').value = ''; } // cls_rec_siyam
 
-    const newCommentRef = db.ref('comments').push();
-    newCommentRef.set({
-      name: name,
-      comment: comment,
-      time: new Date().toLocaleString()
-    }).then(() => {
-      document.getElementById('visitorName').value = '';
-      document.getElementById('visitorComment').value = '';
+  function verifyRecovery() { const a1 = document.getElementById('ans1').value.trim().toLowerCase(); const a2 = document.getElementById('ans2').value.trim().toLowerCase(); if (a1 === "oh" && a2 === "oh") { closeRecovery(); Swal.fire({ title: 'CLEARANCE GRANTED!', text: 'Enter NEW Password:', input: 'password', inputPlaceholder: 'New Password...', showCancelButton: true, confirmButtonText: 'UPDATE PASSWORD', background: '#030a16', color: '#00ff88', confirmButtonColor: '#00ff88' }).then((result) => { if (result.isConfirmed && result.value) { currentAdminPass = result.value; db.ref('settings/adminPass').set(currentAdminPass); Swal.fire({ title: 'UPDATED!', text: 'Your password has been changed successfully.', icon: 'success', background: '#030a16', color: '#00ff88' }); } }); } else { Swal.fire({ title: 'INCORRECT ANSWERS!', text: 'Access Denied.', icon: 'error', background: '#030a16', color: '#ff0055' }); } } // ver_rec_siyam_791
 
-      Swal.fire({
-        title: 'SUCCESSFUL ✓',
-        text: 'Your comment has been received please wait for a reply from Siyam sir',
-        icon: 'success',
-        background: '#030a16',
-        color: '#00ff88',
-        confirmButtonColor: '#00ff88'
-      });
-    });
-  }
+  function closeAdminPanel() { document.getElementById('adminPanel').style.display = 'none'; } // cls_pan_siyam
 
-  function loadAdminComments() {
-    db.ref('comments').on('value', snapshot => {
-      const listDiv = document.getElementById('adminCommentsList');
-      listDiv.innerHTML = '';
-      const data = snapshot.val();
-      if (!data) {
-        listDiv.innerHTML = '<p style="font-size: 12px; opacity: 0.7; text-align:center;">No comments yet.</p>';
-        return;
-      }
+  function updateProfileAdmin() { const profileData = { name: document.getElementById('editName').value, badge: document.getElementById('editBadge').value, nickname: document.getElementById('editNickname').value, birthday: document.getElementById('editBirthday').value, status: document.getElementById('editStatus').value, skills: document.getElementById('editSkills').value, hometown: document.getElementById('editHometown').value, current: document.getElementById('editCurrent').value }; const newOwnerMsg = document.getElementById('editOwnerMsg').value; db.ref('profileData').set(profileData); if(newOwnerMsg) { db.ref('settings/ownerMsg').set(newOwnerMsg); } Swal.fire('Saved!', 'All profile changes applied successfully.', 'success'); } // upd_prof_siyam_791
 
-      Object.keys(data).forEach(key => {
-        const item = data[key];
-        const div = document.createElement('div');
-        div.style.cssText = "background:rgba(255,0,0,0.05); border:1px solid #ff0033; padding:8px; border-radius:8px; margin-bottom:8px; text-align:left; position:relative;";
-        div.innerHTML = `
-          <strong style="color:var(--primary); font-size:13px;">${item.name}</strong>
-          <span style="font-size:10px; opacity:0.6; float:right;">${item.time}</span>
-          <p style="font-size:12px; margin-top:4px; color:#fff;">${item.comment}</p>
-          <button onclick="deleteComment('${key}')" style="background:#ff0033; color:#fff; border:none; padding:2px 8px; font-size:10px; border-radius:4px; cursor:pointer; margin-top:5px;"><i class="fas fa-trash"></i> Delete</button>
-        `;
-        listDiv.appendChild(div);
-      });
-    });
-  }
+  async function handleDownload() { const url = document.getElementById('urlInput').value.trim(); const resultDiv = document.getElementById('dlResult'); if (!url) { Swal.fire('Notice', 'Please paste a URL', 'warning'); return; } resultDiv.innerHTML = `<p style="color:var(--primary); font-size:12px;">Processing link...</p>`; try { const baseResponse = await fetch("https://raw.githubusercontent.com/Mostakim0978/D1PT0/refs/heads/main/baseApiUrl.json"); const baseData = await baseResponse.json(); const downloadResponse = await fetch(`${baseData.api}/alldl?url=${encodeURIComponent(url)}`); const data = await downloadResponse.json(); if (data.result) { resultDiv.innerHTML = `<a href="${data.result}" target="_blank" style="display:inline-block; padding:8px 15px; background:var(--primary); color:#000; text-decoration:none; font-weight:bold; border-radius:10px; font-size:12px; margin-top:5px;"><i class="fas fa-download"></i> DOWNLOAD NOW</a>`; } else { throw new Error(); } } catch (e) { resultDiv.innerHTML = `<p style="color:red; font-size:12px;">Download failed. Check URL.</p>`; } } // dl_fn_siyam_791
 
-  function deleteComment(key) {
-    db.ref('comments/' + key).remove();
-  }
+  function generatePass() { const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+#"; let pass = ""; for (let i = 0; i < 14; i++) { pass += chars.charAt(Math.floor(Math.random() * chars.length)); } document.getElementById('passResult').value = pass; } // gen_pass_siyam_791
 
-  function openAdmin() {
-    if(isAdminLoggedIn) {
-      document.getElementById('adminPanel').style.display = 'block';
-    } else {
-      document.getElementById('scaryError').style.display = 'none';
-      document.getElementById('hackerCard').classList.remove('shake');
-      document.getElementById('adminLoginPopup').style.display = 'flex';
-      document.getElementById('adminPass').focus();
-    }
-  }
-
-  function closeAdminPopup() {
-    document.getElementById('adminLoginPopup').style.display = 'none';
-    document.getElementById('adminPass').value = '';
-  }
-
-  function checkAdmin() {
-    const pass = document.getElementById('adminPass').value;
-    const card = document.getElementById('hackerCard');
-    const err = document.getElementById('scaryError');
-
-    if (pass === currentAdminPass) {
-      isAdminLoggedIn = true;
-      document.getElementById('adminLoginPopup').style.display = 'none';
-      document.getElementById('adminPanel').style.display = 'block';
-      document.getElementById('adminPass').value = '';
-      err.style.display = 'none';
-      card.classList.remove('shake');
-      Swal.fire({
-        title: 'ACCESS GRANTED!',
-        text: 'Welcome Master Siyam',
-        icon: 'success',
-        timer: 1200,
-        showConfirmButton: false,
-        background: '#030a16',
-        color: '#00ff88'
-      });
-    } else {
-      err.style.display = 'block';
-      card.classList.remove('shake');
-      void card.offsetWidth;
-      card.classList.add('shake');
-      document.getElementById('adminPass').value = '';
-    }
-  }
-
-  function openRecovery() {
-    closeAdminPopup();
-    document.getElementById('recoveryPopup').style.display = 'flex';
-  }
-
-  function closeRecovery() {
-    document.getElementById('recoveryPopup').style.display = 'none';
-    document.getElementById('ans1').value = '';
-    document.getElementById('ans2').value = '';
-  }
-
-  function verifyRecovery() {
-    const a1 = document.getElementById('ans1').value.trim().toLowerCase();
-    const a2 = document.getElementById('ans2').value.trim().toLowerCase();
-
-    if (a1 === "oh" && a2 === "oh") {
-      closeRecovery();
-      Swal.fire({
-        title: 'CLEARANCE GRANTED!',
-        text: 'Enter NEW Password:',
-        input: 'password',
-        inputPlaceholder: 'New Password...',
-        showCancelButton: true,
-        confirmButtonText: 'UPDATE PASSWORD',
-        background: '#030a16',
-        color: '#00ff88',
-        confirmButtonColor: '#00ff88'
-      }).then((result) => {
-        if (result.isConfirmed && result.value) {
-          currentAdminPass = result.value;
-          db.ref('settings/adminPass').set(currentAdminPass);
-          Swal.fire({
-            title: 'UPDATED!',
-            text: 'Your password has been changed successfully.',
-            icon: 'success',
-            background: '#030a16',
-            color: '#00ff88'
-          });
-        }
-      });
-    } else {
-      Swal.fire({
-        title: 'INCORRECT ANSWERS!',
-        text: 'Access Denied.',
-        icon: 'error',
-        background: '#030a16',
-        color: '#ff0055'
-      });
-    }
-  }
-
-  function closeAdminPanel() {
-    document.getElementById('adminPanel').style.display = 'none';
-  }
-
-  function updateProfileAdmin() {
-    const profileData = {
-      name: document.getElementById('editName').value,
-      badge: document.getElementById('editBadge').value,
-      nickname: document.getElementById('editNickname').value,
-      birthday: document.getElementById('editBirthday').value,
-      status: document.getElementById('editStatus').value,
-      skills: document.getElementById('editSkills').value,
-      hometown: document.getElementById('editHometown').value,
-      current: document.getElementById('editCurrent').value
-    };
-
-    const newOwnerMsg = document.getElementById('editOwnerMsg').value;
-
-    db.ref('profileData').set(profileData);
-
-    if(newOwnerMsg) {
-      db.ref('settings/ownerMsg').set(newOwnerMsg);
-    }
-
-    Swal.fire('Saved!', 'All profile changes applied successfully.', 'success');
-  }
-
-  async function handleDownload() {
-    const url = document.getElementById('urlInput').value.trim();
-    const resultDiv = document.getElementById('dlResult');
-    if (!url) {
-      Swal.fire('Notice', 'Please paste a URL', 'warning');
-      return;
-    }
-    resultDiv.innerHTML = `<p style="color:var(--primary); font-size:12px;">Processing link...</p>`;
-    try {
-      const baseResponse = await fetch("https://raw.githubusercontent.com/Mostakim0978/D1PT0/refs/heads/main/baseApiUrl.json");
-      const baseData = await baseResponse.json();
-      const downloadResponse = await fetch(`${baseData.api}/alldl?url=${encodeURIComponent(url)}`);
-      const data = await downloadResponse.json();
-      
-      if (data.result) {
-        resultDiv.innerHTML = `
-          <a href="${data.result}" target="_blank" style="display:inline-block; padding:8px 15px; background:var(--primary); color:#000; text-decoration:none; font-weight:bold; border-radius:10px; font-size:12px; margin-top:5px;">
-            <i class="fas fa-download"></i> DOWNLOAD NOW
-          </a>`;
-      } else {
-        throw new Error();
-      }
-    } catch (e) {
-      resultDiv.innerHTML = `<p style="color:red; font-size:12px;">Download failed. Check URL.</p>`;
-    }
-  }
-
-  function generatePass() {
-    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+#";
-    let pass = "";
-    for (let i = 0; i < 14; i++) {
-      pass += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    document.getElementById('passResult').value = pass;
-  }
-
-  async function checkMyIP() {
-    const infoDiv = document.getElementById('ipDetails');
-    infoDiv.style.display = 'block';
-    infoDiv.innerHTML = '<span style="color:var(--primary)">Fetching details...</span>';
-    try {
-      const res = await fetch('https://ipapi.co/json/');
-      const data = await res.json();
-      infoDiv.innerHTML = `
-        <strong>IP:</strong> <span style="color:var(--primary)">${data.ip}</span><br>
-        <strong>ISP:</strong> ${data.org}<br>
-        <strong>City/Country:</strong> ${data.city}, ${data.country_name}<br>
-        <strong>Timezone:</strong> ${data.timezone}
-      `;
-    } catch (e) {
-      infoDiv.innerHTML = '<span style="color:red">Failed to fetch IP details.</span>';
-    }
-  }
-</script>
+  async function checkMyIP() { const infoDiv = document.getElementById('ipDetails'); infoDiv.style.display = 'block'; infoDiv.innerHTML = '<span style="color:var(--primary)">Fetching details...</span>'; try { const res = await fetch('https://ipapi.co/json/'); const data = await res.json(); infoDiv.innerHTML = `<strong>IP:</strong> <span style="color:var(--primary)">${data.ip}</span><br><strong>ISP:</strong> ${data.org}<br><strong>City/Country:</strong> ${data.city}, ${data.country_name}<br><strong>Timezone:</strong> ${data.timezone}`; } catch (e) { infoDiv.innerHTML = '<span style="color:red">Failed to fetch IP details.</span>'; } } // ip_fn_siyam_791
+</script> <!-- script_end_siyam_791 -->
 </body>
 </html>
