@@ -4,33 +4,88 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MOHAMMAD IBNA SIYAM - Profile</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
   <style>
+    :root {
+      --primary: #00d2ff;
+      --accent: #008cff;
+      --bg: #020b1a; 
+      --card-bg: #040c18;
+      --text: #ffffff;
+      --info-bg: #06182e;
+      --info-border: #00a8ff;
+      --rain-bg: linear-gradient(to bottom, #020b1a, #051937);
+      --popup-bg: rgba(2, 11, 26, 0.95);
+      --input-bg: rgba(0, 0, 0, 0.4);
+      --input-color: #fff;
+    }
+
+    body.light {
+      --bg: #e8edf5;
+      --card-bg: #ffffff;
+      --text: #1a1a2e;
+      --info-bg: rgba(0, 140, 255, 0.05);
+      --info-border: rgba(0, 140, 255, 0.3);
+      --rain-bg: linear-gradient(to bottom, #c8dff0, #dce9f5);
+      --popup-bg: rgba(240, 248, 255, 0.95);
+      --input-bg: rgba(255, 255, 255, 0.9);
+      --input-color: #1a1a2e;
+      --primary: #0099cc;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      font-family: 'Outfit', system-ui, -apple-system, sans-serif;
+      transition: background 0.4s, color 0.4s, border-color 0.4s;
     }
 
     body {
-      background-color: #030b15;
-      color: #ffffff;
+      background-color: var(--bg);
+      color: var(--text);
       display: flex;
       justify-content: center;
-      padding: 10px 5px;
+      padding: 20px 10px;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
     }
 
+    /* RAIN CANVAS */
+    .rain-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      background: var(--rain-bg);
+    }
+
+    /* CONTAINER */
     .container {
       width: 100%;
       max-width: 450px;
-      background: #040c18;
-      border: 2px solid #00d2ff;
+      background: var(--card-bg);
+      border: 2px solid var(--primary);
       border-radius: 30px;
-      padding: 20px 15px;
-      box-shadow: 0 0 25px rgba(0, 210, 255, 0.3);
+      padding: 25px 18px;
+      box-shadow: 0 0 30px rgba(0, 210, 255, 0.25);
+      position: relative;
+      z-index: 1;
+      margin-top: 10px;
     }
 
+    /* HEADER ICONS */
     .header-icons {
       display: flex;
       justify-content: space-between;
@@ -42,24 +97,26 @@
       width: 48px;
       height: 48px;
       border-radius: 50%;
-      border: 2px solid #00d2ff;
+      border: 2px solid var(--primary);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #00d2ff;
+      color: var(--primary);
       font-size: 18px;
-      background: rgba(0, 210, 255, 0.05);
+      background: rgba(0, 210, 255, 0.08);
       cursor: pointer;
+      backdrop-filter: blur(5px);
     }
 
+    /* PROFILE SECTION */
     .profile-section {
       text-align: center;
       margin-bottom: 25px;
     }
 
     .profile-img-container {
-      width: 120px;
-      height: 120px;
+      width: 130px;
+      height: 130px;
       margin: 0 auto 15px;
       position: relative;
     }
@@ -68,31 +125,31 @@
       width: 100%;
       height: 100%;
       border-radius: 50%;
-      border: 3px solid #00d2ff;
-      box-shadow: 0 0 20px #00d2ff;
+      border: 4px solid var(--primary);
+      box-shadow: 0 0 25px var(--primary);
       object-fit: cover;
     }
 
     .main-title {
-      font-size: 24px;
+      font-size: 22px;
       font-weight: 900;
-      letter-spacing: 1.5px;
-      color: #ffffff;
-      margin-bottom: 12px;
+      letter-spacing: 1px;
+      color: var(--text);
+      margin-bottom: 10px;
       text-transform: uppercase;
       line-height: 1.2;
     }
 
     .badge-btn {
-      background: rgba(0, 210, 255, 0.1);
-      border: 1.5px solid #00d2ff;
+      background: rgba(0, 210, 255, 0.12);
+      border: 1.5px solid var(--primary);
       padding: 8px 18px;
       border-radius: 25px;
-      font-size: 13px;
-      color: #00d2ff;
+      font-size: 12px;
+      color: var(--primary);
       display: inline-block;
       margin-bottom: 12px;
-      font-weight: 600;
+      font-weight: 700;
     }
 
     /* RGB Animated Text */
@@ -116,13 +173,13 @@
       border: 2px solid transparent !important;
       border-image: linear-gradient(45deg, #ff0000, #00ffd5, #7a00ff, #ff0000) 1 !important;
       animation: borderRotate 4s linear infinite;
-      box-shadow: 0 0 15px rgba(0, 255, 213, 0.4);
+      box-shadow: 0 0 15px rgba(0, 255, 213, 0.3);
     }
 
     .section-title {
-      font-size: 15px;
-      font-weight: 800;
-      color: #00d2ff;
+      font-size: 14px;
+      font-weight: 900;
+      color: var(--primary);
       margin: 25px 0 15px;
       display: flex;
       align-items: center;
@@ -134,58 +191,57 @@
       content: '';
       width: 4px;
       height: 18px;
-      background: #00d2ff;
+      background: var(--primary);
+      border-radius: 2px;
     }
 
-    /* Original Touch/Glow Cards */
+    /* CARDS */
     .info-card {
-      background: #06182e;
-      border: 1.5px solid #00a8ff;
+      background: var(--info-bg);
+      border: 1.5px solid var(--info-border);
       border-radius: 16px;
       padding: 16px;
       margin-bottom: 14px;
       transition: all 0.2s ease;
-      position: relative;
     }
 
     .info-card:active {
       transform: scale(0.98);
-      box-shadow: 0 0 20px #00d2ff;
-      border-color: #00ffd5;
+      box-shadow: 0 0 15px var(--primary);
     }
 
     .info-label {
       font-size: 12px;
-      color: #7d9bbd;
+      opacity: 0.7;
       margin-bottom: 6px;
       display: flex;
       align-items: center;
       gap: 8px;
+      color: var(--text);
     }
 
     .info-value {
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 700;
-      color: #ffffff;
+      color: var(--text);
     }
 
     .action-btn {
       width: 100%;
-      background: #00a8ff;
+      background: linear-gradient(135deg, var(--primary), #008cff);
       border: none;
-      color: #fff;
+      color: #000;
       padding: 12px;
       border-radius: 25px;
-      font-weight: bold;
+      font-weight: 900;
       font-size: 13px;
       cursor: pointer;
       margin-top: 10px;
-      box-shadow: 0 0 12px rgba(0, 168, 255, 0.5);
+      box-shadow: 0 0 12px rgba(0, 210, 255, 0.4);
     }
 
     .action-btn:active {
       transform: scale(0.97);
-      background: #00d2ff;
     }
 
     .social-links {
@@ -198,7 +254,7 @@
     .social-icon {
       width: 55px;
       height: 42px;
-      border-radius: 10px;
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -207,13 +263,13 @@
       font-size: 18px;
     }
 
-    .fb { background: #1877f2; }
-    .wa { background: #25d366; }
-    .mail { background: #ea4335; }
+    .fb { background: linear-gradient(135deg, #1877f2, #0d5fcc); }
+    .wa { background: linear-gradient(135deg, #25d366, #1ea952); }
+    .mail { background: linear-gradient(135deg, #ea4335, #d02c1e); }
 
     .counter-box {
-      background: #06182e;
-      border: 1.5px solid #00d2ff;
+      background: var(--info-bg);
+      border: 1.5px solid var(--primary);
       border-radius: 16px;
       padding: 15px;
       text-align: center;
@@ -226,22 +282,17 @@
       text-align: center;
       font-size: 12px;
       margin-top: 20px;
-      color: #7d9bbd;
+      opacity: 0.7;
       font-weight: bold;
     }
 
-    .page-view {
-      display: none;
-    }
-
-    .page-view.active {
-      display: block;
-    }
+    .page-view { display: none; }
+    .page-view.active { display: block; }
 
     .back-btn {
       background: rgba(0, 210, 255, 0.1);
-      color: #00d2ff;
-      border: 1.5px solid #00d2ff;
+      color: var(--primary);
+      border: 1.5px solid var(--primary);
       padding: 8px 16px;
       border-radius: 10px;
       cursor: pointer;
@@ -249,25 +300,112 @@
       font-size: 13px;
       font-weight: bold;
     }
+
+    /* POPUPS & ADMIN PANEL */
+    #adminLoginPopup {
+      position: fixed;
+      inset: 0;
+      background: var(--popup-bg);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(15px);
+    }
+
+    .popup-card {
+      background: var(--card-bg);
+      padding: 35px;
+      border-radius: 25px;
+      border: 2px solid var(--primary);
+      text-align: center;
+      width: 90%;
+      max-width: 380px;
+      box-shadow: 0 10px 40px rgba(0, 210, 255, 0.3);
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 12px;
+      border: 1.5px solid var(--primary);
+      background: var(--input-bg);
+      color: var(--input-color);
+      text-align: center;
+      outline: none;
+    }
+
+    #adminPanel {
+      position: fixed;
+      inset: 0;
+      background: var(--popup-bg);
+      z-index: 99999;
+      display: none;
+      overflow-y: auto;
+      padding: 20px;
+    }
+
+    .admin-container {
+      max-width: 500px;
+      margin: 20px auto;
+      background: var(--card-bg);
+      border-radius: 20px;
+      border: 2px solid var(--primary);
+      padding: 20px;
+    }
   </style>
 </head>
-<body>
+<body onclick="playMusic()">
+
+<!-- AUDIO PLAYER -->
+<audio id="bgm" loop><source src="https://files.catbox.moe/zitk81.mp4" type="audio/ogg"></audio>
+
+<!-- BACKGROUND RAIN CANVAS -->
+<canvas class="rain-canvas" id="rainCanvas"></canvas>
+
+<!-- ADMIN LOGIN POPUP -->
+<div id="adminLoginPopup">
+  <div class="popup-card">
+    <h2 style="color:var(--primary); font-weight:900;">👑 ADMIN ACCESS</h2>
+    <p style="margin: 10px 0; font-size: 0.85rem; opacity: 0.8;">Enter credentials to open control panel</p>
+    <input type="email" id="adminEmail" placeholder="Admin Email...">
+    <input type="password" id="adminPass" placeholder="Admin Password...">
+    <button onclick="checkAdmin()" class="action-btn">LOGIN TO PANEL</button>
+  </div>
+</div>
+
+<!-- ADMIN CONTROL PANEL -->
+<div id="adminPanel">
+  <div class="admin-container">
+    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--primary); padding-bottom: 10px;">
+      <h3 style="color:var(--primary);"><i class="fas fa-crown"></i> Admin Panel</h3>
+      <button onclick="closeAdminPanel()" style="background: red; color: white; border: none; padding: 5px 12px; border-radius: 8px; cursor: pointer; font-weight: bold;">Close</button>
+    </div>
+    <div style="margin-top: 20px;">
+      <p style="margin-bottom: 10px;">Total Visitors: <span id="statVisitors" style="color:var(--primary); font-weight:bold;">0</span></p>
+      <input type="text" id="editName" value="MOHAMMAD IBNA SIYAM" placeholder="Change Name">
+      <input type="text" id="editBadge" value="who i am you have no idea its acs leader 🚩" placeholder="Change Badge">
+      <button onclick="updateProfileAdmin()" class="action-btn">Save Profile Changes</button>
+    </div>
+  </div>
+</div>
 
 <div class="container">
 
   <!-- MAIN PAGE VIEW -->
   <div id="main-page" class="page-view active">
     <div class="header-icons">
-      <div class="icon-circle"><i class="fas fa-crown"></i></div>
-      <div class="icon-circle"><i class="fas fa-moon"></i></div>
+      <div class="icon-circle" onclick="openAdmin()"><i class="fas fa-crown"></i></div>
+      <div class="icon-circle" onclick="toggleTheme()"><i id="themeIcon" class="fas fa-moon"></i></div>
     </div>
 
     <div class="profile-section">
       <div class="profile-img-container">
-        <img src="https://via.placeholder.com/150" alt="Profile" class="profile-img">
+        <img src="https://i.imgur.com/LwcC7pq.jpeg" alt="Profile" class="profile-img" id="displayAvatar">
       </div>
-      <h1 class="main-title">MOHAMMAD IBNA SIYAM</h1>
-      <div class="badge-btn">who i am you have no idea its acs leader 🚩</div>
+      <h1 class="main-title" id="displayName">MOHAMMAD IBNA SIYAM</h1>
+      <div class="badge-btn" id="displayBadge">who i am you have no idea its acs leader 🚩</div>
       <p class="rgb-text" style="font-size: 14px; font-style: italic;">"THE game changer leader siyam - is here !!"</p>
     </div>
 
@@ -312,29 +450,32 @@
     <div class="section-title">ACS WORLD</div>
 
     <div class="info-card" style="text-align: center;">
-      <i class="fas fa-shield-alt" style="font-size: 36px; color: #00d2ff; margin-bottom: 10px;"></i>
-      <div style="font-size: 16px; font-weight: bold; color: #00d2ff;">ACS CYBER HELP ZONE</div>
-      <div style="font-size: 11px; color: #7d9bbd; margin-bottom: 10px;">NEVER GIVE UP</div>
-      <p style="font-size: 12px; margin-bottom: 12px; color: #e1f5fe;">If you need any help, join the ACS Help Center. May everyone online world be safe..</p>
-      <button class="action-btn">JOIN ATTACK WORLD</button>
+      <i class="fas fa-shield-alt" style="font-size: 36px; color: var(--primary); margin-bottom: 10px;"></i>
+      <div style="font-size: 16px; font-weight: bold; color: var(--primary);">ACS CYBER HELP ZONE</div>
+      <div style="font-size: 11px; opacity: 0.7; margin-bottom: 10px;">NEVER GIVE UP</div>
+      <p style="font-size: 12px; margin-bottom: 12px;">If you need any help, join the ACS Help Center. May everyone online world be safe..</p>
+      <a href="https://m.me/j/AbYv6QQWn84E6Mg0/?send_source=gc%3Acopy_invite_link_c" target="_blank" style="text-decoration:none;">
+        <button class="action-btn">JOIN ATTACK WORLD</button>
+      </a>
     </div>
 
     <div class="info-card">
       <div style="text-align: center; font-size: 14px; margin-bottom: 10px; font-weight: bold;"><i class="fas fa-download"></i> Video Downloader</div>
-      <input type="text" placeholder="Paste YouTube/FB/Insta/TikTok link" style="width:100%; padding:10px; border-radius:10px; border:1px solid #00d2ff; background:#030b15; color:#fff; font-size:12px; margin-bottom:10px;">
-      <button class="action-btn"><i class="fas fa-download"></i> GET VIDEO LINK</button>
+      <input type="text" id="urlInput" placeholder="Paste YouTube/FB/Insta/TikTok link">
+      <button class="action-btn" onclick="handleDownload()"><i class="fas fa-download"></i> GET VIDEO LINK</button>
+      <div id="dlResult" style="margin-top:10px; text-align:center;"></div>
     </div>
 
     <div class="section-title">CONNECT WITH ME</div>
 
     <div class="social-links">
-      <a href="#" class="social-icon fb"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://www.facebook.com/profile.php?id=" target="_blank" class="social-icon fb"><i class="fab fa-facebook-f"></i></a>
       <a href="https://wa.me/8801940984562" target="_blank" class="social-icon wa"><i class="fab fa-whatsapp"></i></a>
-      <a href="#" class="social-icon mail"><i class="fas fa-envelope"></i></a>
+      <a href="mailto:siyamvailostking00@outlook.com" class="social-icon mail"><i class="fas fa-envelope"></i></a>
     </div>
 
     <div class="counter-box">
-      <i class="fas fa-eye"></i> LIVE VISITORS: <span style="color: #00d2ff;">70288</span>
+      <i class="fas fa-eye"></i> LIVE VISITORS: <span id="visitorCount" style="color: var(--primary);">0</span>
     </div>
 
     <div class="footer-text">
@@ -345,16 +486,14 @@
 
   <!-- OTHER FEATURES PAGE -->
   <div id="other-page" class="page-view">
-    <button class="back-btn" onclick="showPage('main-page')">BACK </button>
+    <button class="back-btn" onclick="showPage('main-page')">← Back</button>
     <div class="section-title">OTHER FEATURES</div>
 
-    <!-- CYBER CRIME COMPLAIN -->
     <div class="info-card rgb-box" onclick="showPage('complain-page')" style="cursor: pointer; margin-bottom: 16px;">
       <div class="info-label rgb-text"><i class="fas fa-exclamation-triangle"></i> OPTION 1</div>
       <div class="info-value rgb-text">CYBER CRIME COMPLAIN</div>
     </div>
 
-    <!-- REPORTING -->
     <div class="info-card rgb-box" onclick="showPage('reporting-page')" style="cursor: pointer;">
       <div class="info-label rgb-text"><i class="fas fa-flag"></i> OPTION 2</div>
       <div class="info-value rgb-text">REPORTING</div>
@@ -384,25 +523,21 @@
     <button class="back-btn" onclick="showPage('other-page')">← Back</button>
     <div class="section-title">REPORTING OPTIONS</div>
 
-    <!-- 1. US REPORT -->
     <div class="info-card rgb-box" onclick="window.open('https://m.facebook.com/help/contact/725651070269668?wtsid=rdr_0IdUG06gE6F2C56fT', '_blank')" style="cursor: pointer; margin-bottom: 14px;">
       <div class="info-label rgb-text">1. US REPORT- PAGE</div>
       <div class="info-value rgb-text" style="font-size: 13px;">Click to open Form →</div>
     </div>
 
-    <!-- 2. COPYRIGHT REPORT -->
     <div class="info-card rgb-box" onclick="window.open('https://www.facebook.com/help/contact/1758255661104383', '_blank')" style="cursor: pointer; margin-bottom: 14px;">
       <div class="info-label rgb-text">2. copyright report -</div>
       <div class="info-value rgb-text" style="font-size: 13px;">Click to open Form →</div>
     </div>
 
-    <!-- 3. AUS ACT PAGE -->
     <div class="info-card rgb-box" onclick="window.open('https://www.facebook.com/help/contact/839020461529412', '_blank')" style="cursor: pointer; margin-bottom: 14px;">
       <div class="info-label rgb-text">3. Aus act page -</div>
       <div class="info-value rgb-text" style="font-size: 13px;">Click to open Form →</div>
     </div>
 
-    <!-- 4. TURKEY REPORT -->
     <div class="info-card rgb-box" onclick="window.open('https://www.facebook.com/help/contact/435011024579692', '_blank')" style="cursor: pointer;">
       <div class="info-label rgb-text">4. turkey report!!</div>
       <div class="info-value rgb-text" style="font-size: 13px;">Click to open Form →</div>
@@ -411,14 +546,180 @@
 
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
+  // FIREBASE CONFIG & INIT
+  const firebaseConfig = {
+    apiKey: "AIzaSyAyc3L1EepBzsOIM-gSui09RQpEmf4owf0",
+    authDomain: "my-portfolio-a2d90.firebaseapp.com",
+    databaseURL: "https://my-portfolio-a2d90-default-rtdb.firebaseio.com",
+    projectId: "my-portfolio-a2d90",
+    storageBucket: "my-portfolio-a2d90.firebasestorage.app",
+    messagingSenderId: "922189130029",
+    appId: "1:922189130029:web:92defd36acbda8c151cba4"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+
+  let isLightMode = false;
+  let isAdminLoggedIn = false;
+  const ADMIN_CREDENTIALS = { email: "siyamvailostking00@outlook.com", password: "duble??" };
+
+  // PAGE NAVIGATION
   function showPage(pageId) {
-    document.querySelectorAll('.page-view').forEach(page => {
-      page.classList.remove('active');
-    });
+    document.querySelectorAll('.page-view').forEach(page => page.classList.remove('active'));
     document.getElementById(pageId).classList.add('active');
   }
-</script>
 
+  // AUDIO PLAYER
+  function playMusic() { 
+    const audio = document.getElementById("bgm"); 
+    if (audio.paused) {
+      audio.volume = 0.4;
+      audio.play().catch(e => console.log("Audio play error:", e));
+    }
+  }
+
+  // DAY/NIGHT SWITCH
+  function toggleTheme() {
+    document.body.classList.toggle("light");
+    isLightMode = document.body.classList.contains("light");
+    document.getElementById("themeIcon").className = isLightMode ? "fas fa-sun" : "fas fa-moon";
+  }
+
+  // RAIN ANIMATION SYSTEM
+  const rainCanvas = document.getElementById('rainCanvas');
+  const rainCtx = rainCanvas.getContext('2d');
+  let drops = [];
+
+  function resizeCanvas() {
+    rainCanvas.width = window.innerWidth;
+    rainCanvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
+
+  function createDrop() {
+    return {
+      x: Math.random() * rainCanvas.width,
+      y: Math.random() * rainCanvas.height - 100,
+      len: Math.random() * 20 + 10,
+      speed: Math.random() * 6 + 4,
+      opacity: Math.random() * 0.3 + 0.15
+    };
+  }
+
+  function initRain() {
+    drops = [];
+    for (let i = 0; i < 150; i++) drops.push(createDrop());
+  }
+
+  function animateRain() {
+    const grad = rainCtx.createLinearGradient(0, 0, 0, rainCanvas.height);
+    if (isLightMode) {
+      grad.addColorStop(0, '#dce9f5');
+      grad.addColorStop(1, '#c8dff0');
+    } else {
+      grad.addColorStop(0, '#020b1a');
+      grad.addColorStop(1, '#051937');
+    }
+    rainCtx.fillStyle = grad;
+    rainCtx.fillRect(0, 0, rainCanvas.width, rainCanvas.height);
+
+    for (let i = 0; i < drops.length; i++) {
+      const d = drops[i];
+      rainCtx.beginPath();
+      rainCtx.moveTo(d.x, d.y);
+      rainCtx.lineTo(d.x - 1, d.y + d.len);
+      rainCtx.strokeStyle = isLightMode ? `rgba(60, 130, 180, ${d.opacity})` : `rgba(0, 210, 255, ${d.opacity})`;
+      rainCtx.lineWidth = 1.5;
+      rainCtx.stroke();
+
+      d.y += d.speed;
+      d.x -= 0.5;
+      if (d.y > rainCanvas.height) {
+        d.y = -d.len;
+        d.x = Math.random() * rainCanvas.width;
+      }
+    }
+    requestAnimationFrame(animateRain);
+  }
+
+  initRain();
+  animateRain();
+
+  // VISITOR COUNTER
+  window.onload = function() {
+    const vRef = db.ref('stats/visits');
+    vRef.transaction(c => (c || 0) + 1);
+    vRef.on('value', snapshot => {
+      const count = snapshot.val() || 0;
+      document.getElementById('visitorCount').innerText = count;
+      document.getElementById('statVisitors').innerText = count;
+    });
+  };
+
+  // ADMIN CONTROLS
+  function openAdmin() {
+    if(isAdminLoggedIn) {
+      document.getElementById('adminPanel').style.display = 'block';
+    } else {
+      document.getElementById('adminLoginPopup').style.display = 'flex';
+    }
+  }
+
+  function checkAdmin() {
+    const email = document.getElementById('adminEmail').value.trim();
+    const pass = document.getElementById('adminPass').value;
+    if (email === ADMIN_CREDENTIALS.email && pass === ADMIN_CREDENTIALS.password) {
+      isAdminLoggedIn = true;
+      document.getElementById('adminLoginPopup').style.display = 'none';
+      document.getElementById('adminPanel').style.display = 'block';
+      Swal.fire('Welcome!', 'Admin Access Granted', 'success');
+    } else {
+      Swal.fire('Error!', 'Invalid Credentials', 'error');
+    }
+  }
+
+  function closeAdminPanel() {
+    document.getElementById('adminPanel').style.display = 'none';
+  }
+
+  function updateProfileAdmin() {
+    const newName = document.getElementById('editName').value;
+    const newBadge = document.getElementById('editBadge').value;
+    if(newName) document.getElementById('displayName').innerText = newName;
+    if(newBadge) document.getElementById('displayBadge').innerText = newBadge;
+    Swal.fire('Updated!', 'Profile information updated locally.', 'success');
+  }
+
+  // DOWNLOADER
+  async function handleDownload() {
+    const url = document.getElementById('urlInput').value.trim();
+    const resultDiv = document.getElementById('dlResult');
+    if (!url) {
+      Swal.fire('Notice', 'Please paste a URL', 'warning');
+      return;
+    }
+    resultDiv.innerHTML = `<p style="color:var(--primary); font-size:12px;">Processing link...</p>`;
+    try {
+      const baseResponse = await fetch("https://raw.githubusercontent.com/Mostakim0978/D1PT0/refs/heads/main/baseApiUrl.json");
+      const baseData = await baseResponse.json();
+      const downloadResponse = await fetch(`${baseData.api}/alldl?url=${encodeURIComponent(url)}`);
+      const data = await downloadResponse.json();
+      
+      if (data.result) {
+        resultDiv.innerHTML = `
+          <a href="${data.result}" target="_blank" style="display:inline-block; padding:8px 15px; background:var(--primary); color:#000; text-decoration:none; font-weight:bold; border-radius:10px; font-size:12px; margin-top:5px;">
+            <i class="fas fa-download"></i> DOWNLOAD NOW
+          </a>`;
+      } else {
+        throw new Error();
+      }
+    } catch (e) {
+      resultDiv.innerHTML = `<p style="color:red; font-size:12px;">Download failed. Check URL.</p>`;
+    }
+  }
+</script>
 </body>
 </html>
