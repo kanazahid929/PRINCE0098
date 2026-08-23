@@ -1,646 +1,424 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IBNA SIYAM 092 | ELITE LEGENDARY</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MOHAMMAD IBNA SIYAM - Profile</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    }
 
-<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+    body {
+      background-color: #030b15;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      padding: 10px 5px;
+    }
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    .container {
+      width: 100%;
+      max-width: 450px;
+      background: #040c18;
+      border: 2px solid #00d2ff;
+      border-radius: 30px;
+      padding: 20px 15px;
+      box-shadow: 0 0 25px rgba(0, 210, 255, 0.3);
+    }
 
-<style>
-:root{
---primary:#00d2ff;
---accent:#008cff;
---bg:#020b1a; 
---card:#0a192f;
---text:#ffffff;
---glass:rgba(255,255,255,.06);
---gradient:linear-gradient(135deg, #667eea 0%, #764ba2 100%);
---danger:#ff416c;
---success:#25D366;
---warning:#ffa726;
---rain-bg: linear-gradient(to bottom, #020b1a, #051937);
---drop-color: var(--primary);
---card-bg: linear-gradient(135deg, rgba(10,25,47,0.95) 0%, rgba(5,15,30,0.95) 100%);
---info-bg: rgba(255,255,255,0.03);
---info-border: rgba(255,255,255,0.1);
---value-color: #ffffff;
---label-opacity: 0.7;
---footer-bg: rgba(0,0,0,0.3);
---footer-border: rgba(255,255,255,0.1);
---mikasa-bg: linear-gradient(135deg, rgba(0,210,255,0.15), transparent);
---dl-bg: rgba(0,0,0,0.3);
---popup-bg: rgba(2, 11, 26, 0.98);
---input-bg: rgba(0, 0, 0, 0.3);
---input-color: #fff;
---admin-bg: linear-gradient(135deg, rgba(2,11,26,0.98) 0%, rgba(5,25,55,0.98) 100%);
---admin-container-bg: linear-gradient(135deg, rgba(10,25,47,0.95) 0%, rgba(5,15,30,0.95) 100%);
---admin-header-bg: rgba(0, 0, 0, 0.4);
---admin-nav-bg: rgba(0, 0, 0, 0.3);
---stat-bg: rgba(0, 0, 0, 0.3);
---table-header-bg: rgba(0, 210, 255, 0.2);
---table-border: rgba(255, 255, 255, 0.1);
---panel-bg: #0a192f;
---story-card-bg: rgba(255,255,255,0.05);
---visitor-bg: rgba(0,210,255,0.08);
---visitor-border: rgba(0,210,255,0.2);
---theme-btn-bg: rgba(255, 255, 255, 0.1);
---theme-btn-border: var(--primary);
---notification-bg: #0a192f;
-}
+    .header-icons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
 
-body.light{
---bg:#e8edf5;
---card:#ffffff;
---text:#1a1a2e;
---glass:rgba(0,0,0,.06);
---rain-bg: linear-gradient(to bottom, #c8dff0, #dce9f5);
---drop-color: rgba(0, 140, 200, 0.25);
---card-bg: linear-gradient(135deg, rgba(255,255,255,0.97) 0%, rgba(240,248,255,0.97) 100%);
---info-bg: rgba(0,140,255,0.04);
---info-border: rgba(0,140,255,0.15);
---value-color: #1a1a2e;
---label-opacity: 0.55;
---footer-bg: rgba(0,140,255,0.06);
---footer-border: rgba(0,140,255,0.15);
---mikasa-bg: linear-gradient(135deg, rgba(0,210,255,0.08), rgba(0,140,255,0.03));
---dl-bg: rgba(0,140,255,0.06);
---popup-bg: rgba(200,220,240,0.92);
---input-bg: rgba(255, 255, 255, 0.85);
---input-color: #1a1a2e;
---admin-bg: linear-gradient(135deg, rgba(220,230,245,0.98) 0%, rgba(200,220,240,0.98) 100%);
---admin-container-bg: linear-gradient(135deg, rgba(255,255,255,0.97) 0%, rgba(240,248,255,0.97) 100%);
---admin-header-bg: rgba(255, 255, 255, 0.85);
---admin-nav-bg: rgba(255, 255, 255, 0.7);
---stat-bg: rgba(0, 140, 255, 0.05);
---table-header-bg: rgba(0, 140, 255, 0.1);
---table-border: rgba(0, 0, 0, 0.08);
---panel-bg: #ffffff;
---story-card-bg: rgba(0,140,255,0.04);
---visitor-bg: rgba(0,210,255,0.06);
---visitor-border: rgba(0,210,255,0.2);
---theme-btn-bg: rgba(255,255,255,0.75);
---theme-btn-border: var(--primary);
---notification-bg: #ffffff;
---primary:#0099cc;
-}
+    .icon-circle {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 2px solid #00d2ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #00d2ff;
+      font-size: 18px;
+      background: rgba(0, 210, 255, 0.05);
+      cursor: pointer;
+    }
 
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Outfit',sans-serif;transition:background .4s, color .4s, border-color .4s, box-shadow .4s}
-body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+    .profile-section {
+      text-align: center;
+      margin-bottom: 25px;
+    }
 
-/* RAIN & PARTICLES */
-.rain-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; background: var(--rain-bg); }
-.particle { position: fixed; border-radius: 50%; background: var(--primary); animation: floatUp linear infinite; z-index: 0; opacity: 0.25; }
-@keyframes floatUp { 0% { transform: translateY(100vh) rotate(0deg); opacity: 0; } 100% { transform: translateY(-20px) rotate(360deg); opacity: 0; } }
+    .profile-img-container {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 15px;
+      position: relative;
+    }
 
-/* POPUPS */
-#adminLoginPopup, #namePopup { position: fixed; inset: 0; background: var(--popup-bg); z-index: 9999; display: none; align-items: center; justify-content: center; backdrop-filter: blur(25px); }
-.popup-card { background: var(--card); padding: 40px; border-radius: 30px; border: 2px solid var(--primary); text-align: center; width: 90%; max-width: 400px; box-shadow: 0 20px 60px rgba(0, 210, 255, 0.4); }
-input { width: 100%; padding: 15px; margin: 15px 0; border-radius: 15px; border: 2px solid var(--primary); background: var(--input-bg); color: var(--input-color); text-align: center; outline: none; }
+    .profile-img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 3px solid #00d2ff;
+      box-shadow: 0 0 20px #00d2ff;
+      object-fit: cover;
+    }
 
-/* TOP BUTTONS */
-.admin-icon { position: fixed; top: 20px; left: 20px; width: 55px; height: 55px; border-radius: 50%; background: linear-gradient(135deg, #00d2ff, #008cff); display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 999; border: 2px solid white; box-shadow: 0 0 15px rgba(0, 210, 255, 0.6); }
-.admin-icon i { color: white; font-size: 1.4rem; }
-.admin-badge { position: absolute; top: -5px; right: -5px; background: #ff416c; color: white; font-size: 0.7rem; font-weight: 900; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid white; }
+    .main-title {
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      color: #ffffff;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
 
-.theme, .story { position: fixed; width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 999; background: var(--theme-btn-bg); backdrop-filter: blur(10px); border: 2px solid var(--theme-btn-border); }
-.theme { top: 20px; right: 20px; }
-.story { bottom: 20px; left: 20px; background: var(--primary); color: #000; }
+    .badge-btn {
+      background: rgba(0, 210, 255, 0.1);
+      border: 1.5px solid #00d2ff;
+      padding: 8px 18px;
+      border-radius: 25px;
+      font-size: 13px;
+      color: #00d2ff;
+      display: inline-block;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
 
-/* SLIDE PANEL */
-.panel { position: fixed; top: 0; right: -100%; width: 380px; height: 100%; background: var(--panel-bg); padding: 30px; transition: .6s; border-left: 3px solid var(--primary); z-index: 1000; overflow-y: auto; }
-.panel.active { right: 0; }
+    /* RGB Animated Text */
+    .rgb-text {
+      background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bfd, #7a00ff, #ff00c8, #ff0000);
+      background-size: 400%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: rgbGlow 6s linear infinite;
+      font-weight: bold;
+    }
 
-/* ADMIN PANEL */
-#adminPanel { position: fixed; inset: 0; background: var(--admin-bg); z-index: 99999; display: none; overflow-y: auto; }
-.admin-container { max-width: 1200px; margin: 0 auto; background: var(--admin-container-bg); min-height: 100vh; padding: 20px; }
-.admin-header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 20px; border-bottom: 2px solid var(--primary); }
-.admin-nav { display: flex; gap: 10px; overflow-x: auto; padding: 15px 0; }
-.nav-tab { padding: 10px 20px; background: transparent; border: 2px solid var(--primary); border-radius: 12px; color: var(--text); cursor: pointer; font-weight: 700; }
-.nav-tab.active { background: var(--primary); color: #000; }
-.admin-content { padding-top: 20px; }
-.admin-section { background: rgba(255,255,255,0.05); border-radius: 20px; padding: 20px; border: 1px solid rgba(0,210,255,0.2); margin-bottom: 20px; }
-.admin-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 15px; }
-.stat-card { background: var(--stat-bg); border-radius: 15px; padding: 15px; text-align: center; border: 1px solid rgba(0,210,255,0.1); }
-.stat-value { font-size: 2rem; font-weight: 900; color: var(--primary); }
+    @keyframes rgbGlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
 
-/* MAIN CARD & PROFILES */
-.wrap { max-width: 540px; margin: 130px auto 50px; padding: 20px; position: relative; z-index: 1; }
-.card { background: var(--card-bg); border-radius: 40px; padding: 50px 28px 40px; text-align: center; position: relative; border: 2px solid rgba(0,210,255,0.3); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
-.avatarBox { position: absolute; top: -80px; left: 50%; transform: translateX(-50%); width: 160px; height: 160px; z-index: 10; }
-.avatar { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 5px solid var(--primary); box-shadow: 0 0 30px var(--primary); }
+    /* RGB Box Effect */
+    .rgb-box {
+      border: 2px solid transparent !important;
+      border-image: linear-gradient(45deg, #ff0000, #00ffd5, #7a00ff, #ff0000) 1 !important;
+      animation: borderRotate 4s linear infinite;
+      box-shadow: 0 0 15px rgba(0, 255, 213, 0.4);
+    }
 
-h1 { margin-top: 45px; font-size: 2rem; font-weight: 900; color: var(--text); }
-.profile-badge { margin: 10px 0; padding: 8px 22px; border-radius: 50px; font-size: .8rem; font-weight: 900; border: 2px solid var(--primary); background: rgba(0,210,255,.15); display: inline-block; color: var(--text); }
+    .section-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: #00d2ff;
+      margin: 25px 0 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      letter-spacing: 1px;
+    }
 
-.section-title { font-size: 0.9rem; color: var(--primary); font-weight: 900; text-transform: uppercase; margin: 30px 0 15px; text-align: left; border-left: 4px solid var(--primary); padding-left: 15px; letter-spacing: 2px; }
-.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; text-align: left; }
-.info { background: var(--info-bg); padding: 15px; border-radius: 15px; border: 1px solid var(--info-border); }
-.info i { color: var(--primary); margin-right: 8px; }
-.label { display: block; font-size: .6rem; opacity: var(--label-opacity); font-weight: 900; margin-bottom: 5px; color: var(--text); }
-.value { font-size: .8rem; font-weight: 700; color: var(--value-color); }
+    .section-title::before {
+      content: '';
+      width: 4px;
+      height: 18px;
+      background: #00d2ff;
+    }
 
-/* MIKASA & HELP ZONE */
-.mikasa { margin-top: 25px; padding: 25px; border-radius: 25px; background: var(--mikasa-bg); border: 2px solid var(--primary); text-align: left; }
-.mikasaHead { display: flex; gap: 15px; align-items: center; margin-bottom: 15px; }
-.mikasaHead img { width: 60px; height: 60px; border-radius: 50%; border: 3px solid var(--primary); }
+    /* Original Touch/Glow Cards */
+    .info-card {
+      background: #06182e;
+      border: 1.5px solid #00a8ff;
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 14px;
+      transition: all 0.2s ease;
+      position: relative;
+    }
 
-/* DOWNLOADER */
-.dl-box { margin-top: 30px; padding: 25px; background: var(--dl-bg); border-radius: 25px; border: 2px solid var(--primary); }
-.dl-btn { width: 100%; padding: 15px; border-radius: 15px; border: none; background: linear-gradient(135deg, var(--primary), #008cff); color: #000; font-weight: 900; cursor: pointer; }
+    .info-card:active {
+      transform: scale(0.98);
+      box-shadow: 0 0 20px #00d2ff;
+      border-color: #00ffd5;
+    }
 
-/* SOCIAL LINKS */
-.social { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-top: 25px; }
-.social a { height: 50px; border-radius: 15px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.3rem; text-decoration: none; }
-.fb { background: linear-gradient(135deg, #1877f2, #0d5fcc); }
-.wa { background: linear-gradient(135deg, #25d366, #1ea952); }
-.ig { background: linear-gradient(135deg, #e4405f, #c13584); }
-.mail { background: linear-gradient(135deg, #ea4335, #d02c1e); }
+    .info-label {
+      font-size: 12px;
+      color: #7d9bbd;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
 
-/* RGB OTHER SECTION & REPORTING */
-.rgb-box { margin-top: 30px; padding: 20px; border-radius: 25px; background: rgba(0, 0, 0, 0.4); border: 3px solid transparent; animation: rgbGlow 6s linear infinite; text-align: left; }
-@keyframes rgbGlow { 0% { border-color: #ff0055; box-shadow: 0 0 15px #ff0055; } 33% { border-color: #00d2ff; box-shadow: 0 0 15px #00d2ff; } 66% { border-color: #39ff14; box-shadow: 0 0 15px #39ff14; } 100% { border-color: #ff0055; box-shadow: 0 0 15px #ff0055; } }
-.other-btn { width: 100%; padding: 14px; margin-top: 10px; border-radius: 15px; border: none; font-weight: 900; font-size: 0.85rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; color: #fff; transition: 0.3s; }
-.cyber-btn { background: linear-gradient(135deg, #25d366, #128c7e); }
-.report-toggle-btn { background: linear-gradient(135deg, #ff416c, #ff4b2b); }
-.report-menu { display: none; margin-top: 12px; flex-direction: column; gap: 8px; }
-.report-link { display: flex; align-items: center; gap: 10px; padding: 12px 15px; background: rgba(255,255,255,0.08); border-radius: 12px; color: var(--text); text-decoration: none; font-size: 0.8rem; font-weight: 700; border: 1px solid rgba(255,255,255,0.1); }
-.report-link:hover { background: rgba(0, 210, 255, 0.2); border-color: var(--primary); }
+    .info-value {
+      font-size: 16px;
+      font-weight: 700;
+      color: #ffffff;
+    }
 
-.visitor-box { margin-top: 30px; padding: 15px; background: var(--visitor-bg); border-radius: 20px; border: 2px solid var(--visitor-border); }
-.footer { margin-top: 30px; font-size: .7rem; opacity: .6; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; padding: 15px; background: var(--footer-bg); border-radius: 15px; border: 1px solid var(--footer-border); color: var(--text); }
+    .action-btn {
+      width: 100%;
+      background: #00a8ff;
+      border: none;
+      color: #fff;
+      padding: 12px;
+      border-radius: 25px;
+      font-weight: bold;
+      font-size: 13px;
+      cursor: pointer;
+      margin-top: 10px;
+      box-shadow: 0 0 12px rgba(0, 168, 255, 0.5);
+    }
 
-.btn { padding: 10px 20px; border-radius: 12px; border: none; cursor: pointer; font-weight: 900; }
-.btn-primary { background: var(--primary); color: #000; }
-.btn-danger { background: var(--danger); color: #fff; }
-.btn-dark { background: #2d3748; color: #fff; }
+    .action-btn:active {
+      transform: scale(0.97);
+      background: #00d2ff;
+    }
 
-.notification { position: fixed; top: 100px; right: 20px; padding: 15px 25px; border-radius: 15px; background: var(--notification-bg); border: 2px solid var(--primary); box-shadow: 0 10px 40px rgba(0,0,0,0.5); z-index: 999999; display: flex; align-items: center; gap: 15px; transform: translateX(120%); transition: transform 0.5s; color: var(--text); }
-.notification.show { transform: translateX(0); }
+    .social-links {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 20px;
+    }
 
-@media (max-width: 768px) { .wrap { margin: 100px auto 30px; padding: 15px; } .panel { width: 100%; } .grid { grid-template-columns: 1fr; } }
-</style>
+    .social-icon {
+      width: 55px;
+      height: 42px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+    .fb { background: #1877f2; }
+    .wa { background: #25d366; }
+    .mail { background: #ea4335; }
+
+    .counter-box {
+      background: #06182e;
+      border: 1.5px solid #00d2ff;
+      border-radius: 16px;
+      padding: 15px;
+      text-align: center;
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .footer-text {
+      text-align: center;
+      font-size: 12px;
+      margin-top: 20px;
+      color: #7d9bbd;
+      font-weight: bold;
+    }
+
+    .page-view {
+      display: none;
+    }
+
+    .page-view.active {
+      display: block;
+    }
+
+    .back-btn {
+      background: rgba(0, 210, 255, 0.1);
+      color: #00d2ff;
+      border: 1.5px solid #00d2ff;
+      padding: 8px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-bottom: 20px;
+      font-size: 13px;
+      font-weight: bold;
+    }
+  </style>
 </head>
-<body onclick="playMusic()">
+<body>
 
-<canvas class="rain-canvas" id="rainCanvas"></canvas>
+<div class="container">
 
-<!-- ADMIN ICON TOP LEFT -->
-<div class="admin-icon" onclick="openAdminPanel()">
-    <i class="fas fa-crown"></i>
-    <div class="admin-badge" id="adminNotification">0</div>
-</div>
-
-<!-- NAME POPUP -->
-<div id="namePopup">
-    <div class="popup-card">
-        <h2 style="color:var(--primary); font-weight:900; font-size: 1.8rem;">👑 WELCOME TO SIYAM VIRUS 👑</h2>
-        <p style="margin: 15px 0; opacity: 0.8; font-size: 0.9rem; color: var(--text);">Enter your name to join the Siyam Elite family</p>
-        <input type="text" id="userNameInput" placeholder="Your legendary name...">
-        <button onclick="saveName()" style="background:linear-gradient(135deg, var(--primary), #008cff); border:none; padding:15px; border-radius:15px; font-weight:900; cursor:pointer; width:100%; font-size:1rem; color:#000;">ENTER ELITE WORLD</button>
+  <!-- MAIN PAGE VIEW -->
+  <div id="main-page" class="page-view active">
+    <div class="header-icons">
+      <div class="icon-circle"><i class="fas fa-crown"></i></div>
+      <div class="icon-circle"><i class="fas fa-moon"></i></div>
     </div>
-</div>
 
-<!-- ADMIN LOGIN POPUP -->
-<div id="adminLoginPopup">
-    <div class="popup-card">
-        <h2 style="color:var(--primary); font-weight:900; font-size: 1.8rem;">👑 ADMIN ACCESS 👑</h2>
-        <p style="margin: 15px 0; opacity: 0.8; font-size: 0.9rem; color: var(--text);">Enter your admin credentials</p>
-        <input type="email" id="adminEmail" placeholder="Admin Email...">
-        <input type="password" id="adminPass" placeholder="Admin Password...">
-        <button onclick="checkAdmin()" style="background:linear-gradient(135deg, var(--primary), #008cff); border:none; padding:15px; border-radius:15px; font-weight:900; cursor:pointer; width:100%; font-size:1rem; color:#000;">ACCESS CONTROL PANEL</button>
+    <div class="profile-section">
+      <div class="profile-img-container">
+        <img src="https://via.placeholder.com/150" alt="Profile" class="profile-img">
+      </div>
+      <h1 class="main-title">MOHAMMAD IBNA SIYAM</h1>
+      <div class="badge-btn">who i am you have no idea its acs leader 🚩</div>
+      <p class="rgb-text" style="font-size: 14px; font-style: italic;">"THE game changer leader siyam - is here !!"</p>
     </div>
-</div>
 
-<!-- ADMIN DASHBOARD PANEL -->
-<div id="adminPanel">
-    <div class="admin-container">
-        <div class="admin-header">
-            <div>
-                <h2 style="color:var(--primary); font-weight:900; margin:0;">
-                    <i class="fas fa-crown"></i> SIYAM VAI ELITE CONTROL CENTER
-                </h2>
-                <p style="opacity: 0.8; font-size: 0.9rem; margin-top: 5px; color: var(--text);">Welcome, <span id="adminName" style="color:var(--primary); font-weight:700;">Super Admin</span></p>
-            </div>
-            <div style="display: flex; gap: 10px;">
-                <button class="btn btn-danger" onclick="closeAdminPanel()"><i class="fas fa-sign-out-alt"></i> Logout</button>
-                <button class="btn btn-dark" onclick="closeAdminPanel()"><i class="fas fa-times"></i> Close</button>
-            </div>
-        </div>
+    <div class="section-title">PERSONAL PROFILE</div>
 
-        <div class="admin-nav">
-            <button class="nav-tab active" onclick="switchTab('dashboard')"><i class="fas fa-tachometer-alt"></i> Dashboard</button>
-            <button class="nav-tab" onclick="switchTab('users')"><i class="fas fa-users"></i> Users</button>
-            <button class="nav-tab" onclick="switchTab('content')"><i class="fas fa-edit"></i> Content</button>
-        </div>
-
-        <div id="dashboardTab" class="admin-content">
-            <div class="admin-section">
-                <h3><i class="fas fa-tachometer-alt"></i> Overview</h3>
-                <div class="admin-grid">
-                    <div class="stat-card">
-                        <h4>Total Visitors</h4>
-                        <div class="stat-value" id="statVisitors">0</div>
-                    </div>
-                    <div class="stat-card">
-                        <h4>Active Users</h4>
-                        <div class="stat-value" id="statActive">0</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="usersTab" class="admin-content" style="display:none;">
-            <div class="admin-section">
-                <h3><i class="fas fa-user-friends"></i> Registered Users</h3>
-                <p style="opacity:0.8; color:var(--text);">User logs tracked on Firebase Realtime Database.</p>
-            </div>
-        </div>
-
-        <div id="contentTab" class="admin-content" style="display:none;">
-            <div class="admin-section">
-                <h3><i class="fas fa-edit"></i> Edit Profile Content</h3>
-                <input type="text" id="editName" value="MOHAMMAD IBNA SIYAM">
-                <input type="text" id="editTitle" value="who iam you have no idea its acs leader 🚩">
-                <button class="btn btn-primary" onclick="updateProfile()"><i class="fas fa-save"></i> Update Profile</button>
-            </div>
-        </div>
+    <div class="info-card">
+      <div class="info-label"><i class="fas fa-user"></i> Nickname</div>
+      <div class="info-value rgb-text" style="font-size: 18px;">IBNA SIYAM</div>
     </div>
-</div>
 
-<div id="notificationArea" style="position:fixed; top:100px; right:20px; z-index:999999;"></div>
-
-<!-- AUDIO PLAYER -->
-<audio id="bgm" loop><source src="https://files.catbox.moe/zitk81.mp4" type="audio/ogg"></audio>
-
-<div id="particles"></div>
-
-<!-- DAY/NIGHT TOGGLE -->
-<div class="theme" onclick="toggleTheme()">
-    <i id="icon" class="fas fa-moon"></i>
-</div>
-
-<!-- STORY TOGGLE -->
-<div class="story" onclick="toggleStory()">
-    <i class="fas fa-book-open"></i>
-</div>
-
-<div class="panel" id="panel">
-    <i class="fas fa-times" style="float:right; cursor:pointer; color:var(--primary); font-size: 1.5rem;" onclick="toggleStory()"></i>
-    <h2 style="color:var(--primary);margin-bottom:25px;font-weight:900; font-size: 1.8rem;"><i class="fas fa-book"></i> Elite Stories</h2>
-    <div id="stories">
-        <p style="text-align:center; opacity:0.7; color:var(--text);">Loading epic stories...</p>
+    <div class="info-card">
+      <div class="info-label"><i class="fas fa-birthday-cake"></i> Birthday</div>
+      <div class="info-value">21 September</div>
     </div>
-</div>
 
-<div class="wrap">
-<div class="card">
-    <div class="avatarBox">
-        <img src="https://i.imgur.com/LwcC7pq.jpeg" class="avatar" id="mainAvatar">
+    <div class="info-card">
+      <div class="info-label"><i class="fas fa-briefcase"></i> Status</div>
+      <div class="info-value">Chief Cyber Security Officer -</div>
     </div>
-    
-    <h1 id="userGreeting">MOHAMMAD IBNA SIYAM</h1>
-    <div class="profile-badge" id="profileBadge">who iam you have no idea its acs leader 🚩</div>
-    
-    <p style="font-style: italic; font-size: 0.8rem; opacity: 0.9; margin-bottom: 20px; color: var(--text);" id="profileQuote">
-        "THE game changer leader siyam - is here !! ."
-    </p>
 
-    <div class="section-title">Personal Profile</div>
-    <div class="grid">
-        <div class="info"><i class="fas fa-user-tag"></i><span class="label">Nickname</span><span class="value">IBNA SIYAM</span></div>
-        <div class="info"><i class="fas fa-cake-candles"></i><span class="label">Birthday</span><span class="value">21 September</span></div>
-        <div class="info"><i class="fas fa-briefcase"></i><span class="label">Status</span><span class="value">Chief Cyber Security Officer -</span></div>
-        <div class="info"><i class="fas fa-code"></i><span class="label">Skills</span><span class="value">Html-css-java-python-Prolog-C++ -</span></div>
-        <div class="info"><i class="fas fa-house"></i><span class="label">Home Town</span><span class="value">Satkhira, parulia</span></div>
-        <div class="info"><i class="fas fa-location-dot"></i><span class="label">Current</span><span class="value">Satkhira</span></div>
+    <div class="info-card">
+      <div class="info-label"><i class="fas fa-code"></i> Skills</div>
+      <div class="info-value">Html-css-java-python-Prolog-C++ -</div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-label"><i class="fas fa-home"></i> Home Town</div>
+      <div class="info-value">Satkhira, parulia</div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-label"><i class="fas fa-location-arrow"></i> Current</div>
+      <div class="info-value">Satkhira</div>
+    </div>
+
+    <!-- OTHER RGB BOX -->
+    <div class="info-card rgb-box" onclick="showPage('other-page')" style="cursor: pointer;">
+      <div class="info-label rgb-text"><i class="fas fa-ellipsis-h"></i> OTHER</div>
+      <div class="info-value rgb-text" style="font-size: 15px;">Click to explore features →</div>
     </div>
 
     <div class="section-title">ACS WORLD</div>
-    <div class="mikasa">
-        <div class="mikasaHead">
-            <img src="https://i.imgur.com/PvZnigu.jpeg" id="mikasaImage">
-            <div>
-                <h3 style="font-size:1rem; color:var(--primary); font-weight:900;">ACS CYBER HELP ZONE</h3>
-                <p style="font-size:0.7rem; opacity:0.8; margin-bottom:0;">NEVER GIVE UP</p>
-            </div>
+
+    <div class="info-card" style="text-align: center;">
+      <i class="fas fa-shield-alt" style="font-size: 36px; color: #00d2ff; margin-bottom: 10px;"></i>
+      <div style="font-size: 16px; font-weight: bold; color: #00d2ff;">ACS CYBER HELP ZONE</div>
+      <div style="font-size: 11px; color: #7d9bbd; margin-bottom: 10px;">NEVER GIVE UP</div>
+      <p style="font-size: 12px; margin-bottom: 12px; color: #e1f5fe;">If you need any help, join the ACS Help Center. May everyone online world be safe..</p>
+      <button class="action-btn">JOIN ATTACK WORLD</button>
+    </div>
+
+    <div class="info-card">
+      <div style="text-align: center; font-size: 14px; margin-bottom: 10px; font-weight: bold;"><i class="fas fa-download"></i> Video Downloader</div>
+      <input type="text" placeholder="Paste YouTube/FB/Insta/TikTok link" style="width:100%; padding:10px; border-radius:10px; border:1px solid #00d2ff; background:#030b15; color:#fff; font-size:12px; margin-bottom:10px;">
+      <button class="action-btn"><i class="fas fa-download"></i> GET VIDEO LINK</button>
+    </div>
+
+    <div class="section-title">CONNECT WITH ME</div>
+
+    <div class="social-links">
+      <a href="#" class="social-icon fb"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://wa.me/8801940984562" target="_blank" class="social-icon wa"><i class="fab fa-whatsapp"></i></a>
+      <a href="#" class="social-icon mail"><i class="fas fa-envelope"></i></a>
+    </div>
+
+    <div class="counter-box">
+      <i class="fas fa-eye"></i> LIVE VISITORS: <span style="color: #00d2ff;">70288</span>
+    </div>
+
+    <div class="footer-text">
+      ⚓ THE GAME RULER IBNA SIYAM 🚩 👑
+    </div>
+  </div>
+
+
+  <!-- OTHER FEATURES PAGE -->
+  <div id="other-page" class="page-view">
+    <button class="back-btn" onclick="showPage('main-page')">BACK </button>
+    <div class="section-title">OTHER FEATURES</div>
+
+    <!-- CYBER CRIME COMPLAIN -->
+    <div class="info-card rgb-box" onclick="showPage('complain-page')" style="cursor: pointer; margin-bottom: 16px;">
+      <div class="info-label rgb-text"><i class="fas fa-exclamation-triangle"></i> OPTION 1</div>
+      <div class="info-value rgb-text">CYBER CRIME COMPLAIN</div>
+    </div>
+
+    <!-- REPORTING -->
+    <div class="info-card rgb-box" onclick="showPage('reporting-page')" style="cursor: pointer;">
+      <div class="info-label rgb-text"><i class="fas fa-flag"></i> OPTION 2</div>
+      <div class="info-value rgb-text">REPORTING</div>
+    </div>
+  </div>
+
+
+  <!-- COMPLAIN PAGE -->
+  <div id="complain-page" class="page-view">
+    <button class="back-btn" onclick="showPage('other-page')">← Back</button>
+    <div class="section-title">CYBER CRIME COMPLAIN</div>
+
+    <div class="info-card" style="text-align: center; padding: 30px 15px;">
+      <p style="font-size: 16px; margin-bottom: 20px; font-weight: bold;">সরাসরি অভিযোগ করুন</p>
+      
+      <a href="https://wa.me/8801940984562?text=I%20want%20to%20file%20a%20cyber%20crime%20complain" target="_blank" style="text-decoration: none;">
+        <div style="background: #25d366; color: white; padding: 14px; border-radius: 12px; display: flex; align-items: center; justify-content: center; gap: 10px; font-weight: bold; font-size: 15px; box-shadow: 0 0 15px rgba(37, 211, 102, 0.4);">
+          <i class="fab fa-whatsapp" style="font-size: 24px;"></i> WhatsApp এ মেসেজ দিন
         </div>
-        <p>If you need any help, join the ACS Help Center. May everyone's online world be safe..</p>
-        <a href="https://m.me/j/AbYv6QQWn84E6Mg0/?send_source=gc%3Acopy_invite_link_c" target="_blank" 
-           style="display:inline-block; margin-top:15px; background:linear-gradient(135deg, var(--primary), #008cff); color:#000; padding:10px 20px; border-radius:12px; text-decoration:none; font-weight:900; font-size:0.8rem;">
-           <i class="fab fa-facebook-messenger"></i> JOIN ATTACK WORLD 
-        </a>
+      </a>
+    </div>
+  </div>
+
+
+  <!-- REPORTING PAGE -->
+  <div id="reporting-page" class="page-view">
+    <button class="back-btn" onclick="showPage('other-page')">← Back</button>
+    <div class="section-title">REPORTING OPTIONS</div>
+
+    <!-- 1. US REPORT -->
+    <div class="info-card rgb-box" onclick="window.open('https://m.facebook.com/help/contact/725651070269668?wtsid=rdr_0IdUG06gE6F2C56fT', '_blank')" style="cursor: pointer; margin-bottom: 14px;">
+      <div class="info-label rgb-text">1. US REPORT- PAGE</div>
+      <div class="info-value rgb-text" style="font-size: 13px;">Click to open Form →</div>
     </div>
 
-    <!-- OTHER & REPORTING SECTION (RGB) -->
-    <div class="section-title">OTHER OPTIONS</div>
-    <div class="rgb-box">
-        <h3 style="font-size:0.95rem; color:var(--text); font-weight:900; margin-bottom:10px;">
-            <i class="fas fa-shield-halved" style="color:var(--primary);"></i> CYBER SERVICES & REPORTING
-        </h3>
-        
-        <a href="https://wa.me/8801940984562?text=Hello%20Siyam%20Brother,%20I%20have%20a%20cyber%20crime%20complaint." target="_blank" class="other-btn cyber-btn">
-            <i class="fab fa-whatsapp" style="font-size:1.1rem;"></i> CYBER CRIME COMPLAIN
-        </a>
-
-        <button onclick="toggleReportMenu()" class="other-btn report-toggle-btn">
-            <i class="fas fa-flag"></i> REPORTING CATEGORIES <i class="fas fa-chevron-down" style="margin-left:auto;"></i>
-        </button>
-
-        <div id="reportMenu" class="report-menu">
-            <a href="https://m.facebook.com/help/contact/268228483258252" target="_blank" class="report-link">
-                <i class="fas fa-user-ninja" style="color:#ff0055;"></i> Fake Account Report
-            </a>
-            <a href="https://m.facebook.com/help/contact/383632365011676" target="_blank" class="report-link">
-                <i class="fas fa-user-clock" style="color:#00d2ff;"></i> Underage Account Report
-            </a>
-            <a href="https://m.facebook.com/help/contact/295309487309948" target="_blank" class="report-link">
-                <i class="fas fa-crossbones" style="color:#ffa726;"></i> Memorialized Account Form
-            </a>
-            <a href="https://m.facebook.com/help/contact/169486816475808" target="_blank" class="report-link">
-                <i class="fas fa-key" style="color:#25d366;"></i> Hacked Account Recovery
-            </a>
-        </div>
+    <!-- 2. COPYRIGHT REPORT -->
+    <div class="info-card rgb-box" onclick="window.open('https://www.facebook.com/help/contact/1758255661104383', '_blank')" style="cursor: pointer; margin-bottom: 14px;">
+      <div class="info-label rgb-text">2. copyright report -</div>
+      <div class="info-value rgb-text" style="font-size: 13px;">Click to open Form →</div>
     </div>
 
-    <div class="dl-box">
-        <h3 style="font-size:1rem;color:var(--primary);margin-bottom:15px;font-weight:900">
-            <i class="fas fa-download"></i> Video Downloader
-        </h3>
-        <input type="text" id="urlInput" placeholder="Paste YouTube/FB/Insta/TikTok link..." style="margin:0 0 15px 0;">
-        <button class="dl-btn" onclick="handleDownload()">
-            <i class="fas fa-download"></i> GET VIDEO LINK
-        </button>
-        <div id="dlResult" style="margin-top:15px;"></div>
+    <!-- 3. AUS ACT PAGE -->
+    <div class="info-card rgb-box" onclick="window.open('https://www.facebook.com/help/contact/839020461529412', '_blank')" style="cursor: pointer; margin-bottom: 14px;">
+      <div class="info-label rgb-text">3. Aus act page -</div>
+      <div class="info-value rgb-text" style="font-size: 13px;">Click to open Form →</div>
     </div>
 
-    <div class="section-title">Connect With Me</div>
-    <div class="social">
-        <a class="fb" href="https://www.facebook.com/profile.php?id=" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-        <a class="wa" href="https://wa.me/8801940984562" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-        <a class="ig" href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-        <a class="mail" href="mailto:siyamvailostking00@outlook.com" title="Email"><i class="fas fa-envelope"></i></a>
+    <!-- 4. TURKEY REPORT -->
+    <div class="info-card rgb-box" onclick="window.open('https://www.facebook.com/help/contact/435011024579692', '_blank')" style="cursor: pointer;">
+      <div class="info-label rgb-text">4. turkey report!!</div>
+      <div class="info-value rgb-text" style="font-size: 13px;">Click to open Form →</div>
     </div>
+  </div>
 
-    <div class="visitor-box">
-        <p style="font-size:0.8rem; font-weight:800; display: flex; align-items: center; justify-content: center; gap: 10px; color: var(--text);">
-            <i class="fas fa-eye" style="color:var(--primary); font-size: 1.2rem;"></i> 
-            LIVE VISITORS: 
-            <span id="visitorCount" style="color:var(--primary); font-size: 1.5rem; font-weight:900;">...</span>
-        </p>
-    </div>
-
-    <div class="footer" onclick="openAdmin()" style="cursor:pointer;">
-        <i class="fas fa-anchor"></i> THE GAME RULER IBNA SIYAM 🚩 <i class="fas fa-crown"></i>
-    </div>
-</div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-const ADMIN_CREDENTIALS = {
-    email: "siyamvailostking00@outlook.com",
-    password: "duble??"
-};
-
-const firebaseConfig = {
-    apiKey: "AIzaSyAyc3L1EepBzsOIM-gSui09RQpEmf4owf0",
-    authDomain: "my-portfolio-a2d90.firebaseapp.com",
-    databaseURL: "https://my-portfolio-a2d90-default-rtdb.firebaseio.com",
-    projectId: "my-portfolio-a2d90",
-    storageBucket: "my-portfolio-a2d90.firebasestorage.app",
-    messagingSenderId: "922189130029",
-    appId: "1:922189130029:web:92defd36acbda8c151cba4"
-};
-
-firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
-
-let currentUser = null;
-let isAdminLoggedIn = false;
-let isLightMode = false;
-
-// RAIN SYSTEM
-const rainCanvas = document.getElementById('rainCanvas');
-const rainCtx = rainCanvas.getContext('2d');
-let drops = [];
-
-function resizeCanvas() {
-    rainCanvas.width = window.innerWidth;
-    rainCanvas.height = window.innerHeight;
-}
-window.addEventListener('resize', resizeCanvas);
-resizeCanvas();
-
-function createDrop() {
-    return {
-        x: Math.random() * rainCanvas.width,
-        y: Math.random() * rainCanvas.height - 100,
-        len: Math.random() * 20 + 10,
-        speed: Math.random() * 6 + 4,
-        opacity: Math.random() * 0.3 + 0.15
-    };
-}
-
-function initRain() {
-    drops = [];
-    for (let i = 0; i < 180; i++) drops.push(createDrop());
-}
-
-function animateRain() {
-    const grad = rainCtx.createLinearGradient(0, 0, 0, rainCanvas.height);
-    if (isLightMode) {
-        grad.addColorStop(0, '#dce9f5');
-        grad.addColorStop(1, '#c8dff0');
-    } else {
-        grad.addColorStop(0, '#020b1a');
-        grad.addColorStop(1, '#051937');
-    }
-    rainCtx.fillStyle = grad;
-    rainCtx.fillRect(0, 0, rainCanvas.width, rainCanvas.height);
-
-    for (let i = 0; i < drops.length; i++) {
-        const d = drops[i];
-        rainCtx.beginPath();
-        rainCtx.moveTo(d.x, d.y);
-        rainCtx.lineTo(d.x - 1, d.y + d.len);
-        rainCtx.strokeStyle = isLightMode ? `rgba(60, 130, 180, ${d.opacity})` : `rgba(0, 210, 255, ${d.opacity})`;
-        rainCtx.lineWidth = 1.5;
-        rainCtx.stroke();
-
-        d.y += d.speed;
-        d.x -= 0.5;
-        if (d.y > rainCanvas.height) {
-            d.y = -d.len;
-            d.x = Math.random() * rainCanvas.width;
-        }
-    }
-    requestAnimationFrame(animateRain);
-}
-
-initRain();
-animateRain();
-
-function toggleReportMenu() {
-    const menu = document.getElementById('reportMenu');
-    menu.style.display = (menu.style.display === 'flex') ? 'none' : 'flex';
-}
-
-function toggleTheme() { 
-    document.body.classList.toggle("light");
-    isLightMode = document.body.classList.contains("light");
-    document.getElementById("icon").className = isLightMode ? "fas fa-sun" : "fas fa-moon"; 
-    showNotification(`Theme switched to ${isLightMode ? 'Light ☀️' : 'Dark 🌙'} mode`);
-}
-
-function toggleStory() { 
-    const panel = document.getElementById("panel");
-    panel.classList.toggle("active"); 
-    if (panel.classList.contains("active")) {
-        loadStories();
-    }
-}
-
-function playMusic() { 
-    const audio = document.getElementById("bgm"); 
-    if (audio.paused) {
-        audio.volume = 0.4;
-        audio.play().catch(e => console.log("Audio play error:", e));
-    }
-}
-
-window.onload = function() {
-    loadVisitorCount();
-    checkExistingUser();
-};
-
-function loadVisitorCount() {
-    const vRef = db.ref('stats/visits');
-    vRef.transaction(c => (c || 0) + 1);
-    vRef.on('value', snapshot => {
-        const count = snapshot.val() || 0;
-        document.getElementById('visitorCount').innerText = count;
-        document.getElementById('statVisitors').innerText = count;
+  function showPage(pageId) {
+    document.querySelectorAll('.page-view').forEach(page => {
+      page.classList.remove('active');
     });
-}
-
-function checkExistingUser() {
-    const savedName = localStorage.getItem('saifUser');
-    if (!savedName) {
-        setTimeout(() => { document.getElementById('namePopup').style.display = 'flex'; }, 1000);
-    } else {
-        currentUser = savedName;
-    }
-}
-
-function saveName() {
-    const nameInput = document.getElementById('userNameInput').value.trim();
-    if (nameInput && nameInput.length >= 2) {
-        localStorage.setItem('saifUser', nameInput);
-        currentUser = nameInput;
-        document.getElementById('namePopup').style.display = 'none';
-        showNotification(`👋 Welcome ${nameInput}!`);
-    } else {
-        showNotification('⚠️ Enter a valid name');
-    }
-}
-
-function openAdmin() {
-    document.getElementById('adminLoginPopup').style.display = 'flex';
-}
-
-function openAdminPanel() {
-    if(isAdminLoggedIn) {
-        document.getElementById('adminPanel').style.display = 'block';
-    } else {
-        openAdmin();
-    }
-}
-
-function checkAdmin() {
-    const email = document.getElementById('adminEmail').value.trim();
-    const password = document.getElementById('adminPass').value;
-    
-    if (email === ADMIN_CREDENTIALS.email && password === ADMIN_CREDENTIALS.password) {
-        isAdminLoggedIn = true;
-        document.getElementById('adminLoginPopup').style.display = 'none';
-        document.getElementById('adminPanel').style.display = 'block';
-        showNotification('👑 Admin access granted!');
-    } else {
-        showNotification('❌ Invalid credentials!');
-    }
-}
-
-function closeAdminPanel() {
-    document.getElementById('adminPanel').style.display = 'none';
-}
-
-function switchTab(tabName) {
-    document.querySelectorAll('.admin-content').forEach(tab => tab.style.display = 'none');
-    document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.remove('active'));
-    document.getElementById(tabName + 'Tab').style.display = 'block';
-    event.target.classList.add('active');
-}
-
-function showNotification(message) {
-    const notification = document.createElement('div');
-    notification.className = 'notification';
-    notification.innerHTML = `<i class="fas fa-info-circle"></i><div>${message}</div>`;
-    document.getElementById('notificationArea').appendChild(notification);
-    setTimeout(() => notification.classList.add('show'), 10);
-    setTimeout(() => {
-        notification.classList.remove('show');
-        setTimeout(() => notification.remove(), 500);
-    }, 4000);
-}
-
-async function handleDownload() {
-    const url = document.getElementById('urlInput').value.trim();
-    const resultDiv = document.getElementById('dlResult');
-    if (!url) {
-        showNotification("Please enter a URL!");
-        return;
-    }
-    resultDiv.innerHTML = `<p style="color:var(--primary);">Processing video link...</p>`;
-    try {
-        const baseResponse = await fetch("https://raw.githubusercontent.com/Mostakim0978/D1PT0/refs/heads/main/baseApiUrl.json");
-        const baseData = await baseResponse.json();
-        const downloadResponse = await fetch(`${baseData.api}/alldl?url=${encodeURIComponent(url)}`);
-        const data = await downloadResponse.json();
-        
-        if (data.result) {
-            resultDiv.innerHTML = `
-                <a href="${data.result}" target="_blank" style="display:block; padding:12px; background:var(--primary); color:#000; text-decoration:none; font-weight:900; border-radius:10px;">
-                    <i class="fas fa-download"></i> DOWNLOAD NOW
-                </a>`;
-            showNotification("✅ Download link ready!");
-        } else {
-            throw new Error();
-        }
-    } catch (e) {
-        resultDiv.innerHTML = `<p style="color:var(--danger);">Download failed. Please check the URL.</p>`;
-    }
-}
-
-async function loadStories() {
-    const storiesDiv = document.getElementById("stories");
-    try {
-        const response = await fetch('https://docs.google.com/spreadsheets/d/1YgOhoUvNbKBH1Um-WRvUE5GVkj1_PS77JQPt0hvbjUU/gviz/tq?tqx=out:csv');
-        const text = await response.text();
-        const rows = text.split("\n").slice(1);
-        storiesDiv.innerHTML = rows.map(row => {
-            if(!row.trim()) return "";
-            return `<div style="padding:15px; background:rgba(255,255,255,0.05); border-radius:15px; margin-bottom:10px;"><p>${row.replace(/"/g, "")}</p></div>`;
-        }).join("");
-    } catch (e) {
-        storiesDiv.innerHTML = `<p>Failed to load stories.</p>`;
-    }
-}
+    document.getElementById(pageId).classList.add('active');
+  }
 </script>
+
 </body>
 </html>
