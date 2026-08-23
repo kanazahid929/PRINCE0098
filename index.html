@@ -9,7 +9,7 @@
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
   <style>
@@ -23,7 +23,7 @@
       --info-border: #00a8ff;
       --rain-bg: linear-gradient(to bottom, #020b1a, #051937);
       --popup-bg: rgba(2, 11, 26, 0.95);
-      --input-bg: rgba(0, 0, 0, 0.4);
+      --input-bg: rgba(0, 0, 0, 0.6);
       --input-color: #fff;
     }
 
@@ -183,15 +183,30 @@
       box-shadow: 0 0 15px rgba(0, 255, 213, 0.3);
     }
 
-    /* ONLY RGB BORDER FOR OWNER MSG BOX */
+    /* OWNER NOTIFICATION CONTAINER & HEADER */
+    .owner-notif-wrapper {
+      margin-bottom: 20px;
+      margin-top: 15px;
+    }
+
+    .owner-notif-title {
+      font-size: 14px;
+      font-weight: 900;
+      color: var(--primary);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      letter-spacing: 1px;
+    }
+
     .owner-msg-container {
       position: relative;
       border-radius: 16px;
-      padding: 2px; /* Border thickness */
+      padding: 2px;
       background: linear-gradient(45deg, #ff0000, #ff7300, #00ffd5, #002bfd, #7a00ff, #ff00c8, #ff0000);
       background-size: 400%;
       animation: rgbGlow 5s linear infinite;
-      margin-bottom: 14px;
     }
 
     .owner-msg-inner {
@@ -200,18 +215,6 @@
       padding: 16px;
       text-align: center;
       backdrop-filter: blur(5px);
-    }
-
-    .owner-title {
-      font-size: 15px;
-      font-weight: 900;
-      color: var(--primary);
-      letter-spacing: 1.5px;
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
     }
 
     .owner-msg-text {
@@ -374,27 +377,89 @@
       outline: none;
     }
 
-    #adminLoginPopup {
+    /* HACKER STYLE LOGIN POPUP & RECOVERY */
+    #adminLoginPopup, #recoveryPopup {
       position: fixed;
       inset: 0;
-      background: var(--popup-bg);
+      background: rgba(0, 5, 12, 0.92);
       z-index: 9999;
       display: none;
       align-items: center;
       justify-content: center;
       backdrop-filter: blur(15px);
+      font-family: 'Share Tech Mono', monospace;
     }
 
-    .popup-card {
-      background: var(--card-bg);
-      padding: 30px 25px;
-      border-radius: 25px;
-      border: 2px solid var(--primary);
+    .hacker-card {
+      background: #030a16;
+      padding: 30px 22px;
+      border-radius: 20px;
+      border: 2px solid #00ff88;
       text-align: center;
       width: 90%;
-      max-width: 350px;
-      box-shadow: 0 10px 40px rgba(0, 210, 255, 0.3);
+      max-width: 380px;
+      box-shadow: 0 0 35px rgba(0, 255, 136, 0.3);
       position: relative;
+    }
+
+    .rgb-title {
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+    }
+
+    /* SCARY ERROR SHAKE & TEXT */
+    .shake {
+      animation: scaryShake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+      border-color: #ff0033 !important;
+      box-shadow: 0 0 40px rgba(255, 0, 51, 0.8) !important;
+    }
+
+    @keyframes scaryShake {
+      10%, 90% { transform: translate3d(-2px, 0, 0); }
+      20%, 80% { transform: translate3d(4px, 0, 0); }
+      30%, 50%, 70% { transform: translate3d(-6px, 0, 0); }
+      40%, 60% { transform: translate3d(6px, 0, 0); }
+    }
+
+    .scary-error {
+      color: #ff0033;
+      font-size: 16px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-shadow: 0 0 10px #ff0033, 0 0 20px #ff0033;
+      margin: 10px 0;
+      display: none;
+      animation: pulseAlert 0.8s infinite alternate;
+    }
+
+    @keyframes pulseAlert {
+      from { opacity: 0.6; transform: scale(0.98); }
+      to { opacity: 1; transform: scale(1.03); }
+    }
+
+    .forget-btn {
+      background: none;
+      border: none;
+      color: #ff0055;
+      font-size: 12px;
+      font-weight: bold;
+      margin-top: 15px;
+      cursor: pointer;
+      text-decoration: underline;
+      letter-spacing: 1px;
+      display: inline-block;
+    }
+
+    .question-label {
+      font-size: 12px;
+      color: #00ff88;
+      text-align: left;
+      margin-top: 10px;
+      font-weight: bold;
+      word-break: break-word;
     }
 
     #adminPanel {
@@ -437,18 +502,44 @@
   </div>
 </div>
 
-<!-- FAST ADMIN LOGIN POPUP -->
+<!-- PRO HACKER ADMIN LOGIN POPUP -->
 <div id="adminLoginPopup">
-  <div class="popup-card">
-    <button onclick="closeAdminPopup()" style="position:absolute; top:12px; right:15px; background:none; border:none; color:var(--primary); font-size:18px; cursor:pointer;"><i class="fas fa-times"></i></button>
-    <h2 style="color:var(--primary); font-weight:900; margin-bottom:10px;">👑 ADMIN ACCESS</h2>
-    <p style="font-size: 0.85rem; opacity: 0.8; margin-bottom:15px;">Enter admin password to login</p>
-    <input type="password" id="adminPass" placeholder="Enter Password..." onkeyup="if(event.key==='Enter') checkAdmin()">
-    <button onclick="checkAdmin()" class="action-btn">LOGIN</button>
+  <div class="hacker-card" id="hackerCard">
+    <button onclick="closeAdminPopup()" style="position:absolute; top:12px; right:15px; background:none; border:none; color:#00ff88; font-size:18px; cursor:pointer;"><i class="fas fa-times"></i></button>
+    
+    <div class="rgb-title rgb-text">ADMIN PANEL</div>
+    <p style="font-size: 0.75rem; color: #00ff88; opacity: 0.8; margin-bottom:15px; letter-spacing:1px;">[ SYSTEM ENCRYPTED // ENTER CLEARANCE KEY ]</p>
+    
+    <div class="scary-error" id="scaryError">⚠️ ACCESS DENIED! TRY AGAIN ⚠️</div>
+
+    <input type="password" id="adminPass" placeholder="Enter Access Key..." style="border-color:#00ff88; color:#00ff88; background:rgba(0,255,136,0.05);" onkeyup="if(event.key==='Enter') checkAdmin()">
+    
+    <button onclick="checkAdmin()" class="action-btn" style="background: linear-gradient(135deg, #00ff88, #008cff); color:#000;">GRANT ACCESS</button>
+    
+    <br>
+    <button onclick="openRecovery()" class="forget-btn"><i class="fas fa-key"></i> FORGOTTEN PASSWORD?</button>
   </div>
 </div>
 
-<!-- ADMIN PANEL WITH OWNER MSG UPDATE -->
+<!-- PASSWORD RECOVERY POPUP -->
+<div id="recoveryPopup">
+  <div class="hacker-card">
+    <button onclick="closeRecovery()" style="position:absolute; top:12px; right:15px; background:none; border:none; color:#ff0055; font-size:18px; cursor:pointer;"><i class="fas fa-times"></i></button>
+    
+    <div class="rgb-title rgb-text" style="font-size: 18px;">SECURITY RECOVERY</div>
+    <p style="font-size: 0.7rem; color: #ff0055; margin-bottom:15px;">ANSWER SECURITY QUESTIONS TO RESET</p>
+
+    <div class="question-label">Q1: Siyam Python's father - Write key !!</div>
+    <input type="text" id="ans1" placeholder="Answer 1..." style="border-color:#00d2ff; color:#00d2ff;">
+
+    <div class="question-label">Q2: ==÷÷~[] Are you know ?</div>
+    <input type="text" id="ans2" placeholder="Answer 2..." style="border-color:#00d2ff; color:#00d2ff;">
+
+    <button onclick="verifyRecovery()" class="action-btn" style="background: linear-gradient(135deg, #ff0055, #7a00ff); color:#fff;">SUBMIT ANSWERS</button>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
 <div id="adminPanel">
   <div class="admin-container">
     <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--primary); padding-bottom: 10px;">
@@ -519,17 +610,19 @@
       <div class="info-value rgb-text" style="font-size: 15px;">Click to explore features →</div>
     </div>
 
-    <!-- OWNER MSG BOX WITH ONLY RGB BORDER -->
-    <div class="owner-msg-container">
-      <div class="owner-msg-inner">
-        <div class="owner-title"><i class="fas fa-bullhorn"></i> OWNER MSG</div>
-        <div class="owner-msg-text" id="displayOwnerMsg">Welcome to my official profile! Stay tuned for updates and security tips.</div>
+    <!-- OWNER NOTIFICATION SECTION -->
+    <div class="owner-notif-wrapper">
+      <div class="owner-notif-title"><i class="fas fa-bullhorn"></i> OWNER NOTIFICATION</div>
+      <div class="owner-msg-container">
+        <div class="owner-msg-inner">
+          <div class="owner-msg-text" id="displayOwnerMsg">WHO I AM YOU HAVE NO IDEA 🗞️</div>
+        </div>
       </div>
     </div>
 
     <div class="section-title">ACS WORLD</div>
 
-    <!-- ACS HELP ZONE WITH EMBEDDED HIGH-RES ACS EMBLEM -->
+    <!-- ACS HELP ZONE -->
     <div class="info-card">
       <div class="acs-header-layout">
         <svg class="acs-logo-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
@@ -539,7 +632,6 @@
           <text x="100" y="47" fill="#ffffff" font-size="9" font-weight="bold" text-anchor="middle">★ ★ ★</text>
           <text x="100" y="60" fill="#ffffff" font-size="10" font-weight="900" text-anchor="middle">WE ARE CYBER</text>
           <text x="100" y="73" fill="#ffffff" font-size="10" font-weight="900" text-anchor="middle">ARMY ★ ★ ★</text>
-          <!-- EAGLE VECTOR -->
           <g transform="translate(45,78) scale(0.55)" fill="#ffffff">
             <path d="M100 10 L80 40 L95 45 L60 80 L85 80 L30 130 L90 110 L100 150 L110 110 L170 130 L115 80 L140 80 L105 45 L120 40 Z"/>
           </g>
@@ -672,7 +764,12 @@
 
   let isLightMode = false;
   let isAdminLoggedIn = false;
-  const ADMIN_PASS = "if?nomore";
+  let currentAdminPass = "if?nomore"; // Default Pass
+
+  // Fetch Saved Password from Firebase if available
+  db.ref('settings/adminPass').on('value', snapshot => {
+    if(snapshot.val()) currentAdminPass = snapshot.val();
+  });
 
   // MUSIC AUTOPLAY
   const audio = document.getElementById("bgm");
@@ -786,11 +883,13 @@
     });
   };
 
-  // ADMIN LOGIN SYSTEM
+  // ADMIN LOGIN & SCARY ERROR SYSTEM
   function openAdmin() {
     if(isAdminLoggedIn) {
       document.getElementById('adminPanel').style.display = 'block';
     } else {
+      document.getElementById('scaryError').style.display = 'none';
+      document.getElementById('hackerCard').classList.remove('shake');
       document.getElementById('adminLoginPopup').style.display = 'flex';
       document.getElementById('adminPass').focus();
     }
@@ -803,19 +902,85 @@
 
   function checkAdmin() {
     const pass = document.getElementById('adminPass').value;
-    if (pass === ADMIN_PASS) {
+    const card = document.getElementById('hackerCard');
+    const err = document.getElementById('scaryError');
+
+    if (pass === currentAdminPass) {
       isAdminLoggedIn = true;
       document.getElementById('adminLoginPopup').style.display = 'none';
       document.getElementById('adminPanel').style.display = 'block';
       document.getElementById('adminPass').value = '';
+      err.style.display = 'none';
+      card.classList.remove('shake');
       Swal.fire({
-        title: 'Access Granted!',
+        title: 'ACCESS GRANTED!',
+        text: 'Welcome Master Siyam',
         icon: 'success',
-        timer: 1000,
-        showConfirmButton: false
+        timer: 1200,
+        showConfirmButton: false,
+        background: '#030a16',
+        color: '#00ff88'
       });
     } else {
-      Swal.fire('Error!', 'Incorrect Password', 'error');
+      // SCARY ERROR ANIMATION
+      err.style.display = 'block';
+      card.classList.remove('shake');
+      void card.offsetWidth; // trigger reflow
+      card.classList.add('shake');
+      document.getElementById('adminPass').value = '';
+    }
+  }
+
+  // RECOVERY SYSTEM
+  function openRecovery() {
+    closeAdminPopup();
+    document.getElementById('recoveryPopup').style.display = 'flex';
+  }
+
+  function closeRecovery() {
+    document.getElementById('recoveryPopup').style.display = 'none';
+    document.getElementById('ans1').value = '';
+    document.getElementById('ans2').value = '';
+  }
+
+  function verifyRecovery() {
+    const a1 = document.getElementById('ans1').value.trim();
+    const a2 = document.getElementById('ans2').value.trim();
+
+    // Check security keys
+    if (a1 === "Guido van Rossum" && a2 === "yes") {
+      closeRecovery();
+      Swal.fire({
+        title: 'SECURITY CLEARANCE PASSED!',
+        text: 'Enter your NEW Admin Password:',
+        input: 'password',
+        inputPlaceholder: 'New Password...',
+        showCancelButton: true,
+        confirmButtonText: 'SET NEW PASSWORD',
+        background: '#030a16',
+        color: '#00ff88',
+        confirmButtonColor: '#00ff88'
+      }).then((result) => {
+        if (result.isConfirmed && result.value) {
+          currentAdminPass = result.value;
+          db.ref('settings/adminPass').set(currentAdminPass);
+          Swal.fire({
+            title: 'SUCCESS!',
+            text: 'Password updated successfully!',
+            icon: 'success',
+            background: '#030a16',
+            color: '#00ff88'
+          });
+        }
+      });
+    } else {
+      Swal.fire({
+        title: 'VERIFICATION FAILED!',
+        text: 'Wrong Security Answers! Access Denied.',
+        icon: 'error',
+        background: '#030a16',
+        color: '#ff0055'
+      });
     }
   }
 
