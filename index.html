@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title> Sheikh Prince | ELITE LEGENDARY</title>
+<title> IBNA SIYAM 092| ELITE LEGENDARY</title>
 
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
@@ -234,8 +234,8 @@ input::placeholder {
     border: 2px solid white;
 }
 
-/* ===== THEME & STORY ICONS ===== */
-.theme,.story{ 
+/* ===== THEME, STORY & MUSIC ICONS ===== */
+.theme,.story,.music-toggle{ 
     position:fixed;
     width:55px;
     height:55px; 
@@ -251,15 +251,16 @@ input::placeholder {
     box-shadow: 0 10px 30px rgba(0, 210, 255, 0.3);
     transition: all 0.3s;
 }
-.theme i, .story i {
+.theme i, .story i, .music-toggle i {
     color: var(--text);
     transition: color 0.4s;
 }
-.theme:hover,.story:hover {
+.theme:hover,.story:hover,.music-toggle:hover {
     transform: scale(1.1);
     box-shadow: 0 15px 40px rgba(0, 210, 255, 0.5);
 }
 .theme{top:20px;right:20px;}
+.music-toggle{top:85px;right:20px;}
 .story{bottom:20px;left:20px;background:var(--primary);color:#000;}
 .story i { font-size: 1.3rem; color: #000 !important; }
 
@@ -709,6 +710,33 @@ body.light h1 {
     color: var(--value-color);
 }
 
+/* ===== SKILL PROGRESS BARS ===== */
+.skill-box {
+    text-align: left;
+    margin-bottom: 12px;
+}
+.skill-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--info-border);
+}
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), #008cff);
+    border-radius: 10px;
+    transition: width 1s ease-in-out;
+}
+
 /* ===== MIKASA ===== */
 .mikasa{
     margin-top:25px;
@@ -924,7 +952,7 @@ body.light h1 {
 }
 </style>
 </head>
-<body onclick="playMusic()">
+<body>
 
 <!-- Rain Canvas -->
 <canvas class="rain-canvas" id="rainCanvas"></canvas>
@@ -937,9 +965,9 @@ body.light h1 {
 
 <!-- Name Popup -->
 <div id="namePopup">
-    <div class="popup-car
-        <h2 style="color:var(--primary); font-weight:900; font-size: 2rem;">👑 WELCOME TO PRINCE VIRUS👑</h2>
-        <p style="margin: 15px 0; opacity: 0.8; font-size: 0.9rem; color: var(--text);">Enter your name to join the Prince Elite family</p>
+    <div class="popup-card">
+        <h2 style="color:var(--primary); font-weight:900; font-size: 2rem;">👑 WELCOME TO SIYAM VIRUS👑</h2>
+        <p style="margin: 15px 0; opacity: 0.8; font-size: 0.9rem; color: var(--text);">Enter your name to join the siyam Elite family</p>
         <input type="text" id="userNameInput" placeholder="Your legendary name...">
         <button onclick="saveName()" style="background:linear-gradient(135deg, var(--primary), #008cff); border:none; padding:15px; border-radius:15px; font-weight:900; cursor:pointer; width:100%; font-size:1rem; margin-top:10px; color:#000;">ENTER ELITE WORLD</button>
     </div>
@@ -962,7 +990,7 @@ body.light h1 {
         <div class="admin-header">
             <div>
                 <h2 style="color:var(--primary); font-weight:900; font-size: 1.8rem; margin:0;">
-                    <i class="fas fa-crown"></i> PRINCE VAI ELITE CONTROL CENTER
+                    <i class="fas fa-crown"></i> SIYAM VAI ELITE CONTROL CENTER
                 </h2>
                 <p style="opacity: 0.8; font-size: 0.9rem; margin-top: 5px; color: var(--text);">Welcome, <span id="adminName" style="color:var(--primary); font-weight:700;">Super Admin</span></p>
             </div>
@@ -1112,7 +1140,7 @@ body.light h1 {
                 <h3><i class="fas fa-edit"></i> Edit Profile Content</h3>
                 <div class="form-group">
                     <label>Full Name</label>
-                    <input type="text" id="editName" value="SHEIKH PRINCE" style="margin:0 0 20px 0;">
+                    <input type="text" id="editName" value="MOHAMMED IBNA SIYAM" style="margin:0 0 20px 0;">
                 </div>
                 <div class="form-group">
                     <label>Title/Badge</label>
@@ -1124,7 +1152,7 @@ body.light h1 {
                 </div>
                 <div class="form-group">
                     <label>Avatar URL</label>
-                    <input type="text" id="editAvatar" value="https://imgur.com/a/lMcd5eO" style="margin:0 0 20px 0;">
+                    <input type="text" id="editAvatar" value="https://i.imgur.com/LwcC7pq.jpeg" style="margin:0 0 20px 0;">
                 </div>
                 <div class="form-group">
                     <label>Mikasa Image URL</label>
@@ -1190,6 +1218,9 @@ body.light h1 {
 <div class="theme" onclick="toggleTheme()">
     <i id="icon" class="fas fa-moon"></i>
 </div>
+<div class="music-toggle" onclick="toggleMusic()">
+    <i id="musicIcon" class="fas fa-music"></i>
+</div>
 <div class="story" onclick="toggleStory()">
     <i class="fas fa-book-open"></i>
 </div>
@@ -1208,21 +1239,41 @@ body.light h1 {
 <div class="wrap">
 <div class="card">
     <div class="avatarBox"><img src="https://i.imgur.com/LwcC7pq.jpeg" class="avatar" id="mainAvatar"></div>
-    <h1 id="userGreeting">SHEIKH PRINCE</h1>
+    <h1 id="userGreeting">MOHAMMAD IBNA SIYAM</h1>
     <div class="profile-badge" id="profileBadge"> who iam you have no idea its acs leader 🚩</div>
     
-    <p style="font-style: italic; font-size: 0.8rem; opacity: 0.9; margin-bottom: 20px; padding: 0 20px; color: var(--text);" id="profileQuote">
-        "The Code Ruler leader Prince - is here !! ."
+    <p style="font-style: italic; font-size: 0.8rem; opacity: 0.9; margin-bottom: 20px; padding: 0 20px; color: var(--text); min-height: 24px;" id="profileQuote">
+        <!-- Typing Animation Text Here -->
     </p>
 
     <div class="section-title">Personal Profile</div>
     <div class="grid">
-        <div class="info"><i class="fas fa-user-tag"></i><span class="label">Nickname</span><span class="value">Prince</span></div>
-        <div class="info"><i class="fas fa-cake-candles"></i><span class="label">Birthday</span><span class="value">12 January</span></div>
-        <div class="info"><i class="fas fa-briefcase"></i><span class="label">Status</span><span class="value"> Chief Cyber Security Officer -</div>
-        <div class="info"><i class="fas fa-code"></i><span class="label">Skills</span><span class="value">Html-css-java-python-Prolog-C++ - </span></div>
-        <div class="info"><i class="fas fa-house"></i><span class="label">Home Town</span><span class="value">Comilla, Chandpur</span></div>
-        <div class="info"><i class="fas fa-location-dot"></i><span class="label">Current</span><span class="value"> Chandpur</span></div>
+        <div class="info"><i class="fas fa-user-tag"></i><span class="label">Nickname</span><span class="value">Siyam</span></div>
+        <div class="info"><i class="fas fa-cake-candles"></i><span class="label">Birthday</span><span class="value">21 September</span></div>
+        <div class="info"><i class="fas fa-briefcase"></i><span class="label">Status</span><span class="value"> Chief Cyber Security Officer</span></div>
+        <div class="info"><i class="fas fa-house"></i><span class="label">Home Town</span><span class="value">Satkhira, parulia</span></div>
+        <div class="info" style="grid-column: span 2;"><i class="fas fa-location-dot"></i><span class="label">Current</span><span class="value"> Satkhira</span></div>
+    </div>
+
+    <!-- TECH SKILLS PROGRESS BARS -->
+    <div class="section-title">Technical Skills</div>
+    <div class="skills-container">
+        <div class="skill-box">
+            <div class="skill-info"><span>HTML & CSS</span><span>95%</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width: 95%;"></div></div>
+        </div>
+        <div class="skill-box">
+            <div class="skill-info"><span>Python</span><span>88%</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width: 88%;"></div></div>
+        </div>
+        <div class="skill-box">
+            <div class="skill-info"><span>C++ / Java</span><span>82%</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width: 82%;"></div></div>
+        </div>
+        <div class="skill-box">
+            <div class="skill-info"><span>Cyber Security & Prolog</span><span>90%</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width: 90%;"></div></div>
+        </div>
     </div>
 
     <div class="section-title">ACS WORLD </div>
@@ -1235,7 +1286,7 @@ body.light h1 {
             </div>
         </div>
         <p> If you need any help, join the ACS Help Center. May everyone's online world be safe..</p>
-        <a href="https://m.me/ACS.LEADER.OF.HACKER/?send_source=gc%3Acopy_invite_link_c" target="_blank" 
+        <a href="https://m.me/j/AbYv6QQWn84E6Mg0/?send_source=gc%3Acopy_invite_link_c" target="_blank" 
            style="display:inline-block; margin-top:15px; background:linear-gradient(135deg, var(--primary), #008cff); color:#000; padding:10px 20px; border-radius:12px; text-decoration:none; font-weight:900; font-size:0.8rem; transition: all 0.3s;">
            <i class="fab fa-facebook-messenger"></i> JOIN ATTACK WORLD 
         </a>
@@ -1252,16 +1303,24 @@ body.light h1 {
         <div id="dlResult" style="margin-top:15px;"></div>
     </div>
 
+    <!-- QUICK MESSAGE BOX -->
+    <div class="section-title">Send Direct Message</div>
+    <div style="background: var(--dl-bg); padding: 20px; border-radius: 20px; border: 1px solid var(--info-border);">
+        <textarea id="quickMsgInput" rows="3" placeholder="Write your message anonymously..." style="margin-bottom: 10px;"></textarea>
+        <button class="dl-btn" onclick="sendQuickMessage()" style="padding: 10px;">
+            <i class="fas fa-paper-plane"></i> Send Message
+        </button>
+    </div>
+
     <div class="section-title">Connect With Me</div>
     <div class="social">
         <a class="fb" href="https://www.facebook.com/profile.php?id=" target="_blank" title="Facebook">
             <i class="fab fa-facebook-f"></i>
         </a>
-        <a class="wa" href="https://wa.me/qr/VRFELVBQLJTJG1" target="_blank" title="WhatsApp">
+        <a class="wa" href="https://wa.me/8801940984562" target="_blank" title="WhatsApp">
             <i class="fab fa-whatsapp"></i>
         </a>
-        </a>
-        <a class="mail" href="mailto: ismailhridoy8241@gmail.com" title="Email">
+        <a class="mail" href="mailto: siyamvailostking00@outlook.com" title="Email">
             <i class="fas fa-envelope"></i>
         </a>
     </div>
@@ -1277,7 +1336,7 @@ body.light h1 {
     <div class="footer" onclick="openAdmin()" style="cursor:pointer;" 
          onmouseover="this.style.opacity='1'; this.style.borderColor='var(--primary)';" 
          onmouseout="this.style.opacity='0.6'; this.style.borderColor='var(--footer-border)';">
-        <i class="fas fa-anchor"></i> THE CODE RULER SHEIKH PRINCE 🚩 <i class="fas fa-crown"></i>
+        <i class="fas fa-anchor"></i> THR GAME RULER IBNA SIYAM 🚩 <i class="fas fa-crown"></i>
     </div>
 </div>
 </div>
@@ -1286,8 +1345,8 @@ body.light h1 {
 <script>
 // --- CONFIGURATION ---
 const ADMIN_CREDENTIALS = {
-    email: "ismailhridoy8241@gmail.com",
-    password: "hridoy8241!!"
+    email: "siyamvailostking00@outlook.com",
+    password: "duble??"
 };
 
 const firebaseConfig = {
@@ -1338,7 +1397,6 @@ function initRain() {
 }
 
 function animateRain() {
-    // Clear with background gradient
     if (isLightMode) {
         const grad = rainCtx.createLinearGradient(0, 0, 0, rainCanvas.height);
         grad.addColorStop(0, '#dce9f5');
@@ -1352,7 +1410,6 @@ function animateRain() {
     }
     rainCtx.fillRect(0, 0, rainCanvas.width, rainCanvas.height);
 
-    // Draw drops
     for (let i = 0; i < drops.length; i++) {
         const d = drops[i];
         rainCtx.beginPath();
@@ -1368,18 +1425,15 @@ function animateRain() {
         }
         rainCtx.stroke();
 
-        // Move drop
         d.y += d.speed;
         d.x -= 0.5;
 
-        // Reset when out of screen
         if (d.y > rainCanvas.height) {
             d.y = -d.len;
             d.x = Math.random() * rainCanvas.width;
         }
     }
 
-    // Splash effect occasionally
     if (Math.random() < 0.05) {
         const sx = Math.random() * rainCanvas.width;
         rainCtx.beginPath();
@@ -1415,11 +1469,24 @@ function createParticles() {
     }
 }
 
+// ===== TYPING ANIMATION =====
+const quoteText = '" THE game changer leader siyam - is here !! ."';
+let charIndex = 0;
+function typeQuote() {
+    const quoteElement = document.getElementById('profileQuote');
+    if (charIndex < quoteText.length) {
+        quoteElement.innerHTML += quoteText.charAt(charIndex);
+        charIndex++;
+        setTimeout(typeQuote, 60);
+    }
+}
+
 // ===== INIT =====
 window.onload = function() {
     createParticles();
     loadVisitorCount();
     checkExistingUser();
+    typeQuote();
     setInterval(updateAdminBadge, 30000);
 };
 
@@ -1443,7 +1510,6 @@ function checkExistingUser() {
         }, 1000);
     } else {
         currentUser = savedName;
-        //document.getElementById('userGreeting').innerText = savedName;
         logUserActivity(savedName, 'login');
         updateUserPresence(savedName);
     }
@@ -1454,14 +1520,29 @@ function saveName() {
     if (nameInput && nameInput.length >= 2) {
         localStorage.setItem('saifUser', nameInput);
         currentUser = nameInput;
-        //document.getElementById('userGreeting').innerText = nameInput;
         document.getElementById('namePopup').style.display = 'none';
         logUserActivity(nameInput, 'register');
         updateUserPresence(nameInput);
-        showNotification(`👋 Welcome ${nameInput}! You're now part of Prince Elite.`);
+        showNotification(`👋 Welcome ${nameInput}! You're now part of siyam Elite.`);
     } else {
         showNotification('⚠️ Please enter a valid name (min 2 characters)');
     }
+}
+
+// ===== QUICK MESSAGE =====
+function sendQuickMessage() {
+    const msg = document.getElementById('quickMsgInput').value.trim();
+    if (!msg) {
+        showNotification('⚠️ Please write a message first!', 'error');
+        return;
+    }
+    db.ref('messages/').push({
+        user: currentUser || 'Anonymous',
+        message: msg,
+        timestamp: new Date().toISOString()
+    });
+    document.getElementById('quickMsgInput').value = '';
+    showNotification('✅ Message sent to Siyam!', 'success');
 }
 
 // ===== ADMIN =====
@@ -1868,12 +1949,20 @@ function toggleStory() {
     }
 }
 
-// ===== MUSIC =====
-function playMusic() { 
+// ===== MUSIC CONTROL =====
+function toggleMusic() { 
     const audio = document.getElementById("bgm"); 
+    const musicIcon = document.getElementById("musicIcon");
     if (audio.paused) {
         audio.volume = 0.3;
-        audio.play().catch(e => console.log("Autoplay prevented:", e));
+        audio.play().then(() => {
+            musicIcon.className = "fas fa-volume-up";
+            showNotification("🎵 Background music playing");
+        }).catch(e => console.log("Autoplay prevented:", e));
+    } else {
+        audio.pause();
+        musicIcon.className = "fas fa-music";
+        showNotification("🔇 Background music paused");
     }
 }
 
@@ -2168,10 +2257,6 @@ function openManualDownload(url) {
     `);
 }
 
-// ===== EVENT LISTENERS =====
-document.addEventListener('click', playMusic);
-document.addEventListener('touchstart', playMusic);
-
 setInterval(() => {
     if (isAdminLoggedIn && adminSession) {
         localStorage.setItem('adminSession', JSON.stringify(adminSession));
@@ -2188,4 +2273,4 @@ window.addEventListener('beforeunload', () => {
 });
 </script>
 </body>
-            </html>
+</html>
