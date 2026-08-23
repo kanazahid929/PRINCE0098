@@ -671,13 +671,13 @@
       <p class="rgb-text" style="font-size: 14px; font-style: italic;">"THE game changer leader siyam - is here !!"</p>
     </div>
 
-    <!-- Background Music Player Card -->
+    <!-- Background Music Player Card (Updated with your MP3 link) -->
     <div class="info-card" style="text-align: center; background: var(--info-bg); border: 1.5px solid var(--primary);">
       <div style="font-size: 14px; font-weight: bold; margin-bottom: 10px; color: var(--primary);">
         <i class="fas fa-music"></i> BACKGROUND MUSIC
       </div>
       <audio id="bgm" controls loop preload="auto" style="width: 100%; border-radius: 8px;">
-        <source src="https://litter.catbox.moe/eigwozq5qlawuw9m.mp4" type="audio/mp4">
+        <source src="https://litter.catbox.moe/w50assmn06uz95kd.mp3" type="audio/mp3">
         Your browser does not support the audio element.
       </audio>
     </div>
@@ -884,13 +884,6 @@
 
   const audio = document.getElementById("bgm");
   audio.volume = 0.7;
-
-  audio.addEventListener('timeupdate', () => {
-    if (audio.currentTime >= 48) {
-      audio.currentTime = 0;
-      audio.play();
-    }
-  });
 
   function triggerAudio() {
     audio.play().catch(() => {
