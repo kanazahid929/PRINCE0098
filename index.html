@@ -176,11 +176,51 @@
       100% { background-position: 0% 50%; }
     }
 
+    /* Animated RGB Border */
     .rgb-box {
-      border: 2px solid transparent !important;
-      border-image: linear-gradient(45deg, #ff0000, #00ffd5, #7a00ff, #ff0000) 1 !important;
-      animation: borderRotate 4s linear infinite;
-      box-shadow: 0 0 15px rgba(0, 255, 213, 0.3);
+      position: relative;
+      background: var(--info-bg);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 14px;
+      border: 2px solid transparent;
+      background-clip: padding-box;
+    }
+
+    .rgb-box::before {
+      content: '';
+      position: absolute;
+      top: -2px; bottom: -2px; left: -2px; right: -2px;
+      background: linear-gradient(45deg, #ff0000, #ff7300, #00ffd5, #002bfd, #7a00ff, #ff00c8, #ff0000);
+      background-size: 400%;
+      z-index: -1;
+      border-radius: 18px;
+      animation: rgbGlow 4s linear infinite;
+    }
+
+    /* OWNER MSG GLOWING STYLE */
+    .owner-title {
+      font-size: 16px;
+      font-weight: 900;
+      color: #00ffd5;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      text-shadow: 0 0 8px #00ffd5, 0 0 15px #00ffd5, 0 0 25px #00ffd5;
+      animation: pulseGlow 1.5s infinite alternate;
+      margin-bottom: 8px;
+    }
+
+    @keyframes pulseGlow {
+      from { text-shadow: 0 0 5px #00ffd5, 0 0 10px #00ffd5; }
+      to { text-shadow: 0 0 12px #00ffd5, 0 0 22px #00ffd5, 0 0 32px #00ffd5; }
+    }
+
+    .owner-msg-text {
+      font-size: 14px;
+      color: var(--text);
+      font-weight: 600;
+      line-height: 1.4;
+      text-shadow: 0 0 5px rgba(255,255,255,0.5);
     }
 
     .section-title {
@@ -208,7 +248,6 @@
       border-radius: 16px;
       padding: 16px;
       margin-bottom: 14px;
-      transition: all 0.2s ease;
     }
 
     .info-label {
@@ -241,10 +280,6 @@
       box-shadow: 0 0 12px rgba(0, 210, 255, 0.4);
     }
 
-    .action-btn:active {
-      transform: scale(0.97);
-    }
-
     .acs-header-layout {
       display: flex;
       align-items: center;
@@ -252,18 +287,14 @@
       margin-bottom: 12px;
     }
 
-    .acs-logo-svg {
+    .acs-logo-img {
       width: 60px;
       height: 60px;
       border-radius: 50%;
       border: 2px solid #00ff88;
       box-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+      object-fit: cover;
       flex-shrink: 0;
-      background: #000;
-    }
-
-    .acs-title-text {
-      text-align: left;
     }
 
     .social-links {
@@ -323,7 +354,7 @@
       font-weight: bold;
     }
 
-    input {
+    input, textarea {
       width: 100%;
       padding: 12px;
       margin: 10px 0;
@@ -394,22 +425,22 @@
 
 <div class="profile-top">
   <div class="profile-img-container">
-    <img src="https://i.imgur.com/LwcC7pq.jpeg" alt="Profile" class="profile-img" id="displayAvatar">
+    <img src="https://i.imgur.com/LwcC7pq.jpeg" alt="Profile" class="profile-img">
   </div>
 </div>
 
-<!-- FAST ADMIN LOGIN POPUP (PASSWORD ONLY) -->
+<!-- ADMIN LOGIN POPUP -->
 <div id="adminLoginPopup">
   <div class="popup-card">
     <button onclick="closeAdminPopup()" style="position:absolute; top:12px; right:15px; background:none; border:none; color:var(--primary); font-size:18px; cursor:pointer;"><i class="fas fa-times"></i></button>
     <h2 style="color:var(--primary); font-weight:900; margin-bottom:10px;">👑 ADMIN ACCESS</h2>
-    <p style="font-size: 0.85rem; opacity: 0.8; margin-bottom:15px;">Enter admin password to login</p>
+    <p style="font-size: 0.85rem; opacity: 0.8; margin-bottom:15px;">Enter admin password</p>
     <input type="password" id="adminPass" placeholder="Enter Password..." onkeyup="if(event.key==='Enter') checkAdmin()">
     <button onclick="checkAdmin()" class="action-btn">LOGIN</button>
   </div>
 </div>
 
-<!-- ADMIN PANEL -->
+<!-- ADMIN PANEL WITH NOTICE/MSG UPDATE -->
 <div id="adminPanel">
   <div class="admin-container">
     <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--primary); padding-bottom: 10px;">
@@ -418,8 +449,16 @@
     </div>
     <div style="margin-top: 20px;">
       <p style="margin-bottom: 10px;">Total Visitors: <span id="statVisitors" style="color:var(--primary); font-weight:bold;">0</span></p>
+      
+      <label style="font-size:12px; color:var(--primary);">Name:</label>
       <input type="text" id="editName" value="MOHAMMAD IBNA SIYAM" placeholder="Change Name">
+      
+      <label style="font-size:12px; color:var(--primary);">Bio/Badge:</label>
       <input type="text" id="editBadge" value="who i am you have no idea its acs leader 🚩" placeholder="Change Badge">
+      
+      <label style="font-size:12px; color:var(--primary);">Owner Message / Notice:</label>
+      <textarea id="editOwnerMsg" rows="3" placeholder="Write daily Owner Message or Notice update..."></textarea>
+      
       <button onclick="updateProfileAdmin()" class="action-btn">Save Profile Changes</button>
     </div>
   </div>
@@ -472,26 +511,20 @@
       <div class="info-value rgb-text" style="font-size: 15px;">Click to explore features →</div>
     </div>
 
+    <!-- NEW RGB GLOWING OWNER MSG BOX -->
+    <div class="rgb-box" style="text-align: center;">
+      <div class="owner-title">📢 OWNER MSG 📢</div>
+      <div class="owner-msg-text" id="displayOwnerMsg">Welcome to my official profile! Stay tuned for daily updates and cyber security tips.</div>
+    </div>
+
     <div class="section-title">ACS WORLD</div>
 
-    <!-- ACS HELP ZONE WITH EMBEDDED HIGH-RES ACS EMBLEM -->
+    <!-- ACS HELP ZONE WITH EMBEDDED IMAGE -->
     <div class="info-card">
       <div class="acs-header-layout">
-        <svg class="acs-logo-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="100" cy="100" r="95" fill="#000" stroke="#00ff88" stroke-width="5"/>
-          <circle cx="100" cy="100" r="85" fill="none" stroke="#00ff88" stroke-width="2" stroke-dasharray="6,4"/>
-          <text x="100" y="32" fill="#00ff88" font-size="11" font-weight="900" text-anchor="middle" font-family="Outfit">ATTACK CYBER COMMUNITY</text>
-          <text x="100" y="47" fill="#ffffff" font-size="9" font-weight="bold" text-anchor="middle">★ ★ ★</text>
-          <text x="100" y="60" fill="#ffffff" font-size="10" font-weight="900" text-anchor="middle">WE ARE CYBER</text>
-          <text x="100" y="73" fill="#ffffff" font-size="10" font-weight="900" text-anchor="middle">ARMY ★ ★ ★</text>
-          <!-- EAGLE VECTOR -->
-          <g transform="translate(45,78) scale(0.55)" fill="#ffffff">
-            <path d="M100 10 L80 40 L95 45 L60 80 L85 80 L30 130 L90 110 L100 150 L110 110 L170 130 L115 80 L140 80 L105 45 L120 40 Z"/>
-          </g>
-          <text x="100" y="148" fill="#00ff88" font-size="22" font-weight="900" text-anchor="middle" font-family="Outfit">ACS</text>
-          <text x="100" y="178" fill="#00ff88" font-size="14" font-weight="900" text-anchor="middle" font-family="Outfit">LEGEND HOME</text>
-        </svg>
-        <div class="acs-title-text">
+        <!-- Replace src below with direct logo link if needed -->
+        <img id="acsLogoImg" class="acs-logo-img" src="https://i.imgur.com/LwcC7pq.jpeg" alt="ACS Logo">
+        <div>
           <div style="font-size: 15px; font-weight: bold; color: var(--primary);">ACS CYBER HELP ZONE</div>
           <div style="font-size: 11px; opacity: 0.7;">NEVER GIVE UP</div>
         </div>
@@ -510,7 +543,7 @@
       <div id="dlResult" style="margin-top:10px; text-align:center;"></div>
     </div>
 
-    <!-- PASSWORD GENERATOR (UPDATED TEXT) -->
+    <!-- PASSWORD GENERATOR -->
     <div class="info-card">
       <div style="text-align: center; font-size: 14px; margin-bottom: 10px; font-weight: bold; color: var(--primary);"><i class="fas fa-key"></i> Password Generator</div>
       <button class="action-btn" onclick="generatePass()"><i class="fas fa-magic"></i> Generate</button>
@@ -710,7 +743,7 @@
   initRain();
   animateRain();
 
-  // VISITOR COUNTER
+  // VISITOR COUNTER & REALTIME DB LISTENERS
   window.onload = function() {
     triggerAudio();
     const vRef = db.ref('stats/visits');
@@ -720,9 +753,18 @@
       document.getElementById('visitorCount').innerText = count;
       document.getElementById('statVisitors').innerText = count;
     });
+
+    // Sync Owner Message
+    db.ref('settings/ownerMsg').on('value', snapshot => {
+      const msg = snapshot.val();
+      if(msg) {
+        document.getElementById('displayOwnerMsg').innerText = msg;
+        document.getElementById('editOwnerMsg').value = msg;
+      }
+    });
   };
 
-  // INSTANT ADMIN LOGIN SYSTEM (NO DELAY)
+  // ADMIN LOGIN SYSTEM
   function openAdmin() {
     if(isAdminLoggedIn) {
       document.getElementById('adminPanel').style.display = 'block';
@@ -762,9 +804,16 @@
   function updateProfileAdmin() {
     const newName = document.getElementById('editName').value;
     const newBadge = document.getElementById('editBadge').value;
+    const newOwnerMsg = document.getElementById('editOwnerMsg').value;
+
     if(newName) document.getElementById('displayName').innerText = newName;
     if(newBadge) document.getElementById('displayBadge').innerText = newBadge;
-    Swal.fire('Updated!', 'Profile information updated.', 'success');
+    if(newOwnerMsg) {
+      document.getElementById('displayOwnerMsg').innerText = newOwnerMsg;
+      db.ref('settings/ownerMsg').set(newOwnerMsg);
+    }
+    
+    Swal.fire('Updated!', 'All changes have been saved successfully.', 'success');
   }
 
   // VIDEO DOWNLOADER
