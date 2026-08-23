@@ -245,7 +245,6 @@
       transform: scale(0.97);
     }
 
-    /* ACS HELP ZONE LAYOUT FIXED WITH EXACT ACS LOGO */
     .acs-header-layout {
       display: flex;
       align-items: center;
@@ -253,13 +252,12 @@
       margin-bottom: 12px;
     }
 
-    .acs-logo-img {
+    .acs-logo-svg {
       width: 60px;
       height: 60px;
       border-radius: 50%;
       border: 2px solid #00ff88;
       box-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
-      object-fit: cover;
       flex-shrink: 0;
       background: #000;
     }
@@ -350,13 +348,14 @@
 
     .popup-card {
       background: var(--card-bg);
-      padding: 35px;
+      padding: 30px 25px;
       border-radius: 25px;
       border: 2px solid var(--primary);
       text-align: center;
       width: 90%;
-      max-width: 380px;
+      max-width: 350px;
       box-shadow: 0 10px 40px rgba(0, 210, 255, 0.3);
+      position: relative;
     }
 
     #adminPanel {
@@ -381,7 +380,6 @@
 </head>
 <body>
 
-<!-- FAST DIRECT AUDIO SOURCE -->
 <audio id="bgm" loop preload="auto">
   <source src="https://files.catbox.moe/zitk81.mp4" type="audio/mp4">
   <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73220.mp3" type="audio/mpeg">
@@ -400,14 +398,14 @@
   </div>
 </div>
 
-<!-- ADMIN LOGIN POPUP -->
+<!-- FAST ADMIN LOGIN POPUP (PASSWORD ONLY) -->
 <div id="adminLoginPopup">
   <div class="popup-card">
-    <h2 style="color:var(--primary); font-weight:900;">👑 ADMIN ACCESS</h2>
-    <p style="margin: 10px 0; font-size: 0.85rem; opacity: 0.8;">Enter credentials to open control panel</p>
-    <input type="email" id="adminEmail" placeholder="Admin Email...">
-    <input type="password" id="adminPass" placeholder="Admin Password...">
-    <button onclick="checkAdmin()" class="action-btn">LOGIN TO PANEL</button>
+    <button onclick="closeAdminPopup()" style="position:absolute; top:12px; right:15px; background:none; border:none; color:var(--primary); font-size:18px; cursor:pointer;"><i class="fas fa-times"></i></button>
+    <h2 style="color:var(--primary); font-weight:900; margin-bottom:10px;">👑 ADMIN ACCESS</h2>
+    <p style="font-size: 0.85rem; opacity: 0.8; margin-bottom:15px;">Enter admin password to login</p>
+    <input type="password" id="adminPass" placeholder="Enter Password..." onkeyup="if(event.key==='Enter') checkAdmin()">
+    <button onclick="checkAdmin()" class="action-btn">LOGIN</button>
   </div>
 </div>
 
@@ -476,10 +474,23 @@
 
     <div class="section-title">ACS WORLD</div>
 
-    <!-- ACS HELP ZONE WITH ACS LOGO EMBEDDED -->
+    <!-- ACS HELP ZONE WITH EMBEDDED HIGH-RES ACS EMBLEM -->
     <div class="info-card">
       <div class="acs-header-layout">
-        <img src="https://i.imgur.com/8QZkHNM.jpeg" alt="ACS Cyber Logo" class="acs-logo-img">
+        <svg class="acs-logo-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="100" r="95" fill="#000" stroke="#00ff88" stroke-width="5"/>
+          <circle cx="100" cy="100" r="85" fill="none" stroke="#00ff88" stroke-width="2" stroke-dasharray="6,4"/>
+          <text x="100" y="32" fill="#00ff88" font-size="11" font-weight="900" text-anchor="middle" font-family="Outfit">ATTACK CYBER COMMUNITY</text>
+          <text x="100" y="47" fill="#ffffff" font-size="9" font-weight="bold" text-anchor="middle">★ ★ ★</text>
+          <text x="100" y="60" fill="#ffffff" font-size="10" font-weight="900" text-anchor="middle">WE ARE CYBER</text>
+          <text x="100" y="73" fill="#ffffff" font-size="10" font-weight="900" text-anchor="middle">ARMY ★ ★ ★</text>
+          <!-- EAGLE VECTOR -->
+          <g transform="translate(45,78) scale(0.55)" fill="#ffffff">
+            <path d="M100 10 L80 40 L95 45 L60 80 L85 80 L30 130 L90 110 L100 150 L110 110 L170 130 L115 80 L140 80 L105 45 L120 40 Z"/>
+          </g>
+          <text x="100" y="148" fill="#00ff88" font-size="22" font-weight="900" text-anchor="middle" font-family="Outfit">ACS</text>
+          <text x="100" y="178" fill="#00ff88" font-size="14" font-weight="900" text-anchor="middle" font-family="Outfit">LEGEND HOME</text>
+        </svg>
         <div class="acs-title-text">
           <div style="font-size: 15px; font-weight: bold; color: var(--primary);">ACS CYBER HELP ZONE</div>
           <div style="font-size: 11px; opacity: 0.7;">NEVER GIVE UP</div>
@@ -499,10 +510,10 @@
       <div id="dlResult" style="margin-top:10px; text-align:center;"></div>
     </div>
 
-    <!-- PASSWORD GENERATOR -->
+    <!-- PASSWORD GENERATOR (UPDATED TEXT) -->
     <div class="info-card">
-      <div style="text-align: center; font-size: 14px; margin-bottom: 10px; font-weight: bold; color: var(--primary);"><i class="fas fa-key"></i> Strong Password Generator</div>
-      <button class="action-btn" onclick="generatePass()"><i class="fas fa-magic"></i> Generate Cyber Password</button>
+      <div style="text-align: center; font-size: 14px; margin-bottom: 10px; font-weight: bold; color: var(--primary);"><i class="fas fa-key"></i> Password Generator</div>
+      <button class="action-btn" onclick="generatePass()"><i class="fas fa-magic"></i> Generate</button>
       <input type="text" id="passResult" readonly placeholder="Your Generated Password" style="margin-top: 10px; font-weight: bold; color: var(--primary); font-size: 14px;">
     </div>
 
@@ -530,7 +541,6 @@
     </div>
   </div>
 
-
   <!-- OTHER FEATURES PAGE -->
   <div id="other-page" class="page-view">
     <button class="back-btn" onclick="showPage('main-page')">← Back</button>
@@ -547,7 +557,6 @@
     </div>
   </div>
 
-
   <!-- COMPLAIN PAGE -->
   <div id="complain-page" class="page-view">
     <button class="back-btn" onclick="showPage('other-page')">← Back</button>
@@ -563,7 +572,6 @@
       </a>
     </div>
   </div>
-
 
   <!-- REPORTING PAGE -->
   <div id="reporting-page" class="page-view">
@@ -595,7 +603,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-  // FIREBASE CONFIG & INIT
   const firebaseConfig = {
     apiKey: "AIzaSyAyc3L1EepBzsOIM-gSui09RQpEmf4owf0",
     authDomain: "my-portfolio-a2d90.firebaseapp.com",
@@ -610,15 +617,14 @@
 
   let isLightMode = false;
   let isAdminLoggedIn = false;
-  const ADMIN_CREDENTIALS = { email: "siyamvailostking00@outlook.com", password: "duble??" };
+  const ADMIN_PASS = "if?nomore";
 
-  // MUSIC AUTOPLAY HANDLER (GUARANTEED PLAY)
+  // MUSIC AUTOPLAY
   const audio = document.getElementById("bgm");
   audio.volume = 0.7;
 
   function triggerAudio() {
     audio.play().catch(() => {
-      // Browser autoplay policy bypass on initial screen interaction
       const playNow = () => {
         audio.play();
         ['click', 'touchstart', 'scroll'].forEach(evt => window.removeEventListener(evt, playNow));
@@ -636,14 +642,14 @@
     document.getElementById(pageId).classList.add('active');
   }
 
-  // DAY/NIGHT SWITCH
+  // THEME TOGGLE
   function toggleTheme() {
     document.body.classList.toggle("light");
     isLightMode = document.body.classList.contains("light");
     document.getElementById("themeIcon").className = isLightMode ? "fas fa-sun" : "fas fa-moon";
   }
 
-  // RAIN ANIMATION SYSTEM
+  // RAIN ANIMATION
   const rainCanvas = document.getElementById('rainCanvas');
   const rainCtx = rainCanvas.getContext('2d');
   let drops = [];
@@ -716,25 +722,36 @@
     });
   };
 
-  // ADMIN CONTROLS
+  // INSTANT ADMIN LOGIN SYSTEM (NO DELAY)
   function openAdmin() {
     if(isAdminLoggedIn) {
       document.getElementById('adminPanel').style.display = 'block';
     } else {
       document.getElementById('adminLoginPopup').style.display = 'flex';
+      document.getElementById('adminPass').focus();
     }
   }
 
+  function closeAdminPopup() {
+    document.getElementById('adminLoginPopup').style.display = 'none';
+    document.getElementById('adminPass').value = '';
+  }
+
   function checkAdmin() {
-    const email = document.getElementById('adminEmail').value.trim();
     const pass = document.getElementById('adminPass').value;
-    if (email === ADMIN_CREDENTIALS.email && pass === ADMIN_CREDENTIALS.password) {
+    if (pass === ADMIN_PASS) {
       isAdminLoggedIn = true;
       document.getElementById('adminLoginPopup').style.display = 'none';
       document.getElementById('adminPanel').style.display = 'block';
-      Swal.fire('Welcome!', 'Admin Access Granted', 'success');
+      document.getElementById('adminPass').value = '';
+      Swal.fire({
+        title: 'Access Granted!',
+        icon: 'success',
+        timer: 1000,
+        showConfirmButton: false
+      });
     } else {
-      Swal.fire('Error!', 'Invalid Credentials', 'error');
+      Swal.fire('Error!', 'Incorrect Password', 'error');
     }
   }
 
@@ -747,10 +764,10 @@
     const newBadge = document.getElementById('editBadge').value;
     if(newName) document.getElementById('displayName').innerText = newName;
     if(newBadge) document.getElementById('displayBadge').innerText = newBadge;
-    Swal.fire('Updated!', 'Profile information updated locally.', 'success');
+    Swal.fire('Updated!', 'Profile information updated.', 'success');
   }
 
-  // DOWNLOADER
+  // VIDEO DOWNLOADER
   async function handleDownload() {
     const url = document.getElementById('urlInput').value.trim();
     const resultDiv = document.getElementById('dlResult');
@@ -778,7 +795,7 @@
     }
   }
 
-  // PASSWORD GENERATOR TOOL
+  // PASSWORD GENERATOR
   function generatePass() {
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+#";
     let pass = "";
@@ -788,7 +805,7 @@
     document.getElementById('passResult').value = pass;
   }
 
-  // IP CHECKER TOOL
+  // IP CHECKER
   async function checkMyIP() {
     const infoDiv = document.getElementById('ipDetails');
     infoDiv.style.display = 'block';
