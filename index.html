@@ -10,88 +10,98 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     }
 
     body {
       background-color: #030b15;
-      color: #e1f5fe;
+      color: #ffffff;
       display: flex;
       justify-content: center;
-      padding: 20px 10px;
+      padding: 10px 5px;
     }
 
     .container {
       width: 100%;
-      max-width: 420px;
-      background: #061325;
+      max-width: 450px;
+      background: #040c18;
       border: 2px solid #00d2ff;
-      border-radius: 25px;
-      padding: 20px;
-      box-shadow: 0 0 15px rgba(0, 210, 255, 0.2);
+      border-radius: 30px;
+      padding: 20px 15px;
+      box-shadow: 0 0 25px rgba(0, 210, 255, 0.3);
     }
 
     .header-icons {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 15px;
+      margin-bottom: 20px;
     }
 
-    .crown-btn, .theme-btn {
-      width: 40px;
-      height: 40px;
+    .icon-circle {
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
-      background: #09203f;
-      border: 1px solid #00d2ff;
+      border: 2px solid #00d2ff;
       display: flex;
       align-items: center;
       justify-content: center;
       color: #00d2ff;
+      font-size: 18px;
+      background: rgba(0, 210, 255, 0.05);
       cursor: pointer;
     }
 
     .profile-section {
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
+    }
+
+    .profile-img-container {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 15px;
+      position: relative;
     }
 
     .profile-img {
-      width: 110px;
-      height: 110px;
+      width: 100%;
+      height: 100%;
       border-radius: 50%;
       border: 3px solid #00d2ff;
       box-shadow: 0 0 20px #00d2ff;
-      margin: 0 auto 15px;
       object-fit: cover;
     }
 
     .main-title {
-      font-size: 20px;
-      font-weight: 800;
-      letter-spacing: 1px;
-      color: #e1f5fe;
-      margin-bottom: 8px;
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      color: #ffffff;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      line-height: 1.2;
     }
 
     .badge-btn {
-      background: #09203f;
-      border: 1px solid #00d2ff;
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 11px;
+      background: rgba(0, 210, 255, 0.1);
+      border: 1.5px solid #00d2ff;
+      padding: 8px 18px;
+      border-radius: 25px;
+      font-size: 13px;
       color: #00d2ff;
       display: inline-block;
-      margin-bottom: 8px;
+      margin-bottom: 12px;
+      font-weight: 600;
     }
 
-    /* RGB Text Animation */
+    /* RGB Animated Text */
     .rgb-text {
       background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bfd, #7a00ff, #ff00c8, #ff0000);
       background-size: 400%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      animation: rgbGlow 8s linear infinite;
+      animation: rgbGlow 6s linear infinite;
       font-weight: bold;
     }
 
@@ -101,53 +111,61 @@
       100% { background-position: 0% 50%; }
     }
 
-    /* RGB Border Glow */
+    /* RGB Box Effect */
     .rgb-box {
-      position: relative;
-      background: #081b33 !important;
       border: 2px solid transparent !important;
       border-image: linear-gradient(45deg, #ff0000, #00ffd5, #7a00ff, #ff0000) 1 !important;
       animation: borderRotate 4s linear infinite;
-      box-shadow: 0 0 10px rgba(0, 255, 213, 0.3);
+      box-shadow: 0 0 15px rgba(0, 255, 213, 0.4);
     }
 
     .section-title {
-      font-size: 13px;
-      font-weight: 700;
+      font-size: 15px;
+      font-weight: 800;
       color: #00d2ff;
-      margin: 20px 0 10px;
+      margin: 25px 0 15px;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
+      letter-spacing: 1px;
     }
 
     .section-title::before {
       content: '';
       width: 4px;
-      height: 14px;
+      height: 18px;
       background: #00d2ff;
     }
 
+    /* Original Touch/Glow Cards */
     .info-card {
-      background: #081b33;
-      border: 1px solid #0e355c;
-      border-radius: 12px;
-      padding: 12px;
-      margin-bottom: 10px;
+      background: #06182e;
+      border: 1.5px solid #00a8ff;
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 14px;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .info-card:active {
+      transform: scale(0.98);
+      box-shadow: 0 0 20px #00d2ff;
+      border-color: #00ffd5;
     }
 
     .info-label {
-      font-size: 10px;
-      color: #6282a5;
-      margin-bottom: 4px;
+      font-size: 12px;
+      color: #7d9bbd;
+      margin-bottom: 6px;
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 8px;
     }
 
     .info-value {
-      font-size: 13px;
-      font-weight: 600;
+      font-size: 16px;
+      font-weight: 700;
       color: #ffffff;
     }
 
@@ -156,32 +174,37 @@
       background: #00a8ff;
       border: none;
       color: #fff;
-      padding: 10px;
-      border-radius: 20px;
+      padding: 12px;
+      border-radius: 25px;
       font-weight: bold;
-      font-size: 12px;
+      font-size: 13px;
       cursor: pointer;
-      margin-top: 8px;
-      box-shadow: 0 0 10px rgba(0, 168, 255, 0.4);
+      margin-top: 10px;
+      box-shadow: 0 0 12px rgba(0, 168, 255, 0.5);
+    }
+
+    .action-btn:active {
+      transform: scale(0.97);
+      background: #00d2ff;
     }
 
     .social-links {
       display: flex;
-      gap: 10px;
+      gap: 12px;
       justify-content: center;
-      margin-top: 15px;
+      margin-top: 20px;
     }
 
     .social-icon {
-      width: 45px;
-      height: 35px;
-      border-radius: 8px;
+      width: 55px;
+      height: 42px;
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: white;
       text-decoration: none;
-      font-size: 16px;
+      font-size: 18px;
     }
 
     .fb { background: #1877f2; }
@@ -189,23 +212,24 @@
     .mail { background: #ea4335; }
 
     .counter-box {
-      background: #081b33;
-      border: 1px solid #00d2ff;
-      border-radius: 12px;
-      padding: 12px;
+      background: #06182e;
+      border: 1.5px solid #00d2ff;
+      border-radius: 16px;
+      padding: 15px;
       text-align: center;
-      margin-top: 15px;
+      margin-top: 20px;
       font-weight: bold;
+      font-size: 14px;
     }
 
     .footer-text {
       text-align: center;
-      font-size: 11px;
-      margin-top: 15px;
-      color: #6282a5;
+      font-size: 12px;
+      margin-top: 20px;
+      color: #7d9bbd;
+      font-weight: bold;
     }
 
-    /* Modals / Pages */
     .page-view {
       display: none;
     }
@@ -215,14 +239,15 @@
     }
 
     .back-btn {
-      background: #09203f;
+      background: rgba(0, 210, 255, 0.1);
       color: #00d2ff;
-      border: 1px solid #00d2ff;
-      padding: 6px 12px;
-      border-radius: 8px;
+      border: 1.5px solid #00d2ff;
+      padding: 8px 16px;
+      border-radius: 10px;
       cursor: pointer;
-      margin-bottom: 15px;
-      font-size: 12px;
+      margin-bottom: 20px;
+      font-size: 13px;
+      font-weight: bold;
     }
   </style>
 </head>
@@ -233,22 +258,24 @@
   <!-- MAIN PAGE VIEW -->
   <div id="main-page" class="page-view active">
     <div class="header-icons">
-      <div class="crown-btn"><i class="fas fa-crown"></i></div>
-      <div class="theme-btn"><i class="fas fa-moon"></i></div>
+      <div class="icon-circle"><i class="fas fa-crown"></i></div>
+      <div class="icon-circle"><i class="fas fa-moon"></i></div>
     </div>
 
     <div class="profile-section">
-      <img src="https://via.placeholder.com/150" alt="Profile" class="profile-img">
-      <h2 class="main-title">MOHAMMAD IBNA SIYAM</h2>
-      <div class="badge-btn">who i am you have no idea its ace leader 🚩</div>
-      <p class="rgb-text" style="font-size: 12px; font-style: italic;">"THE game changer leader siyam - is here !!"</p>
+      <div class="profile-img-container">
+        <img src="https://via.placeholder.com/150" alt="Profile" class="profile-img">
+      </div>
+      <h1 class="main-title">MOHAMMAD IBNA SIYAM</h1>
+      <div class="badge-btn">who i am you have no idea its acs leader 🚩</div>
+      <p class="rgb-text" style="font-size: 14px; font-style: italic;">"THE game changer leader siyam - is here !!"</p>
     </div>
 
     <div class="section-title">PERSONAL PROFILE</div>
 
     <div class="info-card">
       <div class="info-label"><i class="fas fa-user"></i> Nickname</div>
-      <div class="info-value rgb-text">IBNA SIYAM</div>
+      <div class="info-value rgb-text" style="font-size: 18px;">IBNA SIYAM</div>
     </div>
 
     <div class="info-card">
@@ -258,17 +285,17 @@
 
     <div class="info-card">
       <div class="info-label"><i class="fas fa-briefcase"></i> Status</div>
-      <div class="info-value">Chief Cyber Security Officer ..</div>
+      <div class="info-value">Chief Cyber Security Officer -</div>
     </div>
 
     <div class="info-card">
       <div class="info-label"><i class="fas fa-code"></i> Skills</div>
-      <div class="info-value">Java-Python-Prolog-C++ ..</div>
+      <div class="info-value">Html-css-java-python-Prolog-C++ -</div>
     </div>
 
     <div class="info-card">
-      <div class="info-label"><i class="fas fa-map-marker-alt"></i> Home</div>
-      <div class="info-value">Satkhira, Parulia</div>
+      <div class="info-label"><i class="fas fa-home"></i> Home Town</div>
+      <div class="info-value">Satkhira, parulia</div>
     </div>
 
     <div class="info-card">
@@ -276,25 +303,25 @@
       <div class="info-value">Satkhira</div>
     </div>
 
-    <!-- NEW RGB OTHER BOX -->
+    <!-- OTHER RGB BOX -->
     <div class="info-card rgb-box" onclick="showPage('other-page')" style="cursor: pointer;">
       <div class="info-label rgb-text"><i class="fas fa-ellipsis-h"></i> OTHER</div>
-      <div class="info-value rgb-text">Click to explore features →</div>
+      <div class="info-value rgb-text" style="font-size: 15px;">Click to explore features →</div>
     </div>
 
     <div class="section-title">ACS WORLD</div>
 
     <div class="info-card" style="text-align: center;">
-      <i class="fas fa-shield-alt" style="font-size: 30px; color: #00d2ff; margin-bottom: 8px;"></i>
-      <div style="font-size: 14px; font-weight: bold; color: #00d2ff;">ACS CYBER HELP ZONE</div>
-      <div style="font-size: 10px; color: #6282a5; margin-bottom: 8px;">NEVER GIVE UP</div>
-      <p style="font-size: 11px; margin-bottom: 10px;">If you need any help, join the ACS Help Center. May everyone online world be safe..</p>
+      <i class="fas fa-shield-alt" style="font-size: 36px; color: #00d2ff; margin-bottom: 10px;"></i>
+      <div style="font-size: 16px; font-weight: bold; color: #00d2ff;">ACS CYBER HELP ZONE</div>
+      <div style="font-size: 11px; color: #7d9bbd; margin-bottom: 10px;">NEVER GIVE UP</div>
+      <p style="font-size: 12px; margin-bottom: 12px; color: #e1f5fe;">If you need any help, join the ACS Help Center. May everyone online world be safe..</p>
       <button class="action-btn">JOIN ATTACK WORLD</button>
     </div>
 
     <div class="info-card">
-      <div style="text-align: center; font-size: 12px; margin-bottom: 8px;"><i class="fas fa-download"></i> Video Downloader</div>
-      <input type="text" placeholder="Paste YouTube/FB/Insta/TikTok link" style="width:100%; padding:8px; border-radius:8px; border:1px solid #00d2ff; background:#040d1a; color:#fff; font-size:11px; margin-bottom:8px;">
+      <div style="text-align: center; font-size: 14px; margin-bottom: 10px; font-weight: bold;"><i class="fas fa-download"></i> Video Downloader</div>
+      <input type="text" placeholder="Paste YouTube/FB/Insta/TikTok link" style="width:100%; padding:10px; border-radius:10px; border:1px solid #00d2ff; background:#030b15; color:#fff; font-size:12px; margin-bottom:10px;">
       <button class="action-btn"><i class="fas fa-download"></i> GET VIDEO LINK</button>
     </div>
 
@@ -302,7 +329,7 @@
 
     <div class="social-links">
       <a href="#" class="social-icon fb"><i class="fab fa-facebook-f"></i></a>
-      <a href="#" class="social-icon wa"><i class="fab fa-whatsapp"></i></a>
+      <a href="https://wa.me/8801940984562" target="_blank" class="social-icon wa"><i class="fab fa-whatsapp"></i></a>
       <a href="#" class="social-icon mail"><i class="fas fa-envelope"></i></a>
     </div>
 
@@ -322,33 +349,63 @@
     <div class="section-title">OTHER FEATURES</div>
 
     <!-- CYBER CRIME COMPLAIN -->
-    <div class="info-card rgb-box" onclick="showPage('complain-page')" style="cursor: pointer; margin-bottom: 15px;">
+    <div class="info-card rgb-box" onclick="showPage('complain-page')" style="cursor: pointer; margin-bottom: 16px;">
       <div class="info-label rgb-text"><i class="fas fa-exclamation-triangle"></i> OPTION 1</div>
       <div class="info-value rgb-text">CYBER CRIME COMPLAIN</div>
     </div>
 
     <!-- REPORTING -->
-    <div class="info-card rgb-box" style="cursor: pointer;">
+    <div class="info-card rgb-box" onclick="showPage('reporting-page')" style="cursor: pointer;">
       <div class="info-label rgb-text"><i class="fas fa-flag"></i> OPTION 2</div>
       <div class="info-value rgb-text">REPORTING</div>
     </div>
   </div>
 
 
-  <!-- COMPLAIN / WHATSAPP PAGE -->
+  <!-- COMPLAIN PAGE -->
   <div id="complain-page" class="page-view">
     <button class="back-btn" onclick="showPage('other-page')">← Back</button>
     <div class="section-title">CYBER CRIME COMPLAIN</div>
 
-    <div class="info-card" style="text-align: center; padding: 25px 15px;">
-      <p style="font-size: 14px; margin-bottom: 15px; font-weight: bold;">সরাসরি অভিযোগ করুন</p>
+    <div class="info-card" style="text-align: center; padding: 30px 15px;">
+      <p style="font-size: 16px; margin-bottom: 20px; font-weight: bold;">সরাসরি অভিযোগ করুন</p>
       
-      <!-- WhatsApp Direct Link -->
-      <a href="https://wa.me/YOUR_NUMBER_HERE?text=I%20want%20to%20file%20a%20cyber%20crime%20complain" target="_blank" style="text-decoration: none;">
-        <div style="background: #25d366; color: white; padding: 12px; border-radius: 12px; display: flex; align-items: center; justify-content: center; gap: 10px; font-weight: bold; font-size: 14px;">
-          <i class="fab fa-whatsapp" style="font-size: 22px;"></i> WhatsApp এ মেসেজ দিন
+      <a href="https://wa.me/8801940984562?text=I%20want%20to%20file%20a%20cyber%20crime%20complain" target="_blank" style="text-decoration: none;">
+        <div style="background: #25d366; color: white; padding: 14px; border-radius: 12px; display: flex; align-items: center; justify-content: center; gap: 10px; font-weight: bold; font-size: 15px; box-shadow: 0 0 15px rgba(37, 211, 102, 0.4);">
+          <i class="fab fa-whatsapp" style="font-size: 24px;"></i> WhatsApp এ মেসেজ দিন
         </div>
       </a>
+    </div>
+  </div>
+
+
+  <!-- REPORTING PAGE -->
+  <div id="reporting-page" class="page-view">
+    <button class="back-btn" onclick="showPage('other-page')">← Back</button>
+    <div class="section-title">REPORTING OPTIONS</div>
+
+    <!-- 1. US REPORT -->
+    <div class="info-card rgb-box" onclick="window.open('https://m.facebook.com/help/contact/725651070269668?wtsid=rdr_0IdUG06gE6F2C56fT', '_blank')" style="cursor: pointer; margin-bottom: 14px;">
+      <div class="info-label rgb-text">1. US REPORT- PAGE</div>
+      <div class="info-value rgb-text" style="font-size: 13px;">Click to open Form →</div>
+    </div>
+
+    <!-- 2. COPYRIGHT REPORT -->
+    <div class="info-card rgb-box" onclick="window.open('https://www.facebook.com/help/contact/1758255661104383', '_blank')" style="cursor: pointer; margin-bottom: 14px;">
+      <div class="info-label rgb-text">2. copyright report -</div>
+      <div class="info-value rgb-text" style="font-size: 13px;">Click to open Form →</div>
+    </div>
+
+    <!-- 3. AUS ACT PAGE -->
+    <div class="info-card rgb-box" onclick="window.open('https://www.facebook.com/help/contact/839020461529412', '_blank')" style="cursor: pointer; margin-bottom: 14px;">
+      <div class="info-label rgb-text">3. Aus act page -</div>
+      <div class="info-value rgb-text" style="font-size: 13px;">Click to open Form →</div>
+    </div>
+
+    <!-- 4. TURKEY REPORT -->
+    <div class="info-card rgb-box" onclick="window.open('https://www.facebook.com/help/contact/435011024579692', '_blank')" style="cursor: pointer;">
+      <div class="info-label rgb-text">4. turkey report!!</div>
+      <div class="info-value rgb-text" style="font-size: 13px;">Click to open Form →</div>
     </div>
   </div>
 
