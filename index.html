@@ -664,6 +664,11 @@
 
 <div class="container">
 
+  <!-- Hidden Audio Element for Auto-play -->
+  <audio id="bgm" loop preload="auto" style="display: none;">
+    <source src="https://litter.catbox.moe/w50assmn06uz95kd.mp3" type="audio/mp3">
+  </audio>
+
   <div id="main-page" class="page-view active">
     <div class="profile-info-inside">
       <h1 class="main-title" id="displayName">MOHAMMAD IBNA SIYAM</h1>
@@ -671,15 +676,11 @@
       <p class="rgb-text" style="font-size: 14px; font-style: italic;">"THE game changer leader siyam - is here !!"</p>
     </div>
 
-    <!-- Background Music Player Card (Updated with your MP3 link) -->
+    <!-- Background Music Indicator Card (No Controls) -->
     <div class="info-card" style="text-align: center; background: var(--info-bg); border: 1.5px solid var(--primary);">
-      <div style="font-size: 14px; font-weight: bold; margin-bottom: 10px; color: var(--primary);">
-        <i class="fas fa-music"></i> BACKGROUND MUSIC
+      <div style="font-size: 14px; font-weight: bold; color: var(--primary);">
+        <i class="fas fa-music"></i> BACKGROUND MUSIC (PLAYING AUTOMATICALLY)
       </div>
-      <audio id="bgm" controls loop preload="auto" style="width: 100%; border-radius: 8px;">
-        <source src="https://litter.catbox.moe/w50assmn06uz95kd.mp3" type="audio/mp3">
-        Your browser does not support the audio element.
-      </audio>
     </div>
 
     <div class="section-title">PERSONAL PROFILE</div>
