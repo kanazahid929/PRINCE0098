@@ -1005,7 +1005,6 @@
       document.getElementById('statVisitors').innerText = count;
     });
 
-    // Load profile data from Firebase
     db.ref('profileData').on('value', snapshot => {
       const data = snapshot.val();
       if(data) {
