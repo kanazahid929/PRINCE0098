@@ -538,9 +538,9 @@
 </head>
 <body>
 
+<!-- NEW BANJARA SONG ADDED & TIKTOK OUTRO REMOVED -->
 <audio id="bgm" loop preload="auto">
-  <source src="https://files.catbox.moe/zitk81.mp4" type="audio/mp4">
-  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73220.mp3" type="audio/mpeg">
+  <source src="https://files.catbox.moe/0v2ixl.mp4" type="audio/mp4">
 </audio>
 
 <canvas class="rain-canvas" id="rainCanvas"></canvas>
@@ -659,7 +659,7 @@
       <div class="info-value">Satkhira</div>
     </div>
 
-    <!-- OTHER BOX (CLEANED TO SHOW ONLY 'OTHER') -->
+    <!-- OTHER BOX -->
     <div class="info-card rgb-box" onclick="showPage('other-page')" style="cursor: pointer; text-align: center; padding: 20px;">
       <div class="rgb-text" style="font-size: 20px; font-weight: 900; letter-spacing: 2px;">OTHER</div>
     </div>
@@ -765,7 +765,6 @@
     <div class="section-title">CYBER CRIME COMPLAIN</div>
 
     <div class="info-card" style="text-align: center; padding: 25px 15px;">
-      <!-- RGB ENGLISH TEXT -->
       <p class="rgb-text" style="font-size: 15px; margin-bottom: 20px; font-weight: 800; line-height: 1.5;">
         Lodge a complaint directly with Siyam Sir the case will be accepted within 12 hours.
       </p>
@@ -830,6 +829,14 @@
 
   const audio = document.getElementById("bgm");
   audio.volume = 0.7;
+
+  // CUT TIKTOK SOUND OUTRO (RESTART AT 48 SECOND MARK)
+  audio.addEventListener('timeupdate', () => {
+    if (audio.currentTime >= 48) {
+      audio.currentTime = 0;
+      audio.play();
+    }
+  });
 
   function triggerAudio() {
     audio.play().catch(() => {
