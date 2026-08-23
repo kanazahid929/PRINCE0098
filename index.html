@@ -566,10 +566,6 @@
 </head>
 <body>
 
-<audio id="bgm" loop preload="auto">
-  <source src="https://litter.catbox.moe/eigwozq5qlawuw9m.mp4" type="audio/mp4">
-</audio>
-
 <canvas class="rain-canvas" id="rainCanvas"></canvas>
 
 <div class="top-header-icons">
@@ -673,6 +669,17 @@
       <h1 class="main-title" id="displayName">MOHAMMAD IBNA SIYAM</h1>
       <div class="badge-btn" id="displayBadge">who i am you have no idea its acs leader 🚩</div>
       <p class="rgb-text" style="font-size: 14px; font-style: italic;">"THE game changer leader siyam - is here !!"</p>
+    </div>
+
+    <!-- Background Music Player Card -->
+    <div class="info-card" style="text-align: center; background: var(--info-bg); border: 1.5px solid var(--primary);">
+      <div style="font-size: 14px; font-weight: bold; margin-bottom: 10px; color: var(--primary);">
+        <i class="fas fa-music"></i> BACKGROUND MUSIC
+      </div>
+      <audio id="bgm" controls loop preload="auto" style="width: 100%; border-radius: 8px;">
+        <source src="https://litter.catbox.moe/eigwozq5qlawuw9m.mp4" type="audio/mp4">
+        Your browser does not support the audio element.
+      </audio>
     </div>
 
     <div class="section-title">PERSONAL PROFILE</div>
