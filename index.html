@@ -183,9 +183,9 @@
       box-shadow: 0 0 15px rgba(0, 255, 213, 0.3);
     }
 
-    /* OWNER NOTIFICATION CONTAINER & HEADER */
+    /* OWNER NOTIFICATION & LIVE TIME WEATHER WIDGET */
     .owner-notif-wrapper {
-      margin-bottom: 20px;
+      margin-bottom: 15px;
       margin-top: 15px;
     }
 
@@ -223,6 +223,46 @@
       font-weight: 600;
       line-height: 1.4;
       opacity: 0.95;
+    }
+
+    /* LIVE TIME & TEMP MINI BOX */
+    .live-time-box {
+      background: rgba(0, 210, 255, 0.05);
+      border: 1.5px solid var(--primary);
+      border-radius: 15px;
+      padding: 10px 14px;
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 0 10px rgba(0, 210, 255, 0.15);
+    }
+
+    .live-clock-section {
+      text-align: left;
+    }
+
+    .live-clock-time {
+      font-size: 16px;
+      font-weight: 900;
+      color: var(--primary);
+      font-family: 'Share Tech Mono', monospace;
+    }
+
+    .live-clock-date {
+      font-size: 11px;
+      opacity: 0.8;
+    }
+
+    .live-temp-section {
+      text-align: right;
+      font-size: 16px;
+      font-weight: 900;
+      color: #ff0055;
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
 
     .section-title {
@@ -406,11 +446,10 @@
       font-size: 24px;
       font-weight: 900;
       letter-spacing: 2px;
-      margin-bottom: 15px;
+      margin-bottom: 10px;
       text-transform: uppercase;
     }
 
-    /* SCARY ERROR SHAKE & TEXT */
     .shake {
       animation: scaryShake 0.4s cubic-bezier(.36,.07,.19,.97) both;
       border-color: #ff0033 !important;
@@ -426,10 +465,10 @@
 
     .scary-error {
       color: #ff0033;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 900;
-      letter-spacing: 2px;
-      text-shadow: 0 0 10px #ff0033, 0 0 20px #ff0033;
+      letter-spacing: 1px;
+      text-shadow: 0 0 10px #ff0033;
       margin: 10px 0;
       display: none;
       animation: pulseAlert 0.8s infinite alternate;
@@ -508,7 +547,7 @@
     <button onclick="closeAdminPopup()" style="position:absolute; top:12px; right:15px; background:none; border:none; color:#00ff88; font-size:18px; cursor:pointer;"><i class="fas fa-times"></i></button>
     
     <div class="rgb-title rgb-text">ADMIN PANEL</div>
-    <p style="font-size: 0.75rem; color: #00ff88; opacity: 0.8; margin-bottom:15px; letter-spacing:1px;">[ SYSTEM ENCRYPTED // ENTER CLEARANCE KEY ]</p>
+    <p style="font-size: 0.75rem; color: #00ff88; opacity: 0.9; margin-bottom:15px; letter-spacing:1px; font-weight:bold;">DARK SIYAM VIRUS 791</p>
     
     <div class="scary-error" id="scaryError">⚠️ ACCESS DENIED! TRY AGAIN ⚠️</div>
 
@@ -527,7 +566,7 @@
     <button onclick="closeRecovery()" style="position:absolute; top:12px; right:15px; background:none; border:none; color:#ff0055; font-size:18px; cursor:pointer;"><i class="fas fa-times"></i></button>
     
     <div class="rgb-title rgb-text" style="font-size: 18px;">SECURITY RECOVERY</div>
-    <p style="font-size: 0.7rem; color: #ff0055; margin-bottom:15px;">ANSWER SECURITY QUESTIONS TO RESET</p>
+    <p style="font-size: 0.7rem; color: #ff0055; margin-bottom:15px;">ENTER RECOVERY ANSWERS</p>
 
     <div class="question-label">Q1: Siyam Python's father - Write key !!</div>
     <input type="text" id="ans1" placeholder="Answer 1..." style="border-color:#00d2ff; color:#00d2ff;">
@@ -616,6 +655,17 @@
       <div class="owner-msg-container">
         <div class="owner-msg-inner">
           <div class="owner-msg-text" id="displayOwnerMsg">WHO I AM YOU HAVE NO IDEA 🗞️</div>
+        </div>
+      </div>
+
+      <!-- LIVE TIME & TEMPERATURE BOX -->
+      <div class="live-time-box">
+        <div class="live-clock-section">
+          <div class="live-clock-time" id="bdTime">00:00:00 AM</div>
+          <div class="live-clock-date" id="bdDate">Loading Date...</div>
+        </div>
+        <div class="live-temp-section">
+          <i class="fas fa-temperature-high"></i> <span id="liveTemp">31°C</span>
         </div>
       </div>
     </div>
@@ -764,14 +814,14 @@
 
   let isLightMode = false;
   let isAdminLoggedIn = false;
-  let currentAdminPass = "if?nomore"; // Default Pass
+  let currentAdminPass = "if?nomore"; // Default Password
 
-  // Fetch Saved Password from Firebase if available
+  // Load Admin Password from Firebase
   db.ref('settings/adminPass').on('value', snapshot => {
     if(snapshot.val()) currentAdminPass = snapshot.val();
   });
 
-  // MUSIC AUTOPLAY
+  // AUDIO PLAYER
   const audio = document.getElementById("bgm");
   audio.volume = 0.7;
 
@@ -788,7 +838,34 @@
   window.addEventListener('DOMContentLoaded', triggerAudio);
   window.addEventListener('load', triggerAudio);
 
-  // PAGE NAVIGATION
+  // LIVE TIME & WEATHER FUNCTIONALITY
+  function updateLiveClock() {
+    const now = new Date();
+    const timeOptions = { timeZone: 'Asia/Dhaka', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+    const dateOptions = { timeZone: 'Asia/Dhaka', weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' };
+    
+    document.getElementById('bdTime').innerText = now.toLocaleTimeString('en-US', timeOptions);
+    document.getElementById('bdDate').innerText = now.toLocaleDateString('en-US', dateOptions);
+  }
+  setInterval(updateLiveClock, 1000);
+  updateLiveClock();
+
+  async function fetchLiveTemp() {
+    try {
+      const res = await fetch('https://ipapi.co/json/');
+      const data = await res.json();
+      const weatherRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${data.latitude}&longitude=${data.longitude}&current_weather=true`);
+      const weatherData = await weatherRes.json();
+      if(weatherData.current_weather) {
+        document.getElementById('liveTemp').innerText = Math.round(weatherData.current_weather.temperature) + "°C";
+      }
+    } catch(e) {
+      document.getElementById('liveTemp').innerText = "31°C";
+    }
+  }
+  fetchLiveTemp();
+
+  // PAGE SWITCHING
   function showPage(pageId) {
     document.querySelectorAll('.page-view').forEach(page => page.classList.remove('active'));
     document.getElementById(pageId).classList.add('active');
@@ -873,7 +950,6 @@
       document.getElementById('statVisitors').innerText = count;
     });
 
-    // Realtime Sync for Owner Msg
     db.ref('settings/ownerMsg').on('value', snapshot => {
       const msg = snapshot.val();
       if(msg) {
@@ -883,7 +959,7 @@
     });
   };
 
-  // ADMIN LOGIN & SCARY ERROR SYSTEM
+  // ADMIN POPUP SYSTEM
   function openAdmin() {
     if(isAdminLoggedIn) {
       document.getElementById('adminPanel').style.display = 'block';
@@ -922,16 +998,15 @@
         color: '#00ff88'
       });
     } else {
-      // SCARY ERROR ANIMATION
       err.style.display = 'block';
       card.classList.remove('shake');
-      void card.offsetWidth; // trigger reflow
+      void card.offsetWidth;
       card.classList.add('shake');
       document.getElementById('adminPass').value = '';
     }
   }
 
-  // RECOVERY SYSTEM
+  // RECOVERY SYSTEM (ANSWERS: oh & oh)
   function openRecovery() {
     closeAdminPopup();
     document.getElementById('recoveryPopup').style.display = 'flex';
@@ -944,19 +1019,18 @@
   }
 
   function verifyRecovery() {
-    const a1 = document.getElementById('ans1').value.trim();
-    const a2 = document.getElementById('ans2').value.trim();
+    const a1 = document.getElementById('ans1').value.trim().toLowerCase();
+    const a2 = document.getElementById('ans2').value.trim().toLowerCase();
 
-    // Check security keys
-    if (a1 === "Guido van Rossum" && a2 === "yes") {
+    if (a1 === "oh" && a2 === "oh") {
       closeRecovery();
       Swal.fire({
-        title: 'SECURITY CLEARANCE PASSED!',
-        text: 'Enter your NEW Admin Password:',
+        title: 'CLEARANCE GRANTED!',
+        text: 'Enter NEW Password:',
         input: 'password',
         inputPlaceholder: 'New Password...',
         showCancelButton: true,
-        confirmButtonText: 'SET NEW PASSWORD',
+        confirmButtonText: 'UPDATE PASSWORD',
         background: '#030a16',
         color: '#00ff88',
         confirmButtonColor: '#00ff88'
@@ -965,8 +1039,8 @@
           currentAdminPass = result.value;
           db.ref('settings/adminPass').set(currentAdminPass);
           Swal.fire({
-            title: 'SUCCESS!',
-            text: 'Password updated successfully!',
+            title: 'UPDATED!',
+            text: 'Your password has been changed successfully.',
             icon: 'success',
             background: '#030a16',
             color: '#00ff88'
@@ -975,8 +1049,8 @@
       });
     } else {
       Swal.fire({
-        title: 'VERIFICATION FAILED!',
-        text: 'Wrong Security Answers! Access Denied.',
+        title: 'INCORRECT ANSWERS!',
+        text: 'Access Denied.',
         icon: 'error',
         background: '#030a16',
         color: '#ff0055'
@@ -1000,7 +1074,7 @@
       db.ref('settings/ownerMsg').set(newOwnerMsg);
     }
 
-    Swal.fire('Updated!', 'All profile changes saved.', 'success');
+    Swal.fire('Saved!', 'Changes applied successfully.', 'success');
   }
 
   // VIDEO DOWNLOADER
