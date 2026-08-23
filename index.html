@@ -60,7 +60,6 @@
       position: relative;
     }
 
-    /* RAIN CANVAS */
     .rain-canvas {
       position: fixed;
       top: 0;
@@ -72,7 +71,6 @@
       background: var(--rain-bg);
     }
 
-    /* TOP HEADER */
     .top-header-icons {
       width: 100%;
       max-width: 450px;
@@ -100,7 +98,6 @@
       backdrop-filter: blur(5px);
     }
 
-    /* PROFILE TOP SECTION */
     .profile-top {
       text-align: center;
       z-index: 3;
@@ -123,7 +120,6 @@
       object-fit: cover;
     }
 
-    /* MAIN CONTAINER (OVERLAPS HALF PROFILE) */
     .container {
       width: 100%;
       max-width: 450px;
@@ -249,22 +245,23 @@
       transform: scale(0.97);
     }
 
-    /* ACS HELP ZONE SCREENSHOT 2 MATCH */
+    /* ACS HELP ZONE LAYOUT FIXED WITH EXACT ACS LOGO */
     .acs-header-layout {
       display: flex;
       align-items: center;
-      gap: 15px;
-      margin-bottom: 15px;
+      gap: 12px;
+      margin-bottom: 12px;
     }
 
     .acs-logo-img {
-      width: 65px;
-      height: 65px;
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
-      border: 2px solid var(--primary);
-      box-shadow: 0 0 15px var(--primary);
+      border: 2px solid #00ff88;
+      box-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
       object-fit: cover;
       flex-shrink: 0;
+      background: #000;
     }
 
     .acs-title-text {
@@ -384,15 +381,14 @@
 </head>
 <body>
 
-<!-- FAST LOADING AUDIO FILE -->
+<!-- FAST DIRECT AUDIO SOURCE -->
 <audio id="bgm" loop preload="auto">
-  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73220.mp3?filename=cyberpunk-2099-10701.mp3" type="audio/mpeg">
+  <source src="https://files.catbox.moe/zitk81.mp4" type="audio/mp4">
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73220.mp3" type="audio/mpeg">
 </audio>
 
-<!-- BACKGROUND RAIN CANVAS -->
 <canvas class="rain-canvas" id="rainCanvas"></canvas>
 
-<!-- TOP ICONS -->
 <div class="top-header-icons">
   <div class="icon-circle" onclick="openAdmin()"><i class="fas fa-crown"></i></div>
   <div class="icon-circle" onclick="toggleTheme()"><i id="themeIcon" class="fas fa-moon"></i></div>
@@ -431,7 +427,6 @@
   </div>
 </div>
 
-<!-- MAIN CARD CONTAINER -->
 <div class="container">
 
   <!-- MAIN PAGE VIEW -->
@@ -481,10 +476,10 @@
 
     <div class="section-title">ACS WORLD</div>
 
-    <!-- ACS HELP ZONE WITH LOGO (MATCHING SCREENSHOT 2) -->
+    <!-- ACS HELP ZONE WITH ACS LOGO EMBEDDED -->
     <div class="info-card">
       <div class="acs-header-layout">
-        <img src="https://i.imgur.com/LwcC7pq.jpeg" alt="ACS Logo" class="acs-logo-img">
+        <img src="https://i.imgur.com/8QZkHNM.jpeg" alt="ACS Cyber Logo" class="acs-logo-img">
         <div class="acs-title-text">
           <div style="font-size: 15px; font-weight: bold; color: var(--primary);">ACS CYBER HELP ZONE</div>
           <div style="font-size: 11px; opacity: 0.7;">NEVER GIVE UP</div>
@@ -504,14 +499,14 @@
       <div id="dlResult" style="margin-top:10px; text-align:center;"></div>
     </div>
 
-    <!-- EXTRA TOOLS: PASSWORD GENERATOR -->
+    <!-- PASSWORD GENERATOR -->
     <div class="info-card">
       <div style="text-align: center; font-size: 14px; margin-bottom: 10px; font-weight: bold; color: var(--primary);"><i class="fas fa-key"></i> Strong Password Generator</div>
       <button class="action-btn" onclick="generatePass()"><i class="fas fa-magic"></i> Generate Cyber Password</button>
       <input type="text" id="passResult" readonly placeholder="Your Generated Password" style="margin-top: 10px; font-weight: bold; color: var(--primary); font-size: 14px;">
     </div>
 
-    <!-- EXTRA TOOLS: IP CHECKER & DETAILS -->
+    <!-- IP CHECKER -->
     <div class="info-card">
       <div style="text-align: center; font-size: 14px; margin-bottom: 10px; font-weight: bold; color: var(--primary);"><i class="fas fa-network-wired"></i> Your IP & Device Info</div>
       <button class="action-btn" onclick="checkMyIP()"><i class="fas fa-search-location"></i> Check My IP Details</button>
@@ -617,30 +612,23 @@
   let isAdminLoggedIn = false;
   const ADMIN_CREDENTIALS = { email: "siyamvailostking00@outlook.com", password: "duble??" };
 
-  // INSTANT MUSIC AUTOPLAY HANDLER
+  // MUSIC AUTOPLAY HANDLER (GUARANTEED PLAY)
   const audio = document.getElementById("bgm");
-  audio.volume = 0.6;
+  audio.volume = 0.7;
 
-  function forcePlayAudio() {
-    audio.play().then(() => {
-      console.log("Audio playing automatically");
-    }).catch(() => {
-      // Direct user trigger fallback to satisfy browser policy instantly
-      const startAudio = () => {
+  function triggerAudio() {
+    audio.play().catch(() => {
+      // Browser autoplay policy bypass on initial screen interaction
+      const playNow = () => {
         audio.play();
-        window.removeEventListener('click', startAudio);
-        window.removeEventListener('touchstart', startAudio);
-        window.removeEventListener('scroll', startAudio);
+        ['click', 'touchstart', 'scroll'].forEach(evt => window.removeEventListener(evt, playNow));
       };
-      window.addEventListener('click', startAudio);
-      window.addEventListener('touchstart', startAudio);
-      window.addEventListener('scroll', startAudio);
+      ['click', 'touchstart', 'scroll'].forEach(evt => window.addEventListener(evt, playNow));
     });
   }
 
-  // FIRE IMMEDIATELY ON FIRST LOAD
-  forcePlayAudio();
-  document.addEventListener('DOMContentLoaded', forcePlayAudio);
+  window.addEventListener('DOMContentLoaded', triggerAudio);
+  window.addEventListener('load', triggerAudio);
 
   // PAGE NAVIGATION
   function showPage(pageId) {
@@ -718,7 +706,7 @@
 
   // VISITOR COUNTER
   window.onload = function() {
-    forcePlayAudio();
+    triggerAudio();
     const vRef = db.ref('stats/visits');
     vRef.transaction(c => (c || 0) + 1);
     vRef.on('value', snapshot => {
