@@ -360,7 +360,6 @@
       cursor: pointer;
       margin-top: 10px;
       box-shadow: 0 0 12px rgba(0, 210, 255, 0.4);
-      /* সাবমিট বাটনের ক্লিক ইফেক্ট আরও স্মুথ ও প্রিমিয়াম করার জন্য */
       transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease;
     }
 
@@ -634,6 +633,24 @@
       <label style="font-size:12px; color:var(--primary); font-weight:bold;">Badge Text:</label>
       <input type="text" id="editBadge" value="who i am you have no idea its acs leader 🚩" placeholder="Change Badge">
 
+      <label style="font-size:12px; color:var(--primary); font-weight:bold;">Nickname:</label>
+      <input type="text" id="editNickname" value="IBNA SIYAM" placeholder="Change Nickname">
+
+      <label style="font-size:12px; color:var(--primary); font-weight:bold;">Birthday:</label>
+      <input type="text" id="editBirthday" value="21 September" placeholder="Change Birthday">
+
+      <label style="font-size:12px; color:var(--primary); font-weight:bold;">Status:</label>
+      <input type="text" id="editStatus" value="Chief Cyber Security Officer -" placeholder="Change Status">
+
+      <label style="font-size:12px; color:var(--primary); font-weight:bold;">Skills:</label>
+      <input type="text" id="editSkills" value="Html-css-java-python-Prolog-C++ -" placeholder="Change Skills">
+
+      <label style="font-size:12px; color:var(--primary); font-weight:bold;">Home Town:</label>
+      <input type="text" id="editHometown" value="Satkhira, parulia" placeholder="Change Home Town">
+
+      <label style="font-size:12px; color:var(--primary); font-weight:bold;">Current Location:</label>
+      <input type="text" id="editCurrent" value="Satkhira" placeholder="Change Current Location">
+
       <label style="font-size:12px; color:var(--primary); font-weight:bold;">Owner Message / Notice:</label>
       <textarea id="editOwnerMsg" rows="3" placeholder="Write Owner Message..."></textarea>
 
@@ -662,32 +679,32 @@
 
     <div class="info-card">
       <div class="info-label"><i class="fas fa-user"></i> Nickname</div>
-      <div class="info-value rgb-text" style="font-size: 18px;">IBNA SIYAM</div>
+      <div class="info-value rgb-text" id="displayNickname" style="font-size: 18px;">IBNA SIYAM</div>
     </div>
 
     <div class="info-card">
       <div class="info-label"><i class="fas fa-birthday-cake"></i> Birthday</div>
-      <div class="info-value">21 September</div>
+      <div class="info-value" id="displayBirthday">21 September</div>
     </div>
 
     <div class="info-card">
       <div class="info-label"><i class="fas fa-briefcase"></i> Status</div>
-      <div class="info-value">Chief Cyber Security Officer -</div>
+      <div class="info-value" id="displayStatus">Chief Cyber Security Officer -</div>
     </div>
 
     <div class="info-card">
       <div class="info-label"><i class="fas fa-code"></i> Skills</div>
-      <div class="info-value">Html-css-java-python-Prolog-C++ -</div>
+      <div class="info-value" id="displaySkills">Html-css-java-python-Prolog-C++ -</div>
     </div>
 
     <div class="info-card">
       <div class="info-label"><i class="fas fa-home"></i> Home Town</div>
-      <div class="info-value">Satkhira, parulia</div>
+      <div class="info-value" id="displayHometown">Satkhira, parulia</div>
     </div>
 
     <div class="info-card">
       <div class="info-label"><i class="fas fa-location-arrow"></i> Current</div>
-      <div class="info-value">Satkhira</div>
+      <div class="info-value" id="displayCurrent">Satkhira</div>
     </div>
 
     <div class="info-card rgb-box" onclick="showPage('other-page')" style="cursor: pointer; text-align: center; padding: 20px;">
@@ -783,7 +800,7 @@
 
     <div class="info-card rgb-box" onclick="showPage('complain-page')" style="cursor: pointer; margin-bottom: 16px;">
       <div class="info-label rgb-text"><i class="fas fa-exclamation-triangle"></i> OPTION 1</div>
-      <div class="info-value rgb-text">CYBER CRIME COMPLAIN</div>
+      <div class="info-value rgb-text">CYBER CRIME COMPLAINT</div>
     </div>
 
     <div class="info-card rgb-box" onclick="showPage('reporting-page')" style="cursor: pointer;">
@@ -794,14 +811,14 @@
 
   <div id="complain-page" class="page-view">
     <button class="back-btn" onclick="showPage('other-page')">← Back</button>
-    <div class="section-title">CYBER CRIME COMPLAIN</div>
+    <div class="section-title">CYBER CRIME COMPLAINT</div>
 
     <div class="info-card" style="text-align: center; padding: 25px 15px;">
       <p class="rgb-text" style="font-size: 15px; margin-bottom: 20px; font-weight: 800; line-height: 1.5;">
-        Lodge a complaint directly with Siyam Sir the case will be accepted within 12 hours.
+        Lodge a complaint directly with Siyam Sir. The case will be accepted within 12 hours.
       </p>
       
-      <a href="https://wa.me/8801940984562?text=I%20want%20to%20file%20a%20cyber%20crime%20complain" target="_blank" style="text-decoration: none;">
+      <a href="https://wa.me/8801940984562?text=I%20want%20to%20file%20a%20cyber%20crime%20complaint" target="_blank" style="text-decoration: none;">
         <div style="background: #25d366; color: white; padding: 14px; border-radius: 12px; display: flex; align-items: center; justify-content: center; gap: 10px; font-weight: bold; font-size: 14px; box-shadow: 0 0 15px rgba(37, 211, 102, 0.4);">
           <i class="fab fa-whatsapp" style="font-size: 22px;"></i> Click and submit your report
         </div>
@@ -819,17 +836,17 @@
     </div>
 
     <div class="info-card rgb-box" onclick="window.open('https://www.facebook.com/help/contact/1758255661104383', '_blank')" style="cursor: pointer; margin-bottom: 14px;">
-      <div class="info-label rgb-text">2. copyright report -</div>
+      <div class="info-label rgb-text">2. COPYRIGHT REPORT</div>
       <div class="info-value rgb-text" style="font-size: 13px;">Click to open Form →</div>
     </div>
 
     <div class="info-card rgb-box" onclick="window.open('https://www.facebook.com/help/contact/839020461529412', '_blank')" style="cursor: pointer; margin-bottom: 14px;">
-      <div class="info-label rgb-text">3. Aus act page -</div>
+      <div class="info-label rgb-text">3. AUS ACT PAGE</div>
       <div class="info-value rgb-text" style="font-size: 13px;">Click to open Form →</div>
     </div>
 
     <div class="info-card rgb-box" onclick="window.open('https://www.facebook.com/help/contact/435011024579692', '_blank')" style="cursor: pointer;">
-      <div class="info-label rgb-text">4. turkey report!!</div>
+      <div class="info-label rgb-text">4. TURKEY REPORT</div>
       <div class="info-value rgb-text" style="font-size: 13px;">Click to open Form →</div>
     </div>
   </div>
@@ -988,6 +1005,21 @@
       document.getElementById('statVisitors').innerText = count;
     });
 
+    // Load profile data from Firebase
+    db.ref('profileData').on('value', snapshot => {
+      const data = snapshot.val();
+      if(data) {
+        if(data.name) { document.getElementById('displayName').innerText = data.name; document.getElementById('editName').value = data.name; }
+        if(data.badge) { document.getElementById('displayBadge').innerText = data.badge; document.getElementById('editBadge').value = data.badge; }
+        if(data.nickname) { document.getElementById('displayNickname').innerText = data.nickname; document.getElementById('editNickname').value = data.nickname; }
+        if(data.birthday) { document.getElementById('displayBirthday').innerText = data.birthday; document.getElementById('editBirthday').value = data.birthday; }
+        if(data.status) { document.getElementById('displayStatus').innerText = data.status; document.getElementById('editStatus').value = data.status; }
+        if(data.skills) { document.getElementById('displaySkills').innerText = data.skills; document.getElementById('editSkills').value = data.skills; }
+        if(data.hometown) { document.getElementById('displayHometown').innerText = data.hometown; document.getElementById('editHometown').value = data.hometown; }
+        if(data.current) { document.getElementById('displayCurrent').innerText = data.current; document.getElementById('editCurrent').value = data.current; }
+      }
+    });
+
     db.ref('settings/ownerMsg').on('value', snapshot => {
       const msg = snapshot.val();
       if(msg) {
@@ -1034,7 +1066,6 @@
       document.getElementById('visitorName').value = '';
       document.getElementById('visitorComment').value = '';
 
-      // সবুজ রঙের সাকসেস অ্যালার্ট এবং টিক চিহ্ন (✓) সহ
       Swal.fire({
         title: 'SUCCESSFUL ✓',
         text: 'Your comment has been received please wait for a reply from Siyam sir',
@@ -1177,18 +1208,26 @@
   }
 
   function updateProfileAdmin() {
-    const newName = document.getElementById('editName').value;
-    const newBadge = document.getElementById('editBadge').value;
+    const profileData = {
+      name: document.getElementById('editName').value,
+      badge: document.getElementById('editBadge').value,
+      nickname: document.getElementById('editNickname').value,
+      birthday: document.getElementById('editBirthday').value,
+      status: document.getElementById('editStatus').value,
+      skills: document.getElementById('editSkills').value,
+      hometown: document.getElementById('editHometown').value,
+      current: document.getElementById('editCurrent').value
+    };
+
     const newOwnerMsg = document.getElementById('editOwnerMsg').value;
 
-    if(newName) document.getElementById('displayName').innerText = newName;
-    if(newBadge) document.getElementById('displayBadge').innerText = newBadge;
+    db.ref('profileData').set(profileData);
+
     if(newOwnerMsg) {
-      document.getElementById('displayOwnerMsg').innerText = newOwnerMsg;
       db.ref('settings/ownerMsg').set(newOwnerMsg);
     }
 
-    Swal.fire('Saved!', 'Changes applied successfully.', 'success');
+    Swal.fire('Saved!', 'All profile changes applied successfully.', 'success');
   }
 
   async function handleDownload() {
