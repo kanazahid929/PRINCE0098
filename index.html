@@ -9,7 +9,7 @@
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Orbitron:wght@600;800;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
   <style>
@@ -183,7 +183,7 @@
       box-shadow: 0 0 15px rgba(0, 255, 213, 0.3);
     }
 
-    /* OWNER NOTIFICATION & LIVE TIME WEATHER WIDGET */
+    /* OWNER NOTIFICATION */
     .owner-notif-wrapper {
       margin-bottom: 15px;
       margin-top: 15px;
@@ -225,18 +225,25 @@
       opacity: 0.95;
     }
 
-    /* LIVE TIME & TEMP MINI BOX */
+    /* STYLISH RGB LIVE TIME & TEMP BOX */
+    .live-time-wrapper {
+      margin-top: 12px;
+      position: relative;
+      border-radius: 18px;
+      padding: 2px;
+      background: linear-gradient(45deg, #ff0000, #00ffd5, #7a00ff, #ff00c8, #00ff88, #ff0000);
+      background-size: 400%;
+      animation: rgbGlow 5s linear infinite;
+      box-shadow: 0 0 15px rgba(0, 210, 255, 0.25);
+    }
+
     .live-time-box {
-      background: rgba(0, 210, 255, 0.05);
-      border: 1.5px solid var(--primary);
-      border-radius: 15px;
-      padding: 10px 14px;
-      margin-top: 10px;
+      background: #020916;
+      border-radius: 16px;
+      padding: 12px 16px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      backdrop-filter: blur(5px);
-      box-shadow: 0 0 10px rgba(0, 210, 255, 0.15);
     }
 
     .live-clock-section {
@@ -244,15 +251,20 @@
     }
 
     .live-clock-time {
-      font-size: 16px;
+      font-size: 17px;
       font-weight: 900;
-      color: var(--primary);
-      font-family: 'Share Tech Mono', monospace;
+      color: #00d2ff;
+      font-family: 'Orbitron', sans-serif;
+      letter-spacing: 1.5px;
+      text-shadow: 0 0 10px rgba(0, 210, 255, 0.6);
     }
 
     .live-clock-date {
       font-size: 11px;
-      opacity: 0.8;
+      color: #a0aec0;
+      margin-top: 2px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
     }
 
     .live-temp-section {
@@ -262,7 +274,9 @@
       color: #ff0055;
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 6px;
+      font-family: 'Orbitron', sans-serif;
+      text-shadow: 0 0 10px rgba(255, 0, 85, 0.6);
     }
 
     .section-title {
@@ -327,6 +341,7 @@
       transform: scale(0.97);
     }
 
+    /* ACS LOGO HEADER LAYOUT */
     .acs-header-layout {
       display: flex;
       align-items: center;
@@ -334,14 +349,14 @@
       margin-bottom: 12px;
     }
 
-    .acs-logo-svg {
+    .acs-logo-img {
       width: 60px;
       height: 60px;
       border-radius: 50%;
       border: 2px solid #00ff88;
       box-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
       flex-shrink: 0;
-      background: #000;
+      object-fit: cover;
     }
 
     .acs-title-text {
@@ -658,14 +673,16 @@
         </div>
       </div>
 
-      <!-- LIVE TIME & TEMPERATURE BOX -->
-      <div class="live-time-box">
-        <div class="live-clock-section">
-          <div class="live-clock-time" id="bdTime">00:00:00 AM</div>
-          <div class="live-clock-date" id="bdDate">Loading Date...</div>
-        </div>
-        <div class="live-temp-section">
-          <i class="fas fa-temperature-high"></i> <span id="liveTemp">31°C</span>
+      <!-- LIVE TIME & TEMPERATURE RGB BOX -->
+      <div class="live-time-wrapper">
+        <div class="live-time-box">
+          <div class="live-clock-section">
+            <div class="live-clock-time" id="bdTime">00:00:00 AM</div>
+            <div class="live-clock-date" id="bdDate">Loading Date...</div>
+          </div>
+          <div class="live-temp-section">
+            <i class="fas fa-temperature-high"></i> <span id="liveTemp">31°C</span>
+          </div>
         </div>
       </div>
     </div>
@@ -675,19 +692,9 @@
     <!-- ACS HELP ZONE -->
     <div class="info-card">
       <div class="acs-header-layout">
-        <svg class="acs-logo-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="100" cy="100" r="95" fill="#000" stroke="#00ff88" stroke-width="5"/>
-          <circle cx="100" cy="100" r="85" fill="none" stroke="#00ff88" stroke-width="2" stroke-dasharray="6,4"/>
-          <text x="100" y="32" fill="#00ff88" font-size="11" font-weight="900" text-anchor="middle" font-family="Outfit">ATTACK CYBER COMMUNITY</text>
-          <text x="100" y="47" fill="#ffffff" font-size="9" font-weight="bold" text-anchor="middle">★ ★ ★</text>
-          <text x="100" y="60" fill="#ffffff" font-size="10" font-weight="900" text-anchor="middle">WE ARE CYBER</text>
-          <text x="100" y="73" fill="#ffffff" font-size="10" font-weight="900" text-anchor="middle">ARMY ★ ★ ★</text>
-          <g transform="translate(45,78) scale(0.55)" fill="#ffffff">
-            <path d="M100 10 L80 40 L95 45 L60 80 L85 80 L30 130 L90 110 L100 150 L110 110 L170 130 L115 80 L140 80 L105 45 L120 40 Z"/>
-          </g>
-          <text x="100" y="148" fill="#00ff88" font-size="22" font-weight="900" text-anchor="middle" font-family="Outfit">ACS</text>
-          <text x="100" y="178" fill="#00ff88" font-size="14" font-weight="900" text-anchor="middle" font-family="Outfit">LEGEND HOME</text>
-        </svg>
+        <!-- ACS IMAGE LOGO -->
+        <img src="https://i.imgur.com/56AiZl6.jpeg" alt="ACS Logo" class="acs-logo-img">
+        
         <div class="acs-title-text">
           <div style="font-size: 15px; font-weight: bold; color: var(--primary);">ACS CYBER HELP ZONE</div>
           <div style="font-size: 11px; opacity: 0.7;">NEVER GIVE UP</div>
@@ -814,14 +821,12 @@
 
   let isLightMode = false;
   let isAdminLoggedIn = false;
-  let currentAdminPass = "if?nomore"; // Default Password
+  let currentAdminPass = "if?nomore";
 
-  // Load Admin Password from Firebase
   db.ref('settings/adminPass').on('value', snapshot => {
     if(snapshot.val()) currentAdminPass = snapshot.val();
   });
 
-  // AUDIO PLAYER
   const audio = document.getElementById("bgm");
   audio.volume = 0.7;
 
@@ -865,13 +870,11 @@
   }
   fetchLiveTemp();
 
-  // PAGE SWITCHING
   function showPage(pageId) {
     document.querySelectorAll('.page-view').forEach(page => page.classList.remove('active'));
     document.getElementById(pageId).classList.add('active');
   }
 
-  // THEME TOGGLE
   function toggleTheme() {
     document.body.classList.toggle("light");
     isLightMode = document.body.classList.contains("light");
@@ -939,7 +942,6 @@
   initRain();
   animateRain();
 
-  // VISITOR COUNTER & REALTIME OWNER MSG
   window.onload = function() {
     triggerAudio();
     const vRef = db.ref('stats/visits');
@@ -959,7 +961,6 @@
     });
   };
 
-  // ADMIN POPUP SYSTEM
   function openAdmin() {
     if(isAdminLoggedIn) {
       document.getElementById('adminPanel').style.display = 'block';
@@ -1006,7 +1007,6 @@
     }
   }
 
-  // RECOVERY SYSTEM (ANSWERS: oh & oh)
   function openRecovery() {
     closeAdminPopup();
     document.getElementById('recoveryPopup').style.display = 'flex';
@@ -1077,7 +1077,6 @@
     Swal.fire('Saved!', 'Changes applied successfully.', 'success');
   }
 
-  // VIDEO DOWNLOADER
   async function handleDownload() {
     const url = document.getElementById('urlInput').value.trim();
     const resultDiv = document.getElementById('dlResult');
@@ -1105,7 +1104,6 @@
     }
   }
 
-  // PASSWORD GENERATOR
   function generatePass() {
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+#";
     let pass = "";
@@ -1115,7 +1113,6 @@
     document.getElementById('passResult').value = pass;
   }
 
-  // IP CHECKER
   async function checkMyIP() {
     const infoDiv = document.getElementById('ipDetails');
     infoDiv.style.display = 'block';
