@@ -277,7 +277,6 @@
       text-shadow: 0 0 10px rgba(255, 0, 85, 0.6);
     }
 
-    /* নতুন কমেন্ট বক্স স্টাইল */
     .speak-box-wrapper {
       margin-top: 15px;
       position: relative;
@@ -361,10 +360,16 @@
       cursor: pointer;
       margin-top: 10px;
       box-shadow: 0 0 12px rgba(0, 210, 255, 0.4);
+      /* সাবমিট বাটনের ক্লিক ইফেক্ট আরও স্মুথ ও প্রিমিয়াম করার জন্য */
+      transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease;
+    }
+
+    .action-btn:hover {
+      box-shadow: 0 0 20px rgba(0, 210, 255, 0.7);
     }
 
     .action-btn:active {
-      transform: scale(0.97);
+      transform: scale(0.94);
     }
 
     .acs-header-layout {
@@ -991,11 +996,9 @@
       }
     });
 
-    // এডমিন প্যানেলের জন্য কমেন্টস লোড করা
     loadAdminComments();
   };
 
-  // কমেন্ট সাবমিট করার ফাংশন
   function submitVisitorComment() {
     const name = document.getElementById('visitorName').value.trim();
     const comment = document.getElementById('visitorComment').value.trim();
@@ -1031,19 +1034,18 @@
       document.getElementById('visitorName').value = '';
       document.getElementById('visitorComment').value = '';
 
-      // হ্যাকিং স্টাইলের ভয়ঙ্কর লাল রঙের অ্যালার্ট ইফেক্ট
+      // সবুজ রঙের সাকসেস অ্যালার্ট এবং টিক চিহ্ন (✓) সহ
       Swal.fire({
-        title: 'SYSTEM SECURED / RECEIVED!',
+        title: 'SUCCESSFUL ✓',
         text: 'Your comment has been received please wait for a reply from Siyam sir',
-        icon: 'error', // লাল রঙের ভাইব পাওয়ার জন্য
+        icon: 'success',
         background: '#030a16',
-        color: '#ff0033',
-        confirmButtonColor: '#ff0033'
+        color: '#00ff88',
+        confirmButtonColor: '#00ff88'
       });
     });
   }
 
-  // এডমিন প্যানেলে কমেন্টস শো ও ডিলিট করার ফাংশন
   function loadAdminComments() {
     db.ref('comments').on('value', snapshot => {
       const listDiv = document.getElementById('adminCommentsList');
