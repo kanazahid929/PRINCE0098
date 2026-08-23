@@ -17,9 +17,9 @@
       --primary: #00d2ff;
       --accent: #008cff;
       --bg: #020b1a; 
-      --card-bg: #040c18;
+      --card-bg: rgba(4, 12, 24, 0.85);
       --text: #ffffff;
-      --info-bg: #06182e;
+      --info-bg: rgba(6, 24, 46, 0.6);
       --info-border: #00a8ff;
       --rain-bg: linear-gradient(to bottom, #020b1a, #051937);
       --popup-bg: rgba(2, 11, 26, 0.95);
@@ -29,7 +29,7 @@
 
     body.light {
       --bg: #e8edf5;
-      --card-bg: #ffffff;
+      --card-bg: rgba(255, 255, 255, 0.85);
       --text: #1a1a2e;
       --info-bg: rgba(0, 140, 255, 0.05);
       --info-border: rgba(0, 140, 255, 0.3);
@@ -52,8 +52,9 @@
       background-color: var(--bg);
       color: var(--text);
       display: flex;
-      justify-content: center;
-      padding: 20px 10px;
+      flex-direction: column;
+      align-items: center;
+      padding: 15px 10px 30px;
       min-height: 100vh;
       overflow-x: hidden;
       position: relative;
@@ -71,26 +72,17 @@
       background: var(--rain-bg);
     }
 
-    /* CONTAINER */
-    .container {
+    /* TOP HEADER (OUTSIDE CARD) */
+    .top-header-icons {
       width: 100%;
       max-width: 450px;
-      background: var(--card-bg);
-      border: 2px solid var(--primary);
-      border-radius: 30px;
-      padding: 25px 18px;
-      box-shadow: 0 0 30px rgba(0, 210, 255, 0.25);
-      position: relative;
-      z-index: 1;
-      margin-top: 10px;
-    }
-
-    /* HEADER ICONS */
-    .header-icons {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 20px;
+      padding: 0 10px;
+      margin-bottom: 10px;
+      z-index: 3;
+      position: relative;
     }
 
     .icon-circle {
@@ -108,16 +100,17 @@
       backdrop-filter: blur(5px);
     }
 
-    /* PROFILE SECTION */
-    .profile-section {
+    /* PROFILE TOP SECTION */
+    .profile-top {
       text-align: center;
-      margin-bottom: 25px;
+      z-index: 3;
+      position: relative;
     }
 
     .profile-img-container {
       width: 130px;
       height: 130px;
-      margin: 0 auto 15px;
+      margin: 0 auto;
       position: relative;
     }
 
@@ -125,9 +118,29 @@
       width: 100%;
       height: 100%;
       border-radius: 50%;
-      border: 4px solid var(--primary);
+      border: 3.5px solid var(--primary);
       box-shadow: 0 0 25px var(--primary);
       object-fit: cover;
+    }
+
+    /* MAIN CONTAINER (SCREENSHOT MATCH: OVERLAPS HALF PROFILE IMAGE) */
+    .container {
+      width: 100%;
+      max-width: 450px;
+      background: var(--card-bg);
+      border: 2px solid var(--primary);
+      border-radius: 30px;
+      padding: 80px 18px 25px; /* Top padding leaves space for overlapping profile image */
+      box-shadow: 0 0 30px rgba(0, 210, 255, 0.25);
+      position: relative;
+      z-index: 1;
+      margin-top: -65px; /* Picture-এর অর্ধেক থেকে বর্ডার শুরু */
+      backdrop-filter: blur(10px);
+    }
+
+    .profile-info-inside {
+      text-align: center;
+      margin-bottom: 25px;
     }
 
     .main-title {
@@ -152,7 +165,6 @@
       font-weight: 700;
     }
 
-    /* RGB Animated Text */
     .rgb-text {
       background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bfd, #7a00ff, #ff00c8, #ff0000);
       background-size: 400%;
@@ -168,7 +180,6 @@
       100% { background-position: 0% 50%; }
     }
 
-    /* RGB Box Effect */
     .rgb-box {
       border: 2px solid transparent !important;
       border-image: linear-gradient(45deg, #ff0000, #00ffd5, #7a00ff, #ff0000) 1 !important;
@@ -195,7 +206,6 @@
       border-radius: 2px;
     }
 
-    /* CARDS */
     .info-card {
       background: var(--info-bg);
       border: 1.5px solid var(--info-border);
@@ -356,13 +366,28 @@
     }
   </style>
 </head>
-<body onclick="playMusic()">
+<body>
 
 <!-- AUDIO PLAYER -->
-<audio id="bgm" loop><source src="https://files.catbox.moe/zitk81.mp4" type="audio/ogg"></audio>
+<audio id="bgm" loop preload="auto">
+  <source src="https://files.catbox.moe/zitk81.mp4" type="audio/mp4">
+  <source src="https://files.catbox.moe/zitk81.mp4" type="audio/ogg">
+</audio>
 
 <!-- BACKGROUND RAIN CANVAS -->
 <canvas class="rain-canvas" id="rainCanvas"></canvas>
+
+<!-- TOP ICONS & OVERLAPPING PROFILE HEADER -->
+<div class="top-header-icons">
+  <div class="icon-circle" onclick="openAdmin()"><i class="fas fa-crown"></i></div>
+  <div class="icon-circle" onclick="toggleTheme()"><i id="themeIcon" class="fas fa-moon"></i></div>
+</div>
+
+<div class="profile-top">
+  <div class="profile-img-container">
+    <img src="https://i.imgur.com/LwcC7pq.jpeg" alt="Profile" class="profile-img" id="displayAvatar">
+  </div>
+</div>
 
 <!-- ADMIN LOGIN POPUP -->
 <div id="adminLoginPopup">
@@ -391,19 +416,12 @@
   </div>
 </div>
 
+<!-- MAIN CARD -->
 <div class="container">
 
   <!-- MAIN PAGE VIEW -->
   <div id="main-page" class="page-view active">
-    <div class="header-icons">
-      <div class="icon-circle" onclick="openAdmin()"><i class="fas fa-crown"></i></div>
-      <div class="icon-circle" onclick="toggleTheme()"><i id="themeIcon" class="fas fa-moon"></i></div>
-    </div>
-
-    <div class="profile-section">
-      <div class="profile-img-container">
-        <img src="https://i.imgur.com/LwcC7pq.jpeg" alt="Profile" class="profile-img" id="displayAvatar">
-      </div>
+    <div class="profile-info-inside">
       <h1 class="main-title" id="displayName">MOHAMMAD IBNA SIYAM</h1>
       <div class="badge-btn" id="displayBadge">who i am you have no idea its acs leader 🚩</div>
       <p class="rgb-text" style="font-size: 14px; font-style: italic;">"THE game changer leader siyam - is here !!"</p>
@@ -565,19 +583,30 @@
   let isAdminLoggedIn = false;
   const ADMIN_CREDENTIALS = { email: "siyamvailostking00@outlook.com", password: "duble??" };
 
+  // INSTANT AUTOMATIC AUDIO PLAY
+  const audio = document.getElementById("bgm");
+  audio.volume = 0.5;
+
+  function tryPlayAudio() {
+    audio.play().catch(() => {
+      // Browsers block autoplay without user action, so play instantly on any tap
+      const playOnTouch = () => {
+        audio.play();
+        document.removeEventListener('click', playOnTouch);
+        document.removeEventListener('touchstart', playOnTouch);
+      };
+      document.addEventListener('click', playOnTouch);
+      document.addEventListener('touchstart', playOnTouch);
+    });
+  }
+
+  window.addEventListener('DOMContentLoaded', tryPlayAudio);
+  window.addEventListener('load', tryPlayAudio);
+
   // PAGE NAVIGATION
   function showPage(pageId) {
     document.querySelectorAll('.page-view').forEach(page => page.classList.remove('active'));
     document.getElementById(pageId).classList.add('active');
-  }
-
-  // AUDIO PLAYER
-  function playMusic() { 
-    const audio = document.getElementById("bgm"); 
-    if (audio.paused) {
-      audio.volume = 0.4;
-      audio.play().catch(e => console.log("Audio play error:", e));
-    }
   }
 
   // DAY/NIGHT SWITCH
@@ -650,6 +679,7 @@
 
   // VISITOR COUNTER
   window.onload = function() {
+    tryPlayAudio();
     const vRef = db.ref('stats/visits');
     vRef.transaction(c => (c || 0) + 1);
     vRef.on('value', snapshot => {
