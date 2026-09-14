@@ -29,9 +29,8 @@
     .badge-btn { background: rgba(0, 210, 255, 0.12); border: 1.5px solid var(--primary); padding: 8px 18px; border-radius: 25px; font-size: 12px; color: var(--primary); display: inline-block; margin-bottom: 12px; font-weight: 700; }
     .rgb-text { background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bfd, #7a00ff, #ff00c8, #ff0000); background-size: 400%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: rgbGlow 6s linear infinite; font-weight: bold; }
     @keyframes rgbGlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-    .rgb-box { border: 2px solid transparent !important; border-image: linear-gradient(45deg, #ff0000, #00ffd5, #7a00ff, #ff0000) 1 !important; animation: borderRotate 4s linear infinite; box-shadow: 0 0 15px rgba(0, 255, 213, 0.3); }
+    .rgb-box { border: 2px solid transparent !important; border-image: linear-gradient(45deg, #ff0000, #00ffd5, #7a00ff, #ff0000) 1 !important; box-shadow: 0 0 15px rgba(0, 255, 213, 0.3); }
     
-    /* RGB রেইনবো গ্লো কাস্টম বক্স ஸ்டাইল */
     .rgb-card-custom { position: relative; border-radius: 18px; padding: 2px; background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bfd, #7a00ff, #ff00c8, #ff0000); background-size: 400%; animation: rgbGlow 5s linear infinite; margin-top: 15px; margin-bottom: 15px; box-shadow: 0 0 20px rgba(0, 210, 255, 0.3); }
     .rgb-card-inner { background: var(--info-bg); border-radius: 16px; padding: 18px; text-align: center; backdrop-filter: blur(5px); }
     
@@ -77,11 +76,12 @@
     .shake { animation: scaryShake 0.4s cubic-bezier(.36,.07,.19,.97) both; border-color: #ff0033 !important; box-shadow: 0 0 40px rgba(255, 0, 51, 0.8) !important; }
     @keyframes scaryShake { 10%, 90% { transform: translate3d(-2px, 0, 0); } 20%, 80% { transform: translate3d(4px, 0, 0); } 30%, 50%, 70% { transform: translate3d(-6px, 0, 0); } 40%, 60% { transform: translate3d(6px, 0, 0); } }
     .scary-error { color: #ff0033; font-size: 15px; font-weight: 900; letter-spacing: 1px; text-shadow: 0 0 10px #ff0033; margin: 10px 0; display: none; animation: pulseAlert 0.8s infinite alternate; }
-    @keyframes pulseAlert { from { opacity: 0.6; transform: scale(0.98); } to { opacity: 1; transform: scale(1.03); } }
     .forget-btn { background: none; border: none; color: #ff0055; font-size: 12px; font-weight: bold; margin-top: 15px; cursor: pointer; text-decoration: underline; letter-spacing: 1px; display: inline-block; }
     .question-label { font-size: 12px; color: #00ff88; text-align: left; margin-top: 10px; font-weight: bold; word-break: break-word; }
     #adminPanel { position: fixed; inset: 0; background: var(--popup-bg); z-index: 99999; display: none; overflow-y: auto; padding: 20px; }
     .admin-container { max-width: 500px; margin: 20px auto; background: var(--card-bg); border-radius: 20px; border: 2px solid var(--primary); padding: 20px; }
+    .dyn-row { display: flex; gap: 8px; margin-bottom: 8px; align-items: center; }
+    .dyn-row input { margin: 0; flex: 1; text-align: left; padding: 8px 10px; font-size: 12px; }
   </style>
 </head>
 <body>
@@ -102,16 +102,11 @@
 <div id="adminLoginPopup">
   <div class="hacker-card" id="hackerCard">
     <button onclick="closeAdminPopup()" style="position:absolute; top:12px; right:15px; background:none; border:none; color:#00ff88; font-size:18px; cursor:pointer;"><i class="fas fa-times"></i></button>
-    
     <div class="rgb-title rgb-text">ADMIN PANEL</div>
     <p style="font-size: 0.75rem; color: #00ff88; opacity: 0.9; margin-bottom:15px; letter-spacing:1px; font-weight:bold;">DARK SIYAM VIRUS 791</p>
-    
     <div class="scary-error" id="scaryError">⚠️ ACCESS DENIED! TRY AGAIN ⚠️</div>
-
     <input type="password" id="adminPass" placeholder="Enter Access Key..." style="border-color:#00ff88; color:#00ff88; background:rgba(0,255,136,0.05);" onkeyup="if(event.key==='Enter') checkAdmin()">
-    
     <button onclick="checkAdmin()" class="action-btn" style="background: linear-gradient(135deg, #00ff88, #008cff); color:#000;">GRANT ACCESS</button>
-    
     <br>
     <button onclick="openRecovery()" class="forget-btn"><i class="fas fa-key"></i> FORGOTTEN PASSWORD?</button>
   </div>
@@ -120,16 +115,12 @@
 <div id="recoveryPopup">
   <div class="hacker-card">
     <button onclick="closeRecovery()" style="position:absolute; top:12px; right:15px; background:none; border:none; color:#ff0055; font-size:18px; cursor:pointer;"><i class="fas fa-times"></i></button>
-    
     <div class="rgb-title rgb-text" style="font-size: 18px;">SECURITY RECOVERY</div>
     <p style="font-size: 0.7rem; color: #ff0055; margin-bottom:15px;">ENTER RECOVERY ANSWERS</p>
-
     <div class="question-label">Q1: Siyam Python's father - Write key !!</div>
     <input type="text" id="ans1" placeholder="Answer 1..." style="border-color:#00d2ff; color:#00d2ff;">
-
     <div class="question-label">Q2: ==÷÷~[] Are you know ?</div>
     <input type="text" id="ans2" placeholder="Answer 2..." style="border-color:#00d2ff; color:#00d2ff;">
-
     <button onclick="verifyRecovery()" class="action-btn" style="background: linear-gradient(135deg, #ff0055, #7a00ff); color:#fff;">SUBMIT ANSWERS</button>
   </div>
 </div>
@@ -144,33 +135,42 @@
       <p style="margin-bottom: 15px;">Total Visitors: <span id="statVisitors" style="color:var(--primary); font-weight:bold;">0</span></p>
 
       <label style="font-size:12px; color:var(--primary); font-weight:bold;">Name:</label>
-      <input type="text" id="editName" value="MOHAMMAD IBNA SIYAM" placeholder="Change Name">
-
+      <input type="text" id="editName" value="MOHAMMAD IBNA SIYAM">
       <label style="font-size:12px; color:var(--primary); font-weight:bold;">Badge Text:</label>
-      <input type="text" id="editBadge" value="who i am you have no idea its acs leader 🚩" placeholder="Change Badge">
-
+      <input type="text" id="editBadge" value="who i am you have no idea its acs leader 🚩">
       <label style="font-size:12px; color:var(--primary); font-weight:bold;">Nickname:</label>
-      <input type="text" id="editNickname" value="IBNA SIYAM" placeholder="Change Nickname">
-
+      <input type="text" id="editNickname" value="IBNA SIYAM">
       <label style="font-size:12px; color:var(--primary); font-weight:bold;">Birthday:</label>
-      <input type="text" id="editBirthday" value="21 September" placeholder="Change Birthday">
-
+      <input type="text" id="editBirthday" value="21 September">
       <label style="font-size:12px; color:var(--primary); font-weight:bold;">Status:</label>
-      <input type="text" id="editStatus" value="Chief Cyber Security Officer -" placeholder="Change Status">
-
+      <input type="text" id="editStatus" value="Chief Cyber Security Officer -">
       <label style="font-size:12px; color:var(--primary); font-weight:bold;">Skills:</label>
-      <input type="text" id="editSkills" value="Html-css-java-python-Prolog-C++ -" placeholder="Change Skills">
-
+      <input type="text" id="editSkills" value="Html-css-java-python-Prolog-C++ -">
       <label style="font-size:12px; color:var(--primary); font-weight:bold;">Home Town:</label>
-      <input type="text" id="editHometown" value="Satkhira, parulia" placeholder="Change Home Town">
-
+      <input type="text" id="editHometown" value="Satkhira, parulia">
       <label style="font-size:12px; color:var(--primary); font-weight:bold;">Current Location:</label>
-      <input type="text" id="editCurrent" value="Satkhira" placeholder="Change Current Location">
-
+      <input type="text" id="editCurrent" value="Satkhira">
       <label style="font-size:12px; color:var(--primary); font-weight:bold;">Owner Message / Notice:</label>
-      <textarea id="editOwnerMsg" rows="3" placeholder="Write Owner Message..."></textarea>
+      <textarea id="editOwnerMsg" rows="3"></textarea>
 
       <button onclick="updateProfileAdmin()" class="action-btn">Save Profile Changes</button>
+
+      <!-- ডাইনামিক ফিল্ড কনফিগারেশন ম্যানেজার -->
+      <div style="margin-top: 25px; border-top: 2px solid var(--primary); padding-top: 15px;">
+        <h4 style="color:var(--primary); margin-bottom: 10px;"><i class="fas fa-sliders-h"></i> Daily Log Field Labels Setup</h4>
+        <p style="font-size: 11px; opacity: 0.7; margin-bottom: 10px;">এখানে লেবেল সেট করুন (যেমন: কতক্ষণ ঘুমাচ্ছ, কতক্ষণ বাইরে ছিলে)</p>
+        <div id="labelSetupContainer"></div>
+        <button onclick="addLabelConfigRow()" style="background:rgba(0,210,255,0.2); color:var(--primary); border:1px dashed var(--primary); padding:6px 12px; border-radius:8px; font-size:11px; cursor:pointer; width:100%; margin-top:5px;">+ Add Field Label</button>
+        <button onclick="saveLabelConfigs()" class="action-btn" style="background:#00ff88; color:#000;">Save Field Labels</button>
+      </div>
+
+      <!-- ডেইলি সাবমিটেড রেকর্ড লিস্ট -->
+      <div style="margin-top: 25px; border-top: 2px solid var(--primary); padding-top: 15px;">
+        <h4 style="color:var(--primary); margin-bottom: 10px;"><i class="fas fa-history"></i> Daily Submitted Records</h4>
+        <div id="adminDailyLogsList" style="max-height: 250px; overflow-y: auto; background: rgba(0,0,0,0.4); padding: 10px; border-radius: 12px;">
+          <p style="font-size: 12px; opacity: 0.7;">Loading logs...</p>
+        </div>
+      </div>
 
       <div style="margin-top: 25px; border-top: 2px solid var(--primary); padding-top: 15px;">
         <h4 style="color:var(--primary); margin-bottom: 10px;"><i class="fas fa-comments"></i> Public Comments List</h4>
@@ -183,8 +183,6 @@
 </div>
 
 <div class="container">
-
-  <!-- গিটহাবের পার্মানেন্ট লিংক এখানে সফলভাবে বসানো হয়েছে -->
   <audio id="bgm" loop preload="auto" style="display: none;"> 
     <source src="https://raw.githubusercontent.com/kanazahid929/ACS-LEADER-732/refs/heads/main/WA_1787481063611.mp3" type="audio/mp3"> 
   </audio>
@@ -202,27 +200,22 @@
       <div class="info-label"><i class="fas fa-user"></i> Nickname</div>
       <div class="info-value rgb-text" id="displayNickname" style="font-size: 18px;">IBNA SIYAM</div>
     </div>
-
     <div class="info-card">
       <div class="info-label"><i class="fas fa-birthday-cake"></i> Birthday</div>
       <div class="info-value" id="displayBirthday">21 September</div>
     </div>
-
     <div class="info-card">
       <div class="info-label"><i class="fas fa-briefcase"></i> Status</div>
       <div class="info-value" id="displayStatus">Chief Cyber Security Officer -</div>
     </div>
-
     <div class="info-card">
       <div class="info-label"><i class="fas fa-code"></i> Skills</div>
       <div class="info-value" id="displaySkills">Html-css-java-python-Prolog-C++ -</div>
     </div>
-
     <div class="info-card">
       <div class="info-label"><i class="fas fa-home"></i> Home Town</div>
       <div class="info-value" id="displayHometown">Satkhira, parulia</div>
     </div>
-
     <div class="info-card">
       <div class="info-label"><i class="fas fa-location-arrow"></i> Current</div>
       <div class="info-value" id="displayCurrent">Satkhira</div>
@@ -240,13 +233,12 @@
         </div>
       </div>
 
-      <!-- Owner Notification এর নিচে RGB গ্লো বর্ডার সহ কাস্টম ডেটা ইনপুট বক্স -->
+      <!-- ডাইনামিক ডেইলি ইনপুট হাব (যেখানে কতক্ষণ ঘুমাচ্ছ, কতক্ষণ বাইরে ছিলে ফিল্ড ডাইনামিকালি রেন্ডার হবে) -->
       <div class="rgb-card-custom">
         <div class="rgb-card-inner">
-          <div class="speak-box-title rgb-text" style="margin-bottom:10px;"><i class="fas fa-sliders-h"></i> CUSTOM DATA HUB</div>
-          <input type="text" id="customInput1" placeholder="Custom Field 1 (e.g. Target/Goal)..." style="margin-bottom: 8px;">
-          <input type="text" id="customInput2" placeholder="Custom Field 2 (e.g. Secret Code)..." style="margin-bottom: 12px;">
-          <button class="action-btn" onclick="saveCustomDataHub()" style="background: linear-gradient(135deg, #00ffd5, #7a00ff); color:#fff;"><i class="fas fa-save"></i> SAVE CUSTOM DATA</button>
+          <div class="speak-box-title rgb-text" style="margin-bottom:10px;"><i class="fas fa-clipboard-list"></i> DAILY RECORD SUBMISSION</div>
+          <div id="dynamicInputFieldsContainer"></div>
+          <button class="action-btn" onclick="submitDailyLogEntry()" style="background: linear-gradient(135deg, #00ffd5, #7a00ff); color:#fff;"><i class="fas fa-check-circle"></i> SUBMIT TODAY'S DATA</button>
         </div>
       </div>
 
@@ -270,11 +262,9 @@
           <button class="action-btn" onclick="submitVisitorComment()"><i class="fas fa-paper-plane"></i> SUBMIT</button>
         </div>
       </div>
-
     </div>
 
     <div class="section-title">ACS WORLD</div>
-
     <div class="info-card">
       <div class="acs-header-layout">
         <img src="https://i.imgur.com/56AiZl6.jpeg" alt="ACS Logo" class="acs-logo-img">
@@ -289,37 +279,9 @@
       </a>
     </div>
 
-    <div class="info-card">
-      <div style="text-align: center; font-size: 14px; margin-bottom: 10px; font-weight: bold;"><i class="fas fa-download"></i> Video Downloader</div>
-      <input type="text" id="urlInput" placeholder="Paste YouTube/FB/Insta/TikTok link">
-      <button class="action-btn" onclick="handleDownload()"><i class="fas fa-download"></i> GET VIDEO LINK</button>
-      <div id="dlResult" style="margin-top:10px; text-align:center;"></div>
-    </div>
-
-    <div class="info-card">
-      <div style="text-align: center; font-size: 14px; margin-bottom: 10px; font-weight: bold; color: var(--primary);"><i class="fas fa-key"></i> Password Generator</div>
-      <button class="action-btn" onclick="generatePass()"><i class="fas fa-magic"></i> Generate</button>
-      <input type="text" id="passResult" readonly placeholder="Your Generated Password" style="margin-top: 10px; font-weight: bold; color: var(--primary); font-size: 14px;">
-    </div>
-
-    <div class="info-card">
-      <div style="text-align: center; font-size: 14px; margin-bottom: 10px; font-weight: bold; color: var(--primary);"><i class="fas fa-network-wired"></i> Your IP & Device Info</div>
-      <button class="action-btn" onclick="checkMyIP()"><i class="fas fa-search-location"></i> Check My IP Details</button>
-      <div id="ipDetails" style="margin-top: 10px; font-size: 12px; line-height: 1.6; display: none; text-align: left; background: rgba(0,0,0,0.3); padding: 10px; border-radius: 10px;"></div>
-    </div>
-
-    <div class="section-title">CONNECT WITH ME</div>
-
-    <div class="social-links">
-      <a href="https://www.facebook.com/profile.php?id=" target="_blank" class="social-icon fb"><i class="fab fa-facebook-f"></i></a>
-      <a href="https://wa.me/8801940984562" target="_blank" class="social-icon wa"><i class="fab fa-whatsapp"></i></a>
-      <a href="mailto:siyamvailostking00@outlook.com" class="social-icon mail"><i class="fas fa-envelope"></i></a>
-    </div>
-
     <div class="counter-box">
       <i class="fas fa-eye"></i> LIVE VISITORS: <span id="visitorCount" style="color: var(--primary);">0</span>
     </div>
-
     <div class="footer-text">
       ⚓ THE GAME RULER IBNA SIYAM 🚩 👑
     </div>
@@ -328,12 +290,10 @@
   <div id="other-page" class="page-view">
     <button class="back-btn" onclick="showPage('main-page')">← Back</button>
     <div class="section-title">OTHER FEATURES</div>
-
     <div class="info-card rgb-box" onclick="showPage('complain-page')" style="cursor: pointer; margin-bottom: 16px;">
       <div class="info-label rgb-text"><i class="fas fa-exclamation-triangle"></i> OPTION 1</div>
       <div class="info-value rgb-text">CYBER CRIME COMPLAINT</div>
     </div>
-
     <div class="info-card rgb-box" onclick="showPage('reporting-page')" style="cursor: pointer;">
       <div class="info-label rgb-text"><i class="fas fa-flag"></i> OPTION 2</div>
       <div class="info-value rgb-text">REPORTING</div>
@@ -343,12 +303,10 @@
   <div id="complain-page" class="page-view">
     <button class="back-btn" onclick="showPage('other-page')">← Back</button>
     <div class="section-title">CYBER CRIME COMPLAINT</div>
-
     <div class="info-card" style="text-align: center; padding: 25px 15px;">
       <p class="rgb-text" style="font-size: 15px; margin-bottom: 20px; font-weight: 800; line-height: 1.5;">
         Lodge a complaint directly with Siyam Sir. The case will be accepted within 12 hours.
       </p>
-      
       <a href="https://wa.me/8801940984562?text=I%20want%20to%20file%20a%20cyber%20crime%20complaint" target="_blank" style="text-decoration: none;">
         <div style="background: #25d366; color: white; padding: 14px; border-radius: 12px; display: flex; align-items: center; justify-content: center; gap: 10px; font-weight: bold; font-size: 14px; box-shadow: 0 0 15px rgba(37, 211, 102, 0.4);">
           <i class="fab fa-whatsapp" style="font-size: 22px;"></i> Click and submit your report
@@ -360,28 +318,23 @@
   <div id="reporting-page" class="page-view">
     <button class="back-btn" onclick="showPage('other-page')">← Back</button>
     <div class="section-title">REPORTING OPTIONS</div>
-
     <div class="info-card rgb-box" onclick="window.open('https://m.facebook.com/help/contact/725651070269668?wtsid=rdr_0IdUG06gE6F2C56fT', '_blank')" style="cursor: pointer; margin-bottom: 14px;">
       <div class="info-label rgb-text">1. US REPORT- PAGE</div>
       <div class="info-value rgb-text" style="font-size: 13px;">Click to open Form →</div>
     </div>
-
     <div class="info-card rgb-box" onclick="window.open('https://www.facebook.com/help/contact/1758255661104383', '_blank')" style="cursor: pointer; margin-bottom: 14px;">
       <div class="info-label rgb-text">2. COPYRIGHT REPORT</div>
       <div class="info-value rgb-text" style="font-size: 13px;">Click to open Form →</div>
     </div>
-
     <div class="info-card rgb-box" onclick="window.open('https://www.facebook.com/help/contact/839020461529412', '_blank')" style="cursor: pointer; margin-bottom: 14px;">
       <div class="info-label rgb-text">3. AUS ACT PAGE</div>
       <div class="info-value rgb-text" style="font-size: 13px;">Click to open Form →</div>
     </div>
-
     <div class="info-card rgb-box" onclick="window.open('https://www.facebook.com/help/contact/435011024579692', '_blank')" style="cursor: pointer;">
       <div class="info-label rgb-text">4. TURKEY REPORT</div>
       <div class="info-value rgb-text" style="font-size: 13px;">Click to open Form →</div>
     </div>
   </div>
-
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -393,14 +346,13 @@
   let isLightMode = false;
   let isAdminLoggedIn = false;
   let currentAdminPass = "if?nomore";
+  let activeLabels = ["কতক্ষণ ঘুমাচ্ছ", "কতক্ষণ বাইরে ছিলে"];
 
   db.ref('settings/adminPass').on('value', snapshot => { if(snapshot.val()) currentAdminPass = snapshot.val(); });
 
   const audio = document.getElementById("bgm");
   audio.volume = 0.7;
-
   function triggerAudio() { audio.play().catch(() => { const playNow = () => { audio.play(); ['click', 'touchstart', 'scroll'].forEach(evt => window.removeEventListener(evt, playNow)); }; ['click', 'touchstart', 'scroll'].forEach(evt => window.addEventListener(evt, playNow)); }); }
-
   window.addEventListener('DOMContentLoaded', triggerAudio);
   window.addEventListener('load', triggerAudio);
 
@@ -412,74 +364,152 @@
   fetchLiveTemp();
 
   function showPage(pageId) { document.querySelectorAll('.page-view').forEach(page => page.classList.remove('active')); document.getElementById(pageId).classList.add('active'); }
-
   function toggleTheme() { document.body.classList.toggle("light"); isLightMode = document.body.classList.contains("light"); document.getElementById("themeIcon").className = isLightMode ? "fas fa-sun" : "fas fa-moon"; }
 
   const rainCanvas = document.getElementById('rainCanvas');
   const rainCtx = rainCanvas.getContext('2d');
   let drops = [];
-
   function resizeCanvas() { rainCanvas.width = window.innerWidth; rainCanvas.height = window.innerHeight; }
   window.addEventListener('resize', resizeCanvas);
   resizeCanvas();
-
   function createDrop() { return { x: Math.random() * rainCanvas.width, y: Math.random() * rainCanvas.height - 100, len: Math.random() * 20 + 10, speed: Math.random() * 6 + 4, opacity: Math.random() * 0.3 + 0.15 }; }
-
   function initRain() { drops = []; for (let i = 0; i < 150; i++) drops.push(createDrop()); }
-
   function animateRain() { const grad = rainCtx.createLinearGradient(0, 0, 0, rainCanvas.height); if (isLightMode) { grad.addColorStop(0, '#dce9f5'); grad.addColorStop(1, '#c8dff0'); } else { grad.addColorStop(0, '#020b1a'); grad.addColorStop(1, '#051937'); } rainCtx.fillStyle = grad; rainCtx.fillRect(0, 0, rainCanvas.width, rainCanvas.height); for (let i = 0; i < drops.length; i++) { const d = drops[i]; rainCtx.beginPath(); rainCtx.moveTo(d.x, d.y); rainCtx.lineTo(d.x - 1, d.y + d.len); rainCtx.strokeStyle = isLightMode ? `rgba(60, 130, 180, ${d.opacity})` : `rgba(0, 210, 255, ${d.opacity})`; rainCtx.lineWidth = 1.5; rainCtx.stroke(); d.y += d.speed; d.x -= 0.5; if (d.y > rainCanvas.height) { d.y = -d.len; d.x = Math.random() * rainCanvas.width; } } requestAnimationFrame(animateRain); }
-
   initRain();
   animateRain();
 
-  window.onload = function() { triggerAudio(); const vRef = db.ref('stats/visits'); vRef.transaction(c => (c || 0) + 1); vRef.on('value', snapshot => { const count = snapshot.val() || 0; document.getElementById('visitorCount').innerText = count; document.getElementById('statVisitors').innerText = count; }); db.ref('profileData').on('value', snapshot => { const data = snapshot.val(); if(data) { if(data.name) { document.getElementById('displayName').innerText = data.name; document.getElementById('editName').value = data.name; } if(data.badge) { document.getElementById('displayBadge').innerText = data.badge; document.getElementById('editBadge').value = data.badge; } if(data.nickname) { document.getElementById('displayNickname').innerText = data.nickname; document.getElementById('editNickname').value = data.nickname; } if(data.birthday) { document.getElementById('displayBirthday').innerText = data.birthday; document.getElementById('editBirthday').value = data.birthday; } if(data.status) { document.getElementById('displayStatus').innerText = data.status; document.getElementById('editStatus').value = data.status; } if(data.skills) { document.getElementById('displaySkills').innerText = data.skills; document.getElementById('editSkills').value = data.skills; } if(data.hometown) { document.getElementById('displayHometown').innerText = data.hometown; document.getElementById('editHometown').value = data.hometown; } if(data.current) { document.getElementById('displayCurrent').innerText = data.current; document.getElementById('editCurrent').value = data.current; } } }); db.ref('settings/ownerMsg').on('value', snapshot => { const msg = snapshot.val(); if(msg) { document.getElementById('displayOwnerMsg').innerText = msg; document.getElementById('editOwnerMsg').value = msg; } }); 
-  
-  // কাস্টম ডেটা লোড
-  db.ref('customHubData').on('value', snapshot => {
-    const val = snapshot.val();
-    if(val) {
-      if(val.input1) document.getElementById('customInput1').value = val.input1;
-      if(val.input2) document.getElementById('customInput2').value = val.input2;
-    }
-  });
-  
-  loadAdminComments(); };
+  window.onload = function() {
+    triggerAudio();
+    const vRef = db.ref('stats/visits');
+    vRef.transaction(c => (c || 0) + 1);
+    vRef.on('value', snapshot => { const count = snapshot.val() || 0; document.getElementById('visitorCount').innerText = count; document.getElementById('statVisitors').innerText = count; });
+    
+    db.ref('profileData').on('value', snapshot => { const data = snapshot.val(); if(data) { if(data.name) { document.getElementById('displayName').innerText = data.name; document.getElementById('editName').value = data.name; } if(data.badge) { document.getElementById('displayBadge').innerText = data.badge; document.getElementById('editBadge').value = data.badge; } if(data.nickname) { document.getElementById('displayNickname').innerText = data.nickname; document.getElementById('editNickname').value = data.nickname; } if(data.birthday) { document.getElementById('displayBirthday').innerText = data.birthday; document.getElementById('editBirthday').value = data.birthday; } if(data.status) { document.getElementById('displayStatus').innerText = data.status; document.getElementById('editStatus').value = data.status; } if(data.skills) { document.getElementById('displaySkills').innerText = data.skills; document.getElementById('editSkills').value = data.skills; } if(data.hometown) { document.getElementById('displayHometown').innerText = data.hometown; document.getElementById('editHometown').value = data.hometown; } if(data.current) { document.getElementById('displayCurrent').innerText = data.current; document.getElementById('editCurrent').value = data.current; } } });
+    
+    db.ref('settings/ownerMsg').on('value', snapshot => { const msg = snapshot.val(); if(msg) { document.getElementById('displayOwnerMsg').innerText = msg; document.getElementById('editOwnerMsg').value = msg; } });
 
-  function saveCustomDataHub() {
-    const v1 = document.getElementById('customInput1').value.trim();
-    const v2 = document.getElementById('customInput2').value.trim();
-    db.ref('customHubData').set({ input1: v1, input2: v2 }).then(() => {
-      Swal.fire({ title: 'SAVED ✓', text: 'Custom hub data updated!', icon: 'success', timer: 1000, showConfirmButton: false, background: '#030a16', color: '#00ffd5' });
+    // লেবেল কনফিগারেশন লোড করা
+    db.ref('settings/dailyLabels').on('value', snapshot => {
+      const labels = snapshot.val();
+      if(labels && Array.isArray(labels)) {
+        activeLabels = labels;
+      }
+      renderUserDynamicInputs();
+      renderAdminLabelSetup();
+    });
+
+    loadAdminComments();
+    loadAdminDailyLogs();
+  };
+
+  function renderUserDynamicInputs() {
+    const container = document.getElementById('dynamicInputFieldsContainer');
+    container.innerHTML = '';
+    activeLabels.forEach((label, idx) => {
+      const wrapper = document.createElement('div');
+      wrapper.style.marginBottom = '10px';
+      wrapper.style.textAlign = 'left';
+      wrapper.innerHTML = `
+        <label style="font-size:12px; color:var(--primary); font-weight:bold; display:block; margin-bottom:4px;">${label}</label>
+        <input type="text" class="dyn-val-input" data-label="${label}" placeholder="Enter ${label}...">
+      `;
+      container.appendChild(wrapper);
     });
   }
 
-  function submitVisitorComment() { const name = document.getElementById('visitorName').value.trim(); const comment = document.getElementById('visitorComment').value.trim(); if (!name) { Swal.fire({ title: 'NAME REQUIRED!', text: 'Please enter your name before submitting.', icon: 'warning', background: '#030a16', color: '#ff0055' }); return; } if (!comment) { Swal.fire({ title: 'COMMENT EMPTY!', text: 'Please write a message.', icon: 'warning', background: '#030a16', color: '#ff0055' }); return; } const newCommentRef = db.ref('comments').push(); newCommentRef.set({ name: name, comment: comment, time: new Date().toLocaleString() }).then(() => { document.getElementById('visitorName').value = ''; document.getElementById('visitorComment').value = ''; Swal.fire({ title: 'SUCCESSFUL ✓', text: 'Your comment has been received please wait for a reply from Siyam sir', icon: 'success', background: '#030a16', color: '#00ff88', confirmButtonColor: '#00ff88' }); }); }
+  function submitDailyLogEntry() {
+    const inputs = document.querySelectorAll('.dyn-val-input');
+    const logData = { date: new Date().toLocaleString(), entries: {} };
+    let emptyCount = 0;
+    inputs.forEach(input => {
+      const lbl = input.getAttribute('data-label');
+      const val = input.value.trim();
+      logData.entries[lbl] = val || 'N/A';
+    });
+
+    db.ref('dailyLogs').push(logData).then(() => {
+      inputs.forEach(i => i.value = '');
+      Swal.fire({ title: 'SAVED ✓', text: 'Daily record submitted to admin panel!', icon: 'success', timer: 1200, showConfirmButton: false, background: '#030a16', color: '#00ffd5' });
+    });
+  }
+
+  function renderAdminLabelSetup() {
+    const box = document.getElementById('labelSetupContainer');
+    box.innerHTML = '';
+    activeLabels.forEach((lbl, idx) => {
+      const row = document.createElement('div');
+      row.className = 'dyn-row';
+      row.innerHTML = `
+        <input type="text" class="label-setup-input" value="${lbl}">
+        <button onclick="removeLabelConfigRow(this)" style="background:#ff0033; color:#fff; border:none; padding:8px 10px; border-radius:8px; cursor:pointer;"><i class="fas fa-trash"></i></button>
+      `;
+      box.appendChild(row);
+    });
+  }
+
+  function addLabelConfigRow() {
+    const box = document.getElementById('labelSetupContainer');
+    const row = document.createElement('div');
+    row.className = 'dyn-row';
+    row.innerHTML = `
+      <input type="text" class="label-setup-input" placeholder="New Label (e.g. কতক্ষণ বাইরে ছিলে)">
+      <button onclick="removeLabelConfigRow(this)" style="background:#ff0033; color:#fff; border:none; padding:8px 10px; border-radius:8px; cursor:pointer;"><i class="fas fa-trash"></i></button>
+    `;
+    box.appendChild(row);
+  }
+
+  function removeLabelConfigRow(btn) {
+    btn.parentElement.remove();
+  }
+
+  function saveLabelConfigs() {
+    const inputs = document.querySelectorAll('.label-setup-input');
+    const newLabels = [];
+    inputs.forEach(i => {
+      if(i.value.trim()) newLabels.push(i.value.trim());
+    });
+    db.ref('settings/dailyLabels').set(newLabels).then(() => {
+      Swal.fire({ title: 'UPDATED ✓', text: 'Dynamic fields updated!', icon: 'success', timer: 1000, showConfirmButton: false, background: '#030a16', color: '#00ff88' });
+    });
+  }
+
+  function loadAdminDailyLogs() {
+    db.ref('dailyLogs').on('value', snapshot => {
+      const listDiv = document.getElementById('adminDailyLogsList');
+      listDiv.innerHTML = '';
+      const data = snapshot.val();
+      if (!data) { listDiv.innerHTML = '<p style="font-size: 12px; opacity: 0.7; text-align:center;">No daily records yet.</p>'; return; }
+      Object.keys(data).reverse().forEach(key => {
+        const item = data[key];
+        const div = document.createElement('div');
+        div.style.cssText = "background:rgba(0,210,255,0.05); border:1px solid var(--primary); padding:10px; border-radius:10px; margin-bottom:10px; text-align:left; position:relative;";
+        let entriesHtml = '';
+        if(item.entries) {
+          Object.keys(item.entries).forEach(l => {
+            entriesHtml += `<div style="font-size:12px; margin-top:2px;"><strong style="color:var(--primary);">${l}:</strong> <span style="color:#fff;">${item.entries[l]}</span></div>`;
+          });
+        }
+        div.innerHTML = `<span style="font-size:10px; opacity:0.7;">${item.date}</span>${entriesHtml}<button onclick="deleteDailyLog('${key}')" style="background:#ff0033; color:#fff; border:none; padding:3px 8px; font-size:10px; border-radius:4px; cursor:pointer; margin-top:8px;"><i class="fas fa-trash"></i> Delete Log</button>`;
+        listDiv.appendChild(div);
+      });
+    });
+  }
+
+  function deleteDailyLog(key) { db.ref('dailyLogs/' + key).remove(); }
+
+  function submitVisitorComment() { const name = document.getElementById('visitorName').value.trim(); const comment = document.getElementById('visitorComment').value.trim(); if (!name) { Swal.fire({ title: 'NAME REQUIRED!', text: 'Please enter your name before submitting.', icon: 'warning', background: '#030a16', color: '#ff0055' }); return; } if (!comment) { Swal.fire({ title: 'COMMENT EMPTY!', text: 'Please write a message.', icon: 'warning', background: '#030a16', color: '#ff0055' }); return; } db.ref('comments').push({ name: name, comment: comment, time: new Date().toLocaleString() }).then(() => { document.getElementById('visitorName').value = ''; document.getElementById('visitorComment').value = ''; Swal.fire({ title: 'SUCCESSFUL ✓', text: 'Your comment has been received please wait for a reply from Siyam sir', icon: 'success', background: '#030a16', color: '#00ff88', confirmButtonColor: '#00ff88' }); }); }
 
   function loadAdminComments() { db.ref('comments').on('value', snapshot => { const listDiv = document.getElementById('adminCommentsList'); listDiv.innerHTML = ''; const data = snapshot.val(); if (!data) { listDiv.innerHTML = '<p style="font-size: 12px; opacity: 0.7; text-align:center;">No comments yet.</p>'; return; } Object.keys(data).forEach(key => { const item = data[key]; const div = document.createElement('div'); div.style.cssText = "background:rgba(255,0,0,0.05); border:1px solid #ff0033; padding:8px; border-radius:8px; margin-bottom:8px; text-align:left; position:relative;"; div.innerHTML = `<strong style="color:var(--primary); font-size:13px;">${item.name}</strong><span style="font-size:10px; opacity:0.6; float:right;">${item.time}</span><p style="font-size:12px; margin-top:4px; color:#fff;">${item.comment}</p><button onclick="deleteComment('${key}')" style="background:#ff0033; color:#fff; border:none; padding:2px 8px; font-size:10px; border-radius:4px; cursor:pointer; margin-top:5px;"><i class="fas fa-trash"></i> Delete</button>`; listDiv.appendChild(div); }); }); }
 
   function deleteComment(key) { db.ref('comments/' + key).remove(); }
-
   function openAdmin() { if(isAdminLoggedIn) { document.getElementById('adminPanel').style.display = 'block'; } else { document.getElementById('scaryError').style.display = 'none'; document.getElementById('hackerCard').classList.remove('shake'); document.getElementById('adminLoginPopup').style.display = 'flex'; requestAnimationFrame(() => document.getElementById('adminPass').focus()); } }
-
   function closeAdminPopup() { document.getElementById('adminLoginPopup').style.display = 'none'; document.getElementById('adminPass').value = ''; }
-
   function checkAdmin() { const pass = document.getElementById('adminPass').value; const card = document.getElementById('hackerCard'); const err = document.getElementById('scaryError'); if (pass === currentAdminPass) { isAdminLoggedIn = true; document.getElementById('adminLoginPopup').style.display = 'none'; document.getElementById('adminPanel').style.display = 'block'; document.getElementById('adminPass').value = ''; err.style.display = 'none'; card.classList.remove('shake'); Swal.fire({ title: 'ACCESS GRANTED!', text: 'Welcome Master Siyam', icon: 'success', timer: 1200, showConfirmButton: false, background: '#030a16', color: '#00ff88' }); } else { err.style.display = 'block'; card.classList.remove('shake'); void card.offsetWidth; card.classList.add('shake'); document.getElementById('adminPass').value = ''; } }
-
   function openRecovery() { closeAdminPopup(); document.getElementById('recoveryPopup').style.display = 'flex'; }
-
   function closeRecovery() { document.getElementById('recoveryPopup').style.display = 'none'; document.getElementById('ans1').value = ''; document.getElementById('ans2').value = ''; }
-
   function verifyRecovery() { const a1 = document.getElementById('ans1').value.trim().toLowerCase(); const a2 = document.getElementById('ans2').value.trim().toLowerCase(); if (a1 === "oh" && a2 === "oh") { closeRecovery(); Swal.fire({ title: 'CLEARANCE GRANTED!', text: 'Enter NEW Password:', input: 'password', inputPlaceholder: 'New Password...', showCancelButton: true, confirmButtonText: 'UPDATE PASSWORD', background: '#030a16', color: '#00ff88', confirmButtonColor: '#00ff88' }).then((result) => { if (result.isConfirmed && result.value) { currentAdminPass = result.value; db.ref('settings/adminPass').set(currentAdminPass); Swal.fire({ title: 'UPDATED!', text: 'Your password has been changed successfully.', icon: 'success', background: '#030a16', color: '#00ff88' }); } }); } else { Swal.fire({ title: 'INCORRECT ANSWERS!', text: 'Access Denied.', icon: 'error', background: '#030a16', color: '#ff0055' }); } }
-
   function closeAdminPanel() { document.getElementById('adminPanel').style.display = 'none'; }
-
   function updateProfileAdmin() { const profileData = { name: document.getElementById('editName').value, badge: document.getElementById('editBadge').value, nickname: document.getElementById('editNickname').value, birthday: document.getElementById('editBirthday').value, status: document.getElementById('editStatus').value, skills: document.getElementById('editSkills').value, hometown: document.getElementById('editHometown').value, current: document.getElementById('editCurrent').value }; const newOwnerMsg = document.getElementById('editOwnerMsg').value; db.ref('profileData').set(profileData); if(newOwnerMsg) { db.ref('settings/ownerMsg').set(newOwnerMsg); } Swal.fire('Saved!', 'All profile changes applied successfully.', 'success'); }
-
-  async function handleDownload() { const url = document.getElementById('urlInput').value.trim(); const resultDiv = document.getElementById('dlResult'); if (!url) { Swal.fire('Notice', 'Please paste a URL', 'warning'); return; } resultDiv.innerHTML = `<p style="color:var(--primary); font-size:12px;">Processing link...</p>`; try { const baseResponse = await fetch("https://raw.githubusercontent.com/Mostakim0978/D1PT0/refs/heads/main/baseApiUrl.json"); const baseData = await baseResponse.json(); const downloadResponse = await fetch(`${baseData.api}/alldl?url=${encodeURIComponent(url)}`); const data = await downloadResponse.json(); if (data.result) { resultDiv.innerHTML = `<a href="${data.result}" target="_blank" style="display:inline-block; padding:8px 15px; background:var(--primary); color:#000; text-decoration:none; font-weight:bold; border-radius:10px; font-size:12px; margin-top:5px;"><i class="fas fa-download"></i> DOWNLOAD NOW</a>`; } else { throw new Error(); } } catch (e) { resultDiv.innerHTML = `<p style="color:red; font-size:12px;">Download failed. Check URL.</p>`; } }
-
-  function generatePass() { const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+#"; let pass = ""; for (let i = 0; i < 14; i++) { pass += chars.charAt(Math.floor(Math.random() * chars.length)); } document.getElementById('passResult').value = pass; }
-
-  async function checkMyIP() { const infoDiv = document.getElementById('ipDetails'); infoDiv.style.display = 'block'; infoDiv.innerHTML = '<span style="color:var(--primary)">Fetching details...</span>'; try { const res = await fetch('https://ipapi.co/json/'); const data = await res.json(); infoDiv.innerHTML = `<strong>IP:</strong> <span style="color:var(--primary)">${data.ip}</span><br><strong>ISP:</strong> ${data.org}<br><strong>City/Country:</strong> ${data.city}, ${data.country_name}<br><strong>Timezone:</strong> ${data.timezone}`; } catch (e) { infoDiv.innerHTML = '<span style="color:red">Failed to fetch IP details.</span>'; } }
 </script>
 </body>
 </html>
